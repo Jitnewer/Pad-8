@@ -3,11 +3,12 @@
  * @author Chant Balci
  */
 import {Controller} from "./controller.js";
-import {AdminDashboardRepository} from "../repositories/adminDaschboardRepository.js";
+import {AdminDashboardRepository} from "../repositories/adminDashboardRepository.js";
 
 export class AdminDashboardController extends Controller{
     #adminDashboardView;
     #adminDashboardRepository;
+
     constructor() {
         super();
         this.#adminDashboardRepository = new AdminDashboardRepository();
