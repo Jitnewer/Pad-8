@@ -13,6 +13,7 @@ import { NavbarController }  from "./controllers/navbarController.js"
 import { UploadController }  from "./controllers/uploadController.js"
 import { WelcomeController }  from "./controllers/welcomeController.js"
 import {createappointmentController} from "./controllers/createappointmentController.js";
+import {AdminLoginController} from "./controllers/adminLoginController.js";
 import { StudyController } from "./controllers/studyController.js";
 
 export class App {
@@ -27,6 +28,7 @@ export class App {
     static CONTROLLER_WELCOME = "welcome";
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
+    static CONTROLLER_ADMIN_LOGIN = "admin-login"
     static CONTROLLER_STUDY = "study";
 
     constructor() {
@@ -77,12 +79,14 @@ export class App {
                 App.setCurrentController(name);
                 App.isLoggedIn(()=> new createappointmentController(),()=> new LoginController());
                 break;
-            case App.CONTROLLER_UPLOAD:
-                App.isLoggedIn(() => new UploadController(), () => new LoginController());
+            case App.CONTROLLER_ADMIN_LOGIN:
+                new AdminLoginController();
                 break;
-
             case App.CONTROLLER_STUDY:
                 App.isLoggedIn(() => new StudyController(), () => new LoginController());
+                break;
+            case App.CONTROLLER_UPLOAD:
+                App.isLoggedIn(() => new UploadController(), () => new LoginController());
                 break;
 
             default:
