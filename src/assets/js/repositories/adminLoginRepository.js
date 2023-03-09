@@ -10,6 +10,6 @@ export class AdminLoginRepository {
     }
 
     loginAdmin(username, password) {
-        return this.#networkManager.doRequest(this.#route, "GET", {name: username, password: password})
+        return this.#networkManager.doRequest(this.#route, "POST", {"username": username, "password": password});
     }
 }

@@ -43,9 +43,10 @@ export class AdminLoginController extends Controller {
         }
 
         try {
-            //const data = await this.#adminLoginRepository.loginAdmin(username, password);
-            window.location.href = "index.html"
-        } catch (e) {
+            const user = await this.#adminLoginRepository.loginAdmin(username, password);
+            location.href = "index.html";
+        }
+         catch (e) {
             console.log(e);
         }
     }
