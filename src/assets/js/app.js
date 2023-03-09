@@ -14,8 +14,8 @@ import { UploadController }  from "./controllers/uploadController.js"
 import { WelcomeController }  from "./controllers/welcomeController.js"
 import {createappointmentController} from "./controllers/createappointmentController.js";
 import {AdminLoginController} from "./controllers/adminLoginController.js";
+import {TrialLessonController} from "./controllers/TrialLessonController.js";
 import { StudyController } from "./controllers/studyController.js";
-import {AdminDashboardController} from "./controllers/adminDashboardController.js";
 
 export class App {
     //we only need one instance of the sessionManager, thus static use here
@@ -30,8 +30,9 @@ export class App {
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
-    static CONTROLLER_ADMIN_DASHBOARD = "admin_dashBoard";
+    static CONTROLLER_ADMIN_DASHBOARD = "admin-dashBoard";
     static CONTROLLER_STUDY = "study";
+    static CONTROLLER_TRIALLESSON="trialLesson"
 
     constructor() {
         //Always load the navigation
@@ -79,20 +80,24 @@ export class App {
                 break;
             case App.CONTROLLER_CREATE_APPOINTMENT:
                 App.setCurrentController(name);
-                new createappointmentController();
+                App.isLoggedIn(()=> new createappointmentController(),()=> new LoginController());
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
-                App.isLoggedIn(()=> new AdminDashboardController(),()=>new AdminLoginController());
+                new AdminLoginController();
                 break;
             case App.CONTROLLER_ADMIN_DASHBOARD:
                 App.setCurrentController(name);
-                App.isLoggedIn(() => new AdminDashboardController(), () => new AdminLoginController());
-                break;
+                App.isLoggedIn(() => new adminDashboardController, () => new LoginController());
+                break
             case App.CONTROLLER_STUDY:
-                new StudyController();
+                App.isLoggedIn(() => new StudyController(), () => new LoginController());
                 break;
             case App.CONTROLLER_UPLOAD:
                 App.isLoggedIn(() => new UploadController(), () => new LoginController());
+                break;
+            case App.CONTROLLER_TRIALLESSON:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new TrialLessonController(), () => new LoginController());
                 break;
 
             default:
