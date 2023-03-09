@@ -13,6 +13,7 @@ import { NavbarController }  from "./controllers/navbarController.js"
 import { UploadController }  from "./controllers/uploadController.js"
 import { WelcomeController }  from "./controllers/welcomeController.js"
 import {createappointmentController} from "./controllers/createappointmentController.js";
+import {AdminLoginController} from "./controllers/adminLoginController.js";
 
 export class App {
     //we only need one instance of the sessionManager, thus static use here
@@ -26,6 +27,7 @@ export class App {
     static CONTROLLER_WELCOME = "welcome";
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
+    static CONTROLLER_ADMIN_LOGIN = "admin-login"
 
     constructor() {
         //Always load the navigation
@@ -74,6 +76,9 @@ export class App {
             case App.CONTROLLER_CREATE_APPOINTMENT:
                 App.setCurrentController(name);
                 App.isLoggedIn(()=> new createappointmentController(),()=> new LoginController());
+                break;
+            case App.CONTROLLER_ADMIN_LOGIN:
+                new AdminLoginController();
                 break;
             case App.CONTROLLER_UPLOAD:
                 App.isLoggedIn(() => new UploadController(), () => new LoginController());
