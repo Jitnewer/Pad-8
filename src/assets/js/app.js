@@ -8,7 +8,7 @@
  */
 
 import { SessionManager } from "./framework/utils/sessionManager.js"
-import { LoginController } from "./controllers/loginController.js"
+//import { LoginController } from "./controllers/loginController.js"
 import { NavbarController }  from "./controllers/navbarController.js"
 import { UploadController }  from "./controllers/uploadController.js"
 import { WelcomeController }  from "./controllers/welcomeController.js"
@@ -25,13 +25,13 @@ export class App {
 
     //controller identifiers, add new controllers here
     static CONTROLLER_NAVBAR = "navbar";
-    static CONTROLLER_LOGIN = "login";
+    // static CONTROLLER_LOGIN = "login";
     static CONTROLLER_LOGOUT = "logout";
     static CONTROLLER_WELCOME = "welcome";
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
-    static CONTROLLER_ADMIN_DASHBOARD = "admin-dashBoard";
+    static CONTROLLER_ADMIN_DASHBOARD = "admin-dashboard";
     static CONTROLLER_STUDY = "study";
     static CONTROLLER_TRIALLESSON="trialLesson"
 
@@ -72,12 +72,13 @@ export class App {
         App.setCurrentController(name, controllerData);
         
         switch (name) {
-            case App.CONTROLLER_LOGIN:
-                App.isLoggedIn(() => new WelcomeController(), () => new LoginController());
-                break;
+            // case App.CONTROLLER_LOGIN:
+            //     App.isLoggedIn(() => new WelcomeController(), () => new LoginController());
+            //     break;
 
             case App.CONTROLLER_WELCOME:
-                App.isLoggedIn(() => new WelcomeController(), () => new LoginController());
+                // App.isLoggedIn(() => new WelcomeController(), () => new AdminLoginController());
+                new WelcomeController();
                 break;
             case App.CONTROLLER_CREATE_APPOINTMENT:
                 App.setCurrentController(name);
@@ -87,14 +88,15 @@ export class App {
                 App.isLoggedIn(()=> new AdminDashboardController(), ()=> new AdminLoginController());
                 break;
             case App.CONTROLLER_ADMIN_DASHBOARD:
-                App.setCurrentController(name);
+                // App.setCurrentController(name);
                 App.isLoggedIn(() => new AdminDashboardController(), () => new AdminLoginController());
                 break
             case App.CONTROLLER_STUDY:
               new StudyController();
                 break;
             case App.CONTROLLER_UPLOAD:
-                App.isLoggedIn(() => new UploadController(), () => new LoginController());
+                // App.isLoggedIn(() => new UploadController(), () => new LoginController());
+                App.isLoggedIn(()=> new UploadController(), ()=> new AdminLoginController());
                 break;
             case App.CONTROLLER_TRIALLESSON:
                 App.setCurrentController(name);
