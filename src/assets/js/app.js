@@ -28,6 +28,7 @@ export class App {
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
+    static CONTROLLER_STUDY = "study";
 
     constructor() {
         //Always load the navigation
@@ -79,6 +80,9 @@ export class App {
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
                 new AdminLoginController();
+                break;
+            case App.CONTROLLER_STUDY:
+                App.isLoggedIn(() => new studyController(), () => new LoginController());
                 break;
             case App.CONTROLLER_UPLOAD:
                 App.isLoggedIn(() => new UploadController(), () => new LoginController());
