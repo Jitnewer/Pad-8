@@ -5,8 +5,8 @@
 
 class AppointmentsFormRoutes{
     #app;
-         #databaseHelper = require("../framework/utils/databaseHelper");
-        #httpErrorCodes = require("../framework/utils/httpErrorCodes");
+    #databaseHelper = require("../framework/utils/databaseHelper");
+    #httpErrorCodes = require("../framework/utils/httpErrorCodes");
 
     constructor(app) {
         this.#app = app;
