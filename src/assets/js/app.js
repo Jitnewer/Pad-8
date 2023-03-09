@@ -84,7 +84,7 @@ export class App {
                new createappointmentController();
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
-                new AdminLoginController();
+                App.isLoggedIn(()=> new AdminDashboardController(), ()=> new AdminLoginController());
                 break;
             case App.CONTROLLER_ADMIN_DASHBOARD:
                 App.setCurrentController(name);
