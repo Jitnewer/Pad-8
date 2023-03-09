@@ -29,6 +29,7 @@ export class App {
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
+    static CONTROLLER_ADMIN_DASHBOARD = "admin-dashBoard";
     static CONTROLLER_STUDY = "study";
 
     constructor() {
@@ -82,6 +83,9 @@ export class App {
             case App.CONTROLLER_ADMIN_LOGIN:
                 new AdminLoginController();
                 break;
+            case App.CONTROLLER_ADMIN_DASHBOARD:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new adminDashboardController, () => new LoginController())
             case App.CONTROLLER_STUDY:
                 App.isLoggedIn(() => new StudyController(), () => new LoginController());
                 break;
