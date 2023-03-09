@@ -1,0 +1,22 @@
+.dashboard-container{
+    display:flex;
+    margin: auto;
+}
+#create-testlesson{
+    display: flex;
+    flex-direction: column;
+    background-color: #a8a8a8;
+    padding: 5px;
+    margin: 40px auto auto auto;
+}
+#Submit_Testlesson{
+    height:27px;
+    margin: 4px auto auto auto;
+    font-family: Inter;
+    font-size: 18px;
+}
+#dashboard-input-container{
+    display:flex;
+    flex-direction: column;
+    margin: auto;
+}
