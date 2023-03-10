@@ -14,13 +14,11 @@ class adminDashboardRoute{
         this.#saveTestlesson();
     }
     #saveTestlesson(){
-
         this.#app.get("/adminDashboards", async(req, res) =>{
-
             try{
                 const data = await this.#databaseHelper.handleQuery({
                     query: "INSERT INTO testlesson (name, timeDuration, date, location, room, subject) VALUES(?,?,?,?,?,?)",
-                    values: [req.body.name, req.body.timeDuration, req.body.date, req.body.location, req.body.room, req.body.subject]
+                    values:[req.body.name, req.body.timeDuration, req.body.date, req.body.location, req.body.room, req.body.subject]
                 });
                 if(data.insertId){
                     res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.insertId});
