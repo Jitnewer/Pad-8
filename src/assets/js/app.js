@@ -17,6 +17,7 @@ import {AdminLoginController} from "./controllers/adminLoginController.js";
 import {TrialLessonController} from "./controllers/TrialLessonController.js";
 import { StudyController } from "./controllers/studyController.js";
 import { AdminDashboardController} from "./controllers/adminDashboardController.js";
+import {TrialSEController} from "./controllers/trialSEController.js";
 
 export class App {
     //we only need one instance of the sessionManager, thus static use here

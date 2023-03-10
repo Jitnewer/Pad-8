@@ -9,7 +9,13 @@ export class TrialLessonController extends Controller {
     }
 
     async #setupView() {
-       return  this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
-    }
+       this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
+        this.#trialLessonView.querySelector(".Apply").addEventListener("click",
+            (event) => this.#applySE(event));
+}
+    async #applySE(event){
+        event.preventDefault();
+        window.location.replace("html_views/trialSE.html");
+    }
 }

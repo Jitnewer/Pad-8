@@ -11,7 +11,6 @@ class trialSERoute{
     #createTrialSE(){
         this.#app.get("/trialSE",(req,res)=>
             res.send("API endpoint study gecalled"));
-
     }
 }
 module.exports = trialSERoute;

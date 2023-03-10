@@ -10,6 +10,7 @@ export class TrialSEController extends Controller {
 
     async #setupView() {
         return  this.#trialSEView = await super.loadHtmlIntoContent("html_views/trialSE.html");
+
     }
 
 }
