@@ -33,7 +33,8 @@ export class App {
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
     static CONTROLLER_ADMIN_DASHBOARD = "admin-dashboard";
     static CONTROLLER_STUDY = "study";
-    static CONTROLLER_TRIALLESSON="trialLesson"
+    static CONTROLLER_TRIALLESSON="trialLesson";
+    static CONTROLLER_TRIALSE = "trailSE";
 
     constructor() {
         //Always load the navigation
@@ -101,6 +102,10 @@ export class App {
             case App.CONTROLLER_TRIALLESSON:
                 App.setCurrentController(name);
                new TrialLessonController();
+                break;
+            case App.CONTROLLER_TRIALSE:
+                App.setCurrentController(name);
+                new TrialSEController();
                 break;
 
             default:
