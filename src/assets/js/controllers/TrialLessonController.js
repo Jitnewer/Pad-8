@@ -10,7 +10,7 @@ export class TrialLessonController extends Controller {
 
     async #setupView() {
        return  this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
-        document.querySelector("main").innerHTML = this.#trialLessonView;
+        document.querySelector("#trialBody").innerHTML = this.#trialLessonView;
     }
 
 }
