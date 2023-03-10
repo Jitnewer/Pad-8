@@ -88,7 +88,7 @@ export class App {
                 App.isLoggedIn(()=> new AdminDashboardController(), ()=> new AdminLoginController());
                 break;
             case App.CONTROLLER_ADMIN_DASHBOARD:
-                // App.setCurrentController(name);
+                App.setCurrentController(name);
                 App.isLoggedIn(() => new AdminDashboardController(), () => new AdminLoginController());
                 break
             case App.CONTROLLER_STUDY:

@@ -1,18 +1,18 @@
 .TextProef{
     text-align: center;
 }
-p{
+.trialP{
     color: #FF7A00;
     font-size: 19px;
 }
 
-h1{
+.trialH1{
     font-style: normal;
     font-weight: 700;
     font-size: 58px;
     line-height: 73px;
 }
-h2{
+.trialH2{
     font-family: Inter;
 }
 #trialBody{
@@ -54,13 +54,13 @@ h2{
     border-radius: 0px 0px 15px 15px;
 
 }
-ul{
+.trialUl{
     font-size: 18px;
     display: flex;
     flex-direction: column;
     padding-top: 24px;
 }
-li{
+.trialLi{
     margin-bottom: 10px;
 }
 .Apply{
