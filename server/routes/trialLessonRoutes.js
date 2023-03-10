@@ -12,6 +12,7 @@ class trialLessonRoutes{
 this.#app.get("/trialLesson",(req,res)=>
     res.send("API endpoint study gecalled"));
 
+
 }
 }
 module.exports = trialLessonRoutes;

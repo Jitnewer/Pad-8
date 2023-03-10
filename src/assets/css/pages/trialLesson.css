@@ -15,7 +15,7 @@ h1{
 h2{
     font-family: Inter;
 }
-body{
+#trialBody{
     background: url("img/background-PAD.png");
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -28,12 +28,13 @@ body{
     display: flex;
     flex-direction: row;
     margin-bottom: 38px;
+
 }
 .Testlesson-container{
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 10px;
     margin-left: 120px;
 
 }
