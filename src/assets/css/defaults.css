@@ -14,3 +14,8 @@ footer {
     padding-left: 0.5rem;
     color: #cbbde2;
 }
+
+body{
+    background-image: url("/uploads/background-image.jpg");
+
+}
