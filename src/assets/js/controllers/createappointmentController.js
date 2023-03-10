@@ -37,13 +37,13 @@ export class createappointmentController extends Controller{
                 const errorBox = this.#createAppointmentView.querySelector(".error");
 
                 if (selectedDate < today) {
-                    errorBox.innerHTML = "Date must be in the future";
+                    errorBox.innerHTML = "Datum moet in de toekomst liggen";
                 } else if (selectedDate > maxDate) {
-                    errorBox.innerHTML = "Date must be within the next 7 days";}
+                    errorBox.innerHTML = "Datum moet binnen de komende 7 dagen vallen";}
                 else if (name.length === 0 || name.length === 45) {
-                        errorBox.innerHTML = "Name cant be empty or more than 45 chars"
+                        errorBox.innerHTML = "Naam kan niet leeg zijn of meer dan 45 karakters"
                     } else if (email.length === 0) {
-                        errorBox.innerHTML = "email cant be empty"
+                        errorBox.innerHTML = "email kan niet leeg zijn"
                     } else {
                     try{
                         errorBox.innerHTML = "";
@@ -54,7 +54,7 @@ export class createappointmentController extends Controller{
                      console.log(data);
 
                 }catch (e){
-                        console.log("fuck off");
+
                         errorBox.innerHTML = "Er is iets fout gegaan";
 
                     }

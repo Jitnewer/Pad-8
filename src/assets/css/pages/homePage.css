@@ -45,10 +45,14 @@
 }
 
 .hva {
-    position: absolute;
     margin: -22% 88% 0%;
-    height: 22%;
-    width: 12%;
+    margin-top: -22%;
+    margin-left: 88%;
+    height: 54%;
+    width: 6%;
+    left: 286%;
+    margin-left: 30%;
+    margin-top: -26%;
 }
 
 .platte {
