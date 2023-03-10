@@ -31,13 +31,13 @@ body {
     font-size: 25px;
     line-height: 30px;
 }
+
 #buttonBox {
     position: absolute;
-    width: 590px;
-    height: 100%;
-    left: 50%;
-    top: 0px;
-
+    width: 485px;
+    height: 74%;
+    left: 55%;
+    top: 152px;
     background: rgba(255, 255, 255, 0.3);
 }
 button {
@@ -120,9 +120,8 @@ button:hover {
     position: absolute;
     width: 110px;
     height: 170px;
-    left: 96.85%;
+    left: 93.85%;
     top: 40%;
-    /*background-color: white;*/
 }
 #home {
     position: absolute;
