@@ -13,6 +13,7 @@ export  class AppointmentsRepository {
         this.#networkManager = new NetworkManager();
     }
     createAppointment(name,email,date){
-      return   this.#networkManager.doRequest(this.#route,"POST",{name: name, email: email,date: date})
+      return   this.#networkManager.doRequest(this.#route,"POST",
+          {name: name, email: email,date: date})
     }
 }

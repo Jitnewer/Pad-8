@@ -32,7 +32,7 @@ export class App {
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
-    static CONTROLLER_ADMIN_DASHBOARD = "admin-dashboard";
+    static CONTROLLER_ADMIN_DASHBOARD = "adminDashboard";
     static CONTROLLER_STUDY = "study";
     static CONTROLLER_TRIALLESSON="trialLesson";
     static CONTROLLER_TRIALSE = "trailSE";

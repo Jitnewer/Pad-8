@@ -8,11 +8,12 @@ export class AdminDashboardRepository{
     #networkManager;
     #route;
 constructor() {
-    this.#route = "/adminDashboards";
+    this.#route = "/adminDashboard";
     this.#networkManager = new NetworkManager();
 }
     saveTestlesson(name, timeDuration, date, location, room, subject){
-    return this.#networkManager.doRequest(this.#route, "POST",
-        {name: name, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject})
+        console.log(this.#route); // make sure this is set to the correct URL
+        return this.#networkManager.doRequest(this.#route, "POST",
+            {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject})
  }
 }

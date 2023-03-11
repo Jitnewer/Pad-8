@@ -32,7 +32,9 @@ export class AdminDashboardController extends Controller{
 
         console.log(name + " " + duration + " " + date + " " + location + " " + room + " " + subject);
         try{
-            await this.#adminDashboardRepository.saveTestlesson(name,duration,date,location,room,subject);
+            console.log(name, duration, date, location, room, subject); // make sure this is correct
+            await this.#adminDashboardRepository.saveTestlesson(name, duration, date, location, room, subject);
+
      
         }
         catch (e) {
