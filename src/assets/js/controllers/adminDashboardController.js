@@ -31,11 +31,11 @@ export class AdminDashboardController extends Controller{
         const subject = this.#adminDashboardView.querySelector("#Testlesson_Subject").value;
 
         console.log(name + " " + duration + " " + date + " " + location + " " + room + " " + subject);
+
         try{
             console.log(name, duration, date, location, room, subject); // make sure this is correct
             await this.#adminDashboardRepository.saveTestlesson(name, duration, date, location, room, subject);
 
-     
         }
         catch (e) {
             console.log(e);
