@@ -11,9 +11,13 @@ constructor() {
     this.#route = "/adminDashboard";
     this.#networkManager = new NetworkManager();
 }
-    saveTestlesson(name, timeDuration, date, location, room, subject){
-        console.log(this.#route); // make sure this is set to the correct URL
+    saveTestlesson(name, timeDuration, date, location, room, subject, time){
+        console.log(this.#route);
         return this.#networkManager.doRequest(this.#route, "POST",
-            {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject})
+            {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject, time: time})
  }
+    // getTestlesson(name){
+    //     console.log(this.#route);
+    //     return this.#networkManager.doRequest(`${this.#route}/${name}`, "GET");
+    // }
 }
