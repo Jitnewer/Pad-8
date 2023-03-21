@@ -1,6 +1,3 @@
-/**
- * @author Jit Newer
- */
 class AdminLoginRoute {
     #app
     #databaseHelper = require("../framework/utils/databaseHelper.js");

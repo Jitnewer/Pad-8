@@ -1,6 +1,3 @@
-/**
- * @author Jit Newer
- */
 import {NetworkManager} from "../framework/utils/networkManager.js";
 
 export class AdminLoginRepository {

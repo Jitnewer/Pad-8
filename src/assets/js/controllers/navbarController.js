@@ -22,7 +22,7 @@ export class NavbarController extends Controller{
      */
     async #setupView() {
         //await for when HTML is
-        this.#navbarView = await super.loadHtmlIntoNavigation("html_views/navbar.html");
+        this.#navbarView = await super.loadHtmlIntoNavigation("html_views/navbar.html")
 
         //from here we can safely get elements from the view via the right getter
         const anchors = this.#navbarView.querySelectorAll("a.nav-link");

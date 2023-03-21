@@ -8,6 +8,7 @@
  */
 
 import { SessionManager } from "./framework/utils/sessionManager.js"
+//import { LoginController } from "./controllers/loginController.js"
 import { NavbarController }  from "./controllers/navbarController.js"
 import { UploadController }  from "./controllers/uploadController.js"
 import { WelcomeController }  from "./controllers/welcomeController.js"
@@ -25,6 +26,7 @@ export class App {
 
     //controller identifiers, add new controllers here
     static CONTROLLER_NAVBAR = "navbar";
+    // static CONTROLLER_LOGIN = "login";
     static CONTROLLER_LOGOUT = "logout";
     static CONTROLLER_WELCOME = "welcome";
     static CONTROLLER_UPLOAD = "upload";
@@ -85,7 +87,6 @@ export class App {
                new createappointmentController();
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
-                App.setCurrentController(name);
                 App.isLoggedIn(()=> new AdminDashboardController(), ()=> new AdminLoginController());
                 break;
             case App.CONTROLLER_ADMIN_DASHBOARD:
@@ -101,7 +102,7 @@ export class App {
                 break;
             case App.CONTROLLER_TRIALLESSON:
                 App.setCurrentController(name);
-                new TrialLessonController();
+               new TrialLessonController();
                 break;
             case App.CONTROLLER_TRIALSE:
                 App.setCurrentController(name);
