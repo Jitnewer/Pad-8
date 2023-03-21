@@ -6,8 +6,8 @@
 class adminDashboardRoute{
     #app;
 
-    #databaseHelper = require("../framework/utils/databaseHelper");
-    #httpErrorCodes = require("../framework/utils/httpErrorCodes");
+    #databaseHelper = require("../framework/utils/databaseHelper.js");
+    #httpErrorCodes = require("../framework/utils/httpErrorCodes.js");
 
     constructor(app) {
         this.#app = app;

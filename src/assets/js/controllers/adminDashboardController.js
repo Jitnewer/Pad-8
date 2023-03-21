@@ -18,7 +18,7 @@ export class AdminDashboardController extends Controller{
         this.#adminDashboardView = await super.loadHtmlIntoContent("html_views/adminDashboard.html");
 
         this.#adminDashboardView.querySelector("#Submit_Testlesson").addEventListener("click",
-            (event) => this.#saveTestlesson(event))
+            (event) => this.#saveTestlesson(event));
     }
    async #saveTestlesson(event){
         event.preventDefault();
