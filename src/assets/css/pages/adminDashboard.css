@@ -113,3 +113,14 @@
     font-family: Inter;
     font-size: 1.2rem;
 }
+
+.adminDashboard-plattegrond {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 120px;
+    float: left;
+    margin-right: 30px;
+    margin-top: 60px ;
+    background-color: grey;
+}
