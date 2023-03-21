@@ -1,0 +1,149 @@
+body {
+
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#title {
+    position: absolute;
+    width: 491px;
+    height: 147px;
+    left: 7.5%;
+    top: 15%;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 73px;
+}
+#text {
+    position: absolute;
+    width: 519px;
+    height: 120px;
+    left: 7.5%;
+    top: 35%;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+}
+
+#buttonBox {
+    position: absolute;
+    width: 485px;
+    height: 74%;
+    left: 55%;
+    top: 152px;
+    background: rgba(255, 255, 255, 0.3);
+}
+button {
+    width: 80%;
+    height: 12.5%;
+    left: 10%;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Inter';
+}
+button:hover {
+    cursor: pointer;
+}
+#study1 {
+    position: absolute;
+    /*width: 559px;*/
+    /*height: 152px;*/
+    /*left: 771px;*/
+    top: 4%;
+
+    background: #FFFFFF;
+    border-radius: 21px;
+}
+#study1:hover {
+    background: #f3f3f3;
+}
+#study2 {
+    position: absolute;
+    /*width: 559px;*/
+    /*height: 152px;*/
+    /*left: 771px;*/
+    top: 24%;
+
+    background: #FFFFFF;
+    border-radius: 21px;
+}
+#study2:hover {
+    background: #f3f3f3;
+}
+#study3 {
+    position: absolute;
+    /*width: 559px;*/
+    /*height: 152px;*/
+    /*left: 771px;*/
+    top: 44%;
+
+    background: #FFFFFF;
+    border-radius: 21px;
+}
+#study3:hover {
+    background: #f3f3f3;
+}
+#study4 {
+    position: absolute;
+    /*width: 559px;*/
+    /*height: 152px;*/
+    /*left: 771px;*/
+    top: 64%;
+
+    background: #FFFFFF;
+    border-radius: 21px;
+}
+#study4:hover {
+    background: #f3f3f3;
+}
+#study5 {
+    position: absolute;
+    /*width: 559px;*/
+    /*height: 152px;*/
+    /*left: 771px;*/
+    top: 84%;
+
+    background: #FFFFFF;
+    border-radius: 21px;
+}
+#study5:hover {
+    background: #f3f3f3;
+}
+#sidebar {
+    position: absolute;
+    width: 110px;
+    height: 170px;
+    left: 93.85%;
+    top: 40%;
+}
+#home {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    /*left: 1436px;*/
+    /*top: 40%;*/
+
+    background-color: white;
+}
+#map {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    /*left: 0%;*/
+    /*right: 1.72%;*/
+    top: 34%;
+    /*bottom: 44.79%;*/
+}
+#home:hover {
+    cursor: pointer;
+}
+#map:hover {
+    cursor: pointer;
+}
