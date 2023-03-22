@@ -19,4 +19,8 @@ export class TrialLessonRepository {
     getTrialLessons() {
         return this.#networkManager.doRequest(`${this.#route}`, "GET");
     }
+
+    applyTrialLesson() {
+        return this.#networkManager.doRequest(`${this.#route}`, "POST");
+    }
 }

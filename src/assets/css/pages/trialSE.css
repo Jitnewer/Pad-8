@@ -59,6 +59,13 @@
 .input-apply:hover {
     background: #2b2b8a;
 }
+
+.error-message {
+    display: none;
+    color: red;
+    text-align: center;
+    margin-bottom: 5px;
+}
 /*.trial-dashboard-container{*/
 /*    display:flex;*/
 /*    margin: auto;*/
