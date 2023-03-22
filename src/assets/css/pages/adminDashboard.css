@@ -115,12 +115,11 @@
 }
 
 .adminDashboard-plattegrond {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-left: 120px;
-    float: left;
-    margin-right: 30px;
-    margin-top: 60px ;
-    background-color: grey;
+    width: 400px;
+    padding: 40px;
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
 }
+
