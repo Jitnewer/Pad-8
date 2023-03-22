@@ -15,8 +15,6 @@ export class StudyRepository {
 
     getStudyInformation(nameStudy, information) {
         console.log(this.#route);
-        return this.#networkManager.doRequest(this.#route, "POST",
-            {nameStudy:nameStudy, Admin_IdAdmin:1, information:information}
-            )
+        return this.#networkManager.doRequest(this.#route, "GET");
     }
 }
