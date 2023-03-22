@@ -31,15 +31,16 @@ export class TrialLessonController extends Controller {
      * @returns {Promise<void>}
      */
     async #createTrialLesson () {
-        const CLASS_NAME_ITEM = "item";
+        const CLASS_NAME_ITEM = "trialLi";
         let textNode;
         let elementLi;
 
         //Get trial lesson data
         const data = await this.#trialLessonRepository.getTrialLessons();
+        console.log(data);
 
         //Trial lessons container
-        const trialLessonContainer = this.#trialLessonView.querySelector(".trial-lessons-container");
+        const trialLessonContainer = this.#trialLessonView.querySelector(".Testlesson-position");
         const amount = this.#trialLessonView.querySelector(".amount");
         textNode = document.createTextNode("Er zijn in totaal " + data.length + " proeflesssen beschikbaar!");
         amount.appendChild(textNode);
@@ -48,57 +49,63 @@ export class TrialLessonController extends Controller {
         for (let i = 0; i < data.length; i++) {
             //TrialLesson box
             const trialLesson = document.createElement("div");
-            trialLesson.classList.add("trial-lessons");
+            trialLesson.classList.add("Testlesson-container");
             trialLessonContainer.appendChild(trialLesson);
+
+            const nameContainer = document.createElement("div");
+            nameContainer.classList.add("Testlesson-name");
+            trialLesson.appendChild(nameContainer);
 
             //TrialLesson name
             const trialLessonName = document.createElement("h2");
-            trialLessonName.classList.add("name");
+            trialLessonName.classList.add("trialH2");
             textNode = document.createTextNode(data[i].name);
             trialLessonName.appendChild(textNode);
-            trialLesson.appendChild(trialLessonName);
+            nameContainer.appendChild(trialLessonName);
 
             //Trial lesson info
-            const infoList = document.createElement("ul");
-            infoList.classList.add("trial-lesson-info");
+            const infoList = document.createElement("div");
+            infoList.classList.add("Testlesson-content");
             trialLesson.appendChild(infoList);
 
+            const ul = document.createElement("ul");
+            ul.classList.add("trialUl");
+            infoList.appendChild(ul);
+
             elementLi = document.createElement("li");
-            elementLi.classList.add(CLASS_NAME_ITEM, "duration");
+            elementLi.classList.add(CLASS_NAME_ITEM);
             textNode = document.createTextNode(data[i].duration);
             elementLi.appendChild(textNode);
-            infoList.appendChild(elementLi);
+            ul.appendChild(elementLi);
 
             elementLi = document.createElement("li");
-            elementLi.classList.add(CLASS_NAME_ITEM, "date");
-            textNode = document.createTextNode(data[i].date);
+            elementLi.classList.add(CLASS_NAME_ITEM);
+            textNode = document.createTextNode(data[i].date.split("T")[0] + ", " + data[i].time);
             elementLi.appendChild(textNode);
-            infoList.appendChild(elementLi);
+            ul.appendChild(elementLi);
 
             elementLi = document.createElement("li");
-            elementLi.classList.add(CLASS_NAME_ITEM, "location");
-            textNode = document.createTextNode(data[i].location);
+            elementLi.classList.add(CLASS_NAME_ITEM);
+            textNode = document.createTextNode(data[i].location + ", " + data[i].room);
             elementLi.appendChild(textNode);
-            infoList.appendChild(elementLi);
+            ul.appendChild(elementLi);
 
             elementLi = document.createElement("li");
-            elementLi.classList.add(CLASS_NAME_ITEM, "classroom");
-            textNode = document.createTextNode(data[i].room);
-            elementLi.appendChild(textNode);
-            infoList.appendChild(elementLi);
-
-            elementLi = document.createElement("li");
-            elementLi.classList.add(CLASS_NAME_ITEM, "subject");
+            elementLi.classList.add(CLASS_NAME_ITEM);
             textNode = document.createTextNode(data[i].subject);
             elementLi.appendChild(textNode);
-            infoList.appendChild(elementLi);
+            ul.appendChild(elementLi);
 
             //Create apply button
             const applyButton = document.createElement("button");
-            applyButton.classList.add("trial-lessons-apply");
+            applyButton.classList.add("Apply");
+            infoList.appendChild(applyButton);
+
+            const applyText = document.createElement("p");
+            applyText.classList.add("Apply-text");
             textNode = document.createTextNode("Inschrijven");
-            applyButton.appendChild(textNode)
-            trialLesson.appendChild(applyButton);
+            applyText.appendChild(textNode);
+            applyButton.appendChild(applyText);
         }
     }
 }

@@ -10,6 +10,7 @@
     justify-content: center;
     margin-top: 20px;
     text-align: center;
+
 }
 
 .text {
@@ -91,7 +92,7 @@
     font-size: 1.2rem;
 }
 #trialBody{
-    background: url("img/background-PAD.png");
+    /*background: url("img/background-PAD.png");*/
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -100,14 +101,30 @@
 .Testlesson-position{
     display: flex;
     flex-direction: row;
-    margin-bottom: 38px;
     flex-wrap: wrap;
-    margin-left: 180px;
+    overflow-y: auto;
+    width: 70vw;
+    max-height: 475px;
+    right: 0;
+    left: 0;
+    margin: 0 auto 38px auto;
+    align-self: center;
 }
+
+.Testlesson-position::-webkit-scrollbar {
+    width: 1px;
+}
+
+.Testlesson-position::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    opacity: 0.5;
+    border-radius: 5px;
+}
+
 .Testlesson-container {
     display: flex;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 120px;
     flex-direction: column;
 }
@@ -155,6 +172,12 @@
     font-size: 14px;
     line-height: 30px;
     color: #444444;
+}
+
+.trialBody {
+    width: 100vw;
+    display: flex;
+    align-items: center;
 }
 /*.TextProef{*/
 /*    text-align: center;*/
