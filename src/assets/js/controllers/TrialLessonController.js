@@ -1,10 +1,9 @@
 import { Controller } from "./controller.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
-import {TrialSEController} from "./trialSEController.js";
 
 export class TrialLessonController extends Controller {
     #trialLessonView;
-    #trialLessonRepository
+    #trialLessonRepository;
 
     constructor() {
         super();
@@ -15,11 +14,15 @@ export class TrialLessonController extends Controller {
     async #setupView() {
        this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
-        this.#createTrialLesson().then(
-            () => {
-                this.#applySE();
-            }
-        )
+       // this.#createTrialLesson();
+
+        // this.#trialLessonView.querySelector(".Apply").addEventListener("click",
+        //     (event) => this.#applySE(event));
+        this.#createTrialLesson();
+    }
+
+    async #applySE(event) {
+        event.preventDefault();
     }
 
     /**
@@ -96,7 +99,6 @@ export class TrialLessonController extends Controller {
             //Create apply button
             const applyButton = document.createElement("button");
             applyButton.classList.add("Apply");
-            applyButton.id = data[i].name;
             infoList.appendChild(applyButton);
 
             const applyText = document.createElement("p");
@@ -104,18 +106,6 @@ export class TrialLessonController extends Controller {
             textNode = document.createTextNode("Inschrijven");
             applyText.appendChild(textNode);
             applyButton.appendChild(applyText);
-        }
-    }
-
-    /**
-     * Redirect to apply form
-     */
-    #applySE () {
-        let applyButtons = document.querySelectorAll(".Apply");
-        for (let i = 0; i < applyButtons.length; i++) {
-            applyButtons[i].addEventListener("click", () => {
-                new TrialSEController(applyButtons[i].id);
-            })
         }
     }
 }

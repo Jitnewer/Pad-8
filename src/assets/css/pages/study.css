@@ -41,7 +41,7 @@ body {
     background: rgba(255, 255, 255, 0.3);
     overflow-y: scroll; 
 }
-button {
+.StudyButton {
     width: 100%;
     height: 100px;
     margin-bottom: 8.1%;
@@ -55,71 +55,32 @@ button:hover {
     cursor: pointer;
     background: white   ;
 }
-/*#study1 {*/
-/*    position: absolute;*/
-/*    !*width: 559px;*!*/
-/*    !*height: 152px;*!*/
-/*    !*left: 771px;*!*/
-/*    top: 4%;*/
+.information-posistion {
+    position: absolute;
+    left: 50%;
+    margin-top: 7%;
+}
+.study-title {
+    font-size: 50px;
+    font-weight: 750;
+    font-family: 'Inter';
+}
+.information-input {
+    font-size: 20px;
+    font-family: 'Inter';
+}
+.apply-triallesson {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 8.1%;
+    border-radius: 21px ;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Inter';
+    background: rgba(255, 255, 255, 0.7);
+    visibility: hidden;
+}
 
-/*    background: #FFFFFF;*/
-/*    border-radius: 21px;*/
-/*}*/
-/*#study1:hover {*/
-/*    background: #f3f3f3;*/
-/*}*/
-/*#study2 {*/
-/*    position: absolute;*/
-/*    !*width: 559px;*!*/
-/*    !*height: 152px;*!*/
-/*    !*left: 771px;*!*/
-/*    top: 24%;*/
-
-/*    background: #FFFFFF;*/
-/*    border-radius: 21px;*/
-/*}*/
-/*#study2:hover {*/
-/*    background: #f3f3f3;*/
-/*}*/
-/*#study3 {*/
-/*    position: absolute;*/
-/*    !*width: 559px;*!*/
-/*    !*height: 152px;*!*/
-/*    !*left: 771px;*!*/
-/*    top: 44%;*/
-
-/*    background: #FFFFFF;*/
-/*    border-radius: 21px;*/
-/*}*/
-/*#study3:hover {*/
-/*    background: #f3f3f3;*/
-/*}*/
-/*#study4 {*/
-/*    position: absolute;*/
-/*    !*width: 559px;*!*/
-/*    !*height: 152px;*!*/
-/*    !*left: 771px;*!*/
-/*    top: 64%;*/
-
-/*    background: #FFFFFF;*/
-/*    border-radius: 21px;*/
-/*}*/
-/*#study4:hover {*/
-/*    background: #f3f3f3;*/
-/*}*/
-/*#study5 {*/
-/*    position: absolute;*/
-/*    !*width: 559px;*!*/
-/*    !*height: 152px;*!*/
-/*    !*left: 771px;*!*/
-/*    top: 84%;*/
-
-/*    background: #FFFFFF;*/
-/*    border-radius: 21px;*/
-/*}*/
-/*#study5:hover {*/
-/*    background: #f3f3f3;*/
-/*}*/
 #sidebar {
     position: absolute;
     width: 110px;
