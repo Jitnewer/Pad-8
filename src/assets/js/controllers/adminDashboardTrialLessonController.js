@@ -3,28 +3,28 @@
  * @author Chant Balci
  */
 import {Controller} from "./controller.js";
-import {AdminDashboardRepository} from "../repositories/adminDashboardRepository.js";
+import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
 
 
 
-export class AdminDashboardController extends Controller {
-    #adminDashboardView;
-    #adminDashboardRepository;
+export class AdminDashboardTrialLessonController extends Controller {
+    #adminDashboardTrialLessonView;
+    #adminDashboardTrialLessonRepository;
     #trialLessonView;
     #trialLessonRepository;
 
     constructor() {
         super();
-        this.#adminDashboardRepository = new AdminDashboardRepository();
+        this.#adminDashboardTrialLessonRepository = new AdminDashboardTrialLessonRepository();
         this.#trialLessonRepository = new TrialLessonRepository();
         this.#setupView();
     }
 
     async #setupView() {
         this.#createTrialLesson();
-        this.#adminDashboardView = await super.loadHtmlIntoContent("html_views/adminDashboard.html");
-        this.#adminDashboardView.querySelector(".adminDashboard-Apply").addEventListener("click",
+        this.#adminDashboardTrialLessonView = await super.loadHtmlIntoContent("html_views/adminDashboardTrialLesson.html");
+        this.#adminDashboardTrialLessonView.querySelector(".adminDashboard-Apply").addEventListener("click",
             (event) => this.#saveTestlesson(event));
 
 
@@ -33,19 +33,19 @@ export class AdminDashboardController extends Controller {
     async #saveTestlesson(event) {
         event.preventDefault();
 
-        const name = this.#adminDashboardView.querySelector("#adminDashboard_Testlesson_Name").value;
-        const duration = this.#adminDashboardView.querySelector("#adminDashboard_Testlesson_duration").value;
-        const date = this.#adminDashboardView.querySelector("#adminDashboard_Testlesson_dateTime").value;
-        const location = this.#adminDashboardView.querySelector("#adminDashboard_Testlesson_Location").value;
-        const room = this.#adminDashboardView.querySelector("#adminDashboard_Testlesson_Room").value;
-        const subject = this.#adminDashboardView.querySelector("#adminDashboard_Testlesson_Subject").value;
-        const time = this.#adminDashboardView.querySelector("#adminDashboard_Testlesson_time").value;
+        const name = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Name").value;
+        const duration = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_duration").value;
+        const date = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_dateTime").value;
+        const location = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Location").value;
+        const room = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Room").value;
+        const subject = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Subject").value;
+        const time = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_time").value;
 
         console.log(name + " " + duration + " " + date + " " + location + " " + room + " " + subject + " " + time);
 
         try {
             console.log(name, duration, date, location, room, subject, time);
-            await this.#adminDashboardRepository.saveTestlesson(name, duration, date, location, room, subject, time);
+            await this.#adminDashboardTrialLessonRepository.saveTestlesson(name, duration, date, location, room, subject, time);
         } catch (e) {
             console.log(e);
         }
@@ -61,7 +61,7 @@ export class AdminDashboardController extends Controller {
         console.log(data);
 
         //Trial lessons container
-        const trialLessonContainer = this.#adminDashboardView.querySelector(".adminDashboard-position");
+        const trialLessonContainer = this.#adminDashboardTrialLessonView.querySelector(".adminDashboard-position");
 
         //Create trial lessons
         for (let i = 0; i < data.length; i++) {
