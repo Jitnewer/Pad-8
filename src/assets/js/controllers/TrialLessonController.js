@@ -71,13 +71,13 @@ export class TrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].duration);
+            textNode = document.createTextNode(data[i].timeDuration + " uur proefles");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].date.split("T")[0] + ", " + data[i].time);
+            textNode = document.createTextNode(data[i].date.split("T")[0] + ", " + data[i].time.substring(0, 5));
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
