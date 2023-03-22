@@ -17,6 +17,7 @@ import {TrialLessonController} from "./controllers/TrialLessonController.js";
 import { StudyController } from "./controllers/studyController.js";
 import { AdminDashboardController} from "./controllers/adminDashboardController.js";
 import {TrialSEController} from "./controllers/trialSEController.js";
+import {ChatbotController} from "./controllers/chatbotController.js";
 
 export class App {
     //we only need one instance of the sessionManager, thus static use here
@@ -34,13 +35,17 @@ export class App {
     static CONTROLLER_STUDY = "study";
     static CONTROLLER_TRIALLESSON="trialLesson";
     static CONTROLLER_TRIALSE = "trailSE";
+    static CONTROLLER_CHATBOT = "chatbot";
 
     constructor() {
         //Always load the navigation
         App.loadController(App.CONTROLLER_NAVBAR);
+        App.loadController(App.CONTROLLER_CHATBOT);
+
 
         //Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
         App.loadControllerFromUrl(App.CONTROLLER_WELCOME);
+
     }
 
     /**
@@ -63,6 +68,10 @@ export class App {
                 new NavbarController();
                 return true;
 
+            case App.CONTROLLER_CHATBOT:
+                new ChatbotController();
+                return true;
+
             case App.CONTROLLER_LOGOUT:
                 App.handleLogout();
                 return true;
@@ -83,7 +92,7 @@ export class App {
             case App.CONTROLLER_CREATE_APPOINTMENT:
                 App.setCurrentController(name);
                new createappointmentController();
-                break;
+               break;
             case App.CONTROLLER_ADMIN_LOGIN:
                 App.setCurrentController(name);
                 App.isLoggedIn(()=> new AdminDashboardController(), ()=> new AdminLoginController());

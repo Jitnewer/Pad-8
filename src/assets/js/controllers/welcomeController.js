@@ -30,7 +30,7 @@ export class WelcomeController extends Controller{
         this.#welcomeView = await super.loadHtmlIntoContent("html_views/welcome.html")
 
         const plattegrond = this.#welcomeView.querySelector(".plattegrond");
-        const chatbot = this.#welcomeView.querySelector(".chatbot");
+        const chatbot = this.#welcomeView.querySelector(".chatbox");
         const opleiding = this.#welcomeView.querySelector(".opleiding");
         const proefles = this.#welcomeView.querySelector(".proefles");
 
@@ -56,7 +56,7 @@ export class WelcomeController extends Controller{
 
     #handleClickChatbotButton(e) {
         e.preventDefault();
-        this.#welcomeView.querySelector(".chatbot").addEventListener("click", async (e) => {
+        this.#welcomeView.querySelector(".chatbox").addEventListener("click", async (e) => {
             e.preventDefault();
             window.location.href = ""
         })
