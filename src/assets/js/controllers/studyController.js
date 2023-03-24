@@ -116,51 +116,43 @@ export class StudyController extends Controller {
 
         // let name = this.#studyView.querySelectorAll(".StudyButton");
 
-        const informationContainer = this.#studyView.querySelector(".information-posistion");
-        let studyButton = this.#studyView.querySelectorAll(".StudyButton").value;
-
+        // const informationContainer = this.#studyView.querySelector(".information-posistion");
+        // let studyButton = this.#studyView.querySelectorAll(".StudyButton");
         /**
          * Show study information
          */
         for (let i = 0; i < data.length; i++) {
-            if (name[index] === data[i].nameStudy) {
-                this.#studyView.querySelector(".study-title").innerHTML = "";
-                this.#studyView.querySelector(".information-input").innerHTML = "";
-                // let title = this.#studyView.querySelector(".study-title").innerHTML;
-                this.#studyView.querySelector(".study-title").innerHTML = data[i].nameStudy;
-                this.#studyView.querySelector(".information-input").innerHTML = data[i].information;
+            // console.log(data[i].nameStudy)
 
-                // let title = document.createTextNode(data[i].nameStudy + "")
-                // this.#studyView.querySelector(".study-title").appendChild(title);
-                //
-                // let info = document.createTextNode(data[i].information + "");
-                // this.#studyView.querySelector(".information-input").appendChild(info);
-            }
+            // this.#studyView.querySelector(".study-title").innerHTML = "";
+            this.#studyView.querySelector(".study-title").innerHTML = data[index].nameStudy;
+            this.#studyView.querySelector(".information-input").innerHTML = data[index].information;
 
-            // let title = document.createTextNode(data[i].nameStudy + "")
+            // let title = document.createTextNode(data[index].nameStudy + "")
             // this.#studyView.querySelector(".study-title").appendChild(title);
             //
-            // let info = document.createTextNode(data[i].information + "");
+            // let info = document.createTextNode(data[index].information + "");
             // this.#studyView.querySelector(".information-input").appendChild(info);
-
         }
 
 
-        let title = document.createTextNode(data.nameStudy + "")
-        this.#studyView.querySelector(".study-title").appendChild(title);
+        // let title = document.createTextNode(data[index].nameStudy + "")
+        // let info = document.createTextNode(data[index].information + "");
+        // this.#studyView.querySelector(".study-title").removeChild(title);
+        // this.#studyView.querySelector(".study-title").appendChild(title);
+        // this.#studyView.querySelector(".information-input").removeChild(info);
+        // this.#studyView.querySelector(".information-input").appendChild(info);
 
-        let info = document.createTextNode(data.information + "");
-        this.#studyView.querySelector(".information-input").appendChild(info);
 
-        /**
-         * Delete any visible information
-         */
-        for (let j = o; j < studyButton.length; i++) {
-            let title = this.#studyView.querySelector(".study-title");
-            let info = this.#studyView.querySelector(".information-input");
-            this.#studyView.querySelector(".study-title").removeChild(title);
-            this.#studyView.querySelector(".information-input").removeChild(info);
-        }
+        // /**
+        //  * Delete any visible information
+        //  */
+        // for (let j = 0; j < studyButton.length; i++) {
+        //     let title = this.#studyView.querySelector(".study-title");
+        //     let info = this.#studyView.querySelector(".information-input");
+        //     this.#studyView.querySelector(".study-title").removeChild(title);
+        //     this.#studyView.querySelector(".information-input").removeChild(info);
+        // }
     }
 
     // #applyTrialLesson() {
