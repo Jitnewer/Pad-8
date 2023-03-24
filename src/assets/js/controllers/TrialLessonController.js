@@ -96,7 +96,7 @@ export class TrialLessonController extends Controller {
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
-            //Create apply button
+            // Create apply button
             const applyButton = document.createElement("button");
             applyButton.classList.add("Apply");
             infoList.appendChild(applyButton);
