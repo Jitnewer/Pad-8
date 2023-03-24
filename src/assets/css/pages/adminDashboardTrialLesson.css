@@ -1,33 +1,20 @@
-/*.dashboard-container{*/
-/*    display:flex;*/
-/*    margin: auto;*/
-/*}*/
-/*#create-testlesson{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    background-color: #a8a8a8;*/
-/*    padding: 5px;*/
-/*    margin: 40px auto auto auto;*/
-/*}*/
-/*#Submit_Testlesson{*/
-/*    height:27px;*/
-/*    margin: 4px auto auto auto;*/
-/*    font-family: Inter;*/
-/*    font-size: 18px;*/
-/*}*/
-/*#dashboard-input-container{*/
-/*    display:flex;*/
-/*    flex-direction: column;*/
-/*    margin: auto;*/
-/*}*/
 .adminDashboard-container{
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin: 90px 40px auto 0px;
+}
+.admin-Testlesson-container {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
     margin-left: 120px;
-    float: right;
-    margin-right: 30px;
-    margin-top: 60px ;
+    flex-direction: column;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.admin-Testlesson-container:hover{
+    background-color: #0a53be;
 }
 
 .adminDashboard-name{
@@ -36,7 +23,6 @@
     height: 68px;
     background: #EBEBEB;
     border-radius: 15px 15px 0px 0px;
-    margin: auto;
 }
 .adminDashboard-content{
     display: flex;
@@ -91,6 +77,29 @@
     display:flex;
     flex-direction: row;
     margin: 26px 40px auto 50px;
+}
+.adminDashboard-position{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    width: 70vw;
+    max-height: 475px;
+    right: 0;
+    left: 0;
+    margin: 20px auto 38px auto;
+    align-self: center;
+    float:left;
+}
+
+.adminDashboard-position::-webkit-scrollbar {
+    width: 1px;
+}
+
+.adminDashboard-position::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    opacity: 0.5;
+    border-radius: 5px;
 }
 .adminDashboard-Apply{
     width: 250px;

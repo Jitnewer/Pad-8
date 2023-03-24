@@ -15,7 +15,7 @@ import {createappointmentController} from "./controllers/createappointmentContro
 import {AdminLoginController} from "./controllers/adminLoginController.js";
 import {TrialLessonController} from "./controllers/TrialLessonController.js";
 import { StudyController } from "./controllers/studyController.js";
-import { AdminDashboardController} from "./controllers/adminDashboardController.js";
+import { AdminDashboardTrialLessonController} from "./controllers/adminDashboardTrialLessonController.js";
 import {TrialSEController} from "./controllers/trialSEController.js";
 import {ChatbotController} from "./controllers/chatbotController.js";
 
@@ -31,7 +31,7 @@ export class App {
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
-    static CONTROLLER_ADMIN_DASHBOARD = "adminDashboard";
+    static CONTROLLER_ADMIN_DASHBOARD_TrialLesson = "adminDashboard";
     static CONTROLLER_STUDY = "study";
     static CONTROLLER_TRIALLESSON="trialLesson";
     static CONTROLLER_TRIALSE = "trailSE";
@@ -95,11 +95,11 @@ export class App {
                break;
             case App.CONTROLLER_ADMIN_LOGIN:
                 App.setCurrentController(name);
-                App.isLoggedIn(()=> new AdminDashboardController(), ()=> new AdminLoginController());
+                App.isLoggedIn(()=> new AdminDashboardTrialLessonController(), ()=> new AdminLoginController());
                 break;
-            case App.CONTROLLER_ADMIN_DASHBOARD:
+            case App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson:
                 App.setCurrentController(name);
-                App.isLoggedIn(() => new AdminDashboardController(), () => new AdminLoginController());
+                App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
                 break
             case App.CONTROLLER_STUDY:
               new StudyController();

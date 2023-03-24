@@ -7,16 +7,26 @@
 
 class StudyRoutes {
     #app;
+    #databaseHelper = require("../framework/utils/databaseHelper.js");
+    #httpErrorCodes = require("../framework/utils/httpErrorCodes.js");
+
 
     constructor(app) {
         this.#app = app;
 
-        this.#createStudy();
+        this.#getStudy();
     }
 
-    #createStudy() {
-        this.#app.get("/study", (req, res) => {
-            res.send("API endpoint study gecalled")
+    #getStudy() {
+        this.#app.get("/study", async (req, res) => {
+            try {
+                const study = await this.#databaseHelper.handleQuery({
+                    query: "SELECT * FROM study WHERE Admin_idAdmin"
+                })
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(study);
+            } catch (e) {
+                console.log(e);
+            }
         })
     }
 }

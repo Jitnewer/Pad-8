@@ -3,7 +3,7 @@
  * @author Chant Balci
  */
 
-class adminDashboardRoute{
+class adminDashboardTrialLessonRoute {
     #app;
 
     #databaseHelper = require("../framework/utils/databaseHelper.js");
@@ -15,7 +15,7 @@ class adminDashboardRoute{
         this.#getTestlesson();
     }
     #saveTestlesson(){
-        this.#app.post("/adminDashboard", async(req, res) =>{
+        this.#app.post("/adminDashboardTrialLesson", async(req, res) =>{
             try{
                 const data = await this.#databaseHelper.handleQuery({
                     query: "INSERT INTO testlesson (name,Admin_idAdmin,timeDuration, date, location, room, subject,time) VALUES(?,1,?,?,?,?,?,?)",
@@ -32,7 +32,7 @@ class adminDashboardRoute{
 
 
     #getTestlesson(){
-        this.#app.get("/adminDashboard/:name", async(req, res) =>{
+        this.#app.get("/adminDashboardTrialLesson/:name", async(req, res) =>{
             try{
                 const data = await this.#databaseHelper.handleQuery({
                     query: "SELECT * FROM testlesson WHERE name = ?",
@@ -73,4 +73,4 @@ class adminDashboardRoute{
 // });
 //     }
 }
-module.exports = adminDashboardRoute;
+module.exports = adminDashboardTrialLessonRoute;

@@ -4,7 +4,7 @@
  */
 import {NetworkManager} from "../framework/utils/networkManager.js";
 
-export class AdminDashboardRepository{
+export class AdminDashboardTrialLessonRepository {
     #networkManager;
     #route;
 constructor() {

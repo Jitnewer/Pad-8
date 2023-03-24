@@ -1,35 +1,56 @@
-import { Controller } from "./controller.js";
+/**
+ * Controller for create testlesson and user interaction
+ * @author Chant Balci
+ */
+import {Controller} from "./controller.js";
+import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
 
-export class TrialLessonController extends Controller {
+
+
+export class AdminDashboardTrialLessonController extends Controller {
+    #adminDashboardTrialLessonView;
+    #adminDashboardTrialLessonRepository;
     #trialLessonView;
     #trialLessonRepository;
 
     constructor() {
         super();
+        this.#adminDashboardTrialLessonRepository = new AdminDashboardTrialLessonRepository();
         this.#trialLessonRepository = new TrialLessonRepository();
         this.#setupView();
     }
 
     async #setupView() {
-       this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
-
-       // this.#createTrialLesson();
-
-        // this.#trialLessonView.querySelector(".Apply").addEventListener("click",
-        //     (event) => this.#applySE(event));
         this.#createTrialLesson();
+        this.#adminDashboardTrialLessonView = await super.loadHtmlIntoContent("html_views/adminDashboardTrialLesson.html");
+        this.#adminDashboardTrialLessonView.querySelector(".adminDashboard-Apply").addEventListener("click",
+            (event) => this.#saveTestlesson(event));
+
+
     }
 
-    async #applySE(event) {
+    async #saveTestlesson(event) {
         event.preventDefault();
+
+        const name = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Name").value;
+        const duration = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_duration").value;
+        const date = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_dateTime").value;
+        const location = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Location").value;
+        const room = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Room").value;
+        const subject = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Subject").value;
+        const time = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_time").value;
+
+        console.log(name + " " + duration + " " + date + " " + location + " " + room + " " + subject + " " + time);
+
+        try {
+            console.log(name, duration, date, location, room, subject, time);
+            await this.#adminDashboardTrialLessonRepository.saveTestlesson(name, duration, date, location, room, subject, time);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
-    /**
-     * @author Jit Newer
-     * Creates all trial lessons from database
-     * @returns {Promise<void>}
-     */
     async #createTrialLesson () {
         const CLASS_NAME_ITEM = "trialLi";
         let textNode;
@@ -40,10 +61,7 @@ export class TrialLessonController extends Controller {
         console.log(data);
 
         //Trial lessons container
-        const trialLessonContainer = this.#trialLessonView.querySelector(".Testlesson-position");
-        const amount = this.#trialLessonView.querySelector(".amount");
-        textNode = document.createTextNode("Er zijn in totaal " + data.length + " proeflesssen beschikbaar!");
-        amount.appendChild(textNode);
+        const trialLessonContainer = this.#adminDashboardTrialLessonView.querySelector(".adminDashboard-position");
 
         //Create trial lessons
         for (let i = 0; i < data.length; i++) {
@@ -107,5 +125,19 @@ export class TrialLessonController extends Controller {
             applyText.appendChild(textNode);
             applyButton.appendChild(applyText);
         }
+        // let container = this.#trialLessonView.querySelector("Testlesson-container");
+        //
+        // let i;
+        //
+        // for(i = 0; i <container.length; i++){
+        //     container[i].onclick = function () {
+        //         let cbarry = document.querySelector(".Testlesson-container");
+        //         for(i=0; i < cbarry.length; i++){
+        //             cbarry[i].style.background = 'none'
+        //         }
+        //         this.style.background = "rgba(0,0,0,0.2)";
+        //     }
+        //     console.log(container);
+        // }
     }
 }
