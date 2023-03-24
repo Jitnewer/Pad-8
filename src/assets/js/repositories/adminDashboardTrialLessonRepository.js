@@ -16,7 +16,8 @@ constructor() {
         return this.#networkManager.doRequest(this.#route, "POST",
             {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject, time: time})
  }
-    deleteTestlesson(id) {
-        return this.#networkManager.doRequest(`${this.#route}/${id}`, "DELETE");
-    }
+    // getTestlesson(name){
+    //     console.log(this.#route);
+    //     return this.#networkManager.doRequest(`${this.#route}/${name}`, "GET");
+    // }
 }

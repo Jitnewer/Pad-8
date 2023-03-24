@@ -23,12 +23,12 @@ export class AdminDashboardTrialLessonController extends Controller {
 
     async #setupView() {
         this.#createTrialLesson();
-
         this.#adminDashboardTrialLessonView = await super.loadHtmlIntoContent("html_views/adminDashboardTrialLesson.html");
         this.#adminDashboardTrialLessonView.querySelector(".adminDashboard-Apply").addEventListener("click",
             (event) => this.#saveTestlesson(event));
-    }
 
+
+    }
 
     async #saveTestlesson(event) {
         event.preventDefault();
@@ -36,60 +36,20 @@ export class AdminDashboardTrialLessonController extends Controller {
         const name = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Name").value;
         const duration = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_duration").value;
         const date = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_dateTime").value;
-        const lessonLocation = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Location").value;
+        const location = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Location").value;
         const room = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Room").value;
         const subject = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Subject").value;
         const time = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_time").value;
 
-        const durationMax = /^[0-5](\.\d+)?$/
+        console.log(name + " " + duration + " " + date + " " + location + " " + room + " " + subject + " " + time);
 
-            try {
-                if (name == null || name === "") {
-                    alert("Opleiding mag niet leeg zijn");
-                }
-                else if (name.length > 30) {
-                    alert("Naam van de opleiding mag niet langer dan 30 karakters zijn")
-                }
-                else if (duration == null || duration === "") {
-                    alert("Duur mag niet leeg zijn of letters bevatten");
-                }
-                else if (!duration.match(durationMax)){
-                    alert("Duur mag niet langer dan 5 uur duren")
-                }
-                else if (date == null || date === "") {
-                    alert("Datum mag niet leeg zijn");
-                }
-                else if (lessonLocation === null || lessonLocation === "") {
-                    alert("Locatie mag niet leeg zijn");
-                }
-                else if (lessonLocation.length > 30){
-                    alert("Locatie mag niet langer zijn dan 30 characters")
-                }
-                else if (room === null || room === "") {
-                    alert("Lokaal mag niet leeg zijn");
-                }
-                else if (room.length > 30){
-                    alert("Lokaal mag niet langer zijn dan 30 characters")
-                }
-                else if (subject === null || subject === "") {
-                    alert("Vak mag niet leeg zijn");
-                }
-                else if (subject.length > 15){
-                    alert("Vak mag niet langer zijn dan 15 characters")
-                }
-                else if (time === null || time === "") {
-                    alert("de tijd mag niet leeg zijn");
-                }
-                else{
-                if (confirm("weet u zeker dat u het wil toevoegen") === true) {
-                    await this.#adminDashboardTrialLessonRepository.saveTestlesson(name, duration, date, lessonLocation, room, subject, time);
-                    location.reload();
-                }
-                }
-            } catch (e) {
-                alert("er ging iets mis!");
-            }
+        try {
+            console.log(name, duration, date, location, room, subject, time);
+            await this.#adminDashboardTrialLessonRepository.saveTestlesson(name, duration, date, location, room, subject, time);
+        } catch (e) {
+            console.log(e);
         }
+    }
 
     async #createTrialLesson () {
         const CLASS_NAME_ITEM = "trialLi";
@@ -107,7 +67,7 @@ export class AdminDashboardTrialLessonController extends Controller {
         for (let i = 0; i < data.length; i++) {
             //TrialLesson box
             const trialLesson = document.createElement("div");
-            trialLesson.classList.add("admin-Testlesson-container");
+            trialLesson.classList.add("Testlesson-container");
             trialLessonContainer.appendChild(trialLesson);
 
             const nameContainer = document.createElement("div");
@@ -156,29 +116,28 @@ export class AdminDashboardTrialLessonController extends Controller {
 
             //Create apply button
             const applyButton = document.createElement("button");
-            applyButton.classList.add("trash_Button_position");
+            applyButton.classList.add("Apply");
             infoList.appendChild(applyButton);
-            // ik maak een delete button aan de moment dat het word gecreate.
-            applyButton.addEventListener("click", () => this.#deleteTestlesson(data[i].id));
 
-            const applyText = document.createElement("img");
-            applyText.classList.add("trash_png");
-            applyText.src = "src/assets/img/Trashcan.png";
-            applyText.alt = "Trashcan";
+            const applyText = document.createElement("p");
+            applyText.classList.add("Apply-text");
+            textNode = document.createTextNode("Inschrijven");
+            applyText.appendChild(textNode);
             applyButton.appendChild(applyText);
         }
-    }
-
-        // hier maak ik de delete functie werkend
-        async #deleteTestlesson(id){
-        try {
-            if(confirm("weet u zeker dat je het wilt verwijderen?") === true) {
-                await this.#adminDashboardTrialLessonRepository.deleteTestlesson(id);
-                location.reload();
-            }
-            }
-        catch(e){
-            console.log(e)
-        }
+        // let container = this.#trialLessonView.querySelector("Testlesson-container");
+        //
+        // let i;
+        //
+        // for(i = 0; i <container.length; i++){
+        //     container[i].onclick = function () {
+        //         let cbarry = document.querySelector(".Testlesson-container");
+        //         for(i=0; i < cbarry.length; i++){
+        //             cbarry[i].style.background = 'none'
+        //         }
+        //         this.style.background = "rgba(0,0,0,0.2)";
+        //     }
+        //     console.log(container);
+        // }
     }
 }
