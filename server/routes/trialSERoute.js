@@ -6,25 +6,27 @@ class trialSERoute{
     #app;
     #databaseHelper = require("../framework/utils/databaseHelper.js");
     #httpErrorCodes = require("../framework/utils/httpErrorCodes.js");
-    #cryptoHelper = require("../framework/utils/cryptoHelper");
 
     constructor(app) {
         this.#app = app;
-        this.#createTrialSE();
+        this.#apply();
     }
-    #createTrialSE(){
-        this.#app.get("/trialSE", async (req,res)=> {
-            const firstName = req.body.firstname;
+
+    #apply() {
+        this.#app.post("/trialSELesson", async (req, res) => {
+            const email = req.body.email;
+            const id = req.body.id;
+            const firstname = req.body.firstname;
             const lastname = req.body.lastname;
             const prefix = req.body.prefix;
-            const mail = req.body.mail;
-            const lessonName = req.body.lessonName;
 
             try {
-                await this.#databaseHelper.handleQuery({
-                    query: "CREATE TABLE ? (firstname VARCHAR(40) NOT NULL, lastname VARCHAR(40) NOT NULL, prefix VARCHAR(40), mail VARCHAR(40) NOT NULL, primary key (mail))",
-                    value: [lessonName]
-                });
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "INSERT INTO participant (firstname, lastname, prefix, email, id) value (?, ?, ?, ?, ?)",
+                    values: [firstname, lastname, prefix, email, id]
+                })
+
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
                 console.log(e);
             }
