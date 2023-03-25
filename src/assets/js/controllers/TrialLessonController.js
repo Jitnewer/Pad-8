@@ -1,5 +1,6 @@
 import { Controller } from "./controller.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
+import {TrialSEController} from "./trialSEController.js";
 
 export class TrialLessonController extends Controller {
     #trialLessonView;
@@ -14,15 +15,17 @@ export class TrialLessonController extends Controller {
     async #setupView() {
        this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
-       // this.#createTrialLesson();
-
-        // this.#trialLessonView.querySelector(".Apply").addEventListener("click",
-        //     (event) => this.#applySE(event));
-        this.#createTrialLesson();
+       this.#createTrialLesson();
     }
 
-    async #applySE(event) {
-        event.preventDefault();
+    #applySE(data) {
+        const buttons = this.#trialLessonView.querySelectorAll(".Apply");
+
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("click", ()=> {
+                new TrialSEController(data[i].name, data[i].id);
+            });
+        }
     }
 
     /**
@@ -99,6 +102,7 @@ export class TrialLessonController extends Controller {
             //Create apply button
             const applyButton = document.createElement("button");
             applyButton.classList.add("Apply");
+            applyButton.id = data[i].name;
             infoList.appendChild(applyButton);
 
             const applyText = document.createElement("p");
@@ -107,5 +111,7 @@ export class TrialLessonController extends Controller {
             applyText.appendChild(textNode);
             applyButton.appendChild(applyText);
         }
+
+        this.#applySE(data);
     }
 }
