@@ -158,7 +158,7 @@ export class AdminDashboardTrialLessonController extends Controller {
             const applyButton = document.createElement("button");
             applyButton.classList.add("trash_Button_position");
             infoList.appendChild(applyButton);
-            // ik maak een delete button aan de moment dat het word gecreate.
+            // giving the delete button a function that deletes the selected triallesson
             applyButton.addEventListener("click", () => this.#deleteTestlesson(data[i].id));
 
             const applyText = document.createElement("img");

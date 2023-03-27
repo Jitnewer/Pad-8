@@ -1,14 +1,17 @@
 import { Controller } from "./controller.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
 import {TrialSEController} from "./trialSEController.js";
+import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 
 export class TrialLessonController extends Controller {
     #trialLessonView;
     #trialLessonRepository;
+    #adminDashboardTrialLessonRepository;
 
     constructor() {
         super();
         this.#trialLessonRepository = new TrialLessonRepository();
+        this.#adminDashboardTrialLessonRepository = new AdminDashboardTrialLessonRepository();
         this.#setupView();
     }
 
@@ -110,6 +113,27 @@ export class TrialLessonController extends Controller {
             textNode = document.createTextNode("Inschrijven");
             applyText.appendChild(textNode);
             applyButton.appendChild(applyText);
+
+            /**
+             * @author chant balci
+             * this makes sure a user can apply for a trialleson when it's full
+             * @type {HTMLParagraphElement}
+             */
+            // this the text thats been added to indicate how many spots are left for the specific triallesson
+            const clickCount = document.createElement("p");
+            const clickCountFull = document.createElement("p");
+            clickCountFull.classList.add("countFull");
+            clickCount.classList.add("countText");
+            if(data[i].clicked > 30){
+                clickCountFull.textContent = "Proef les is vol"
+                applyButton.remove();
+                infoList.appendChild(clickCountFull)
+            }
+            else {
+                clickCount.textContent = "nog " + (30 - data[i].clicked) + " plaatsen over"
+                infoList.appendChild(clickCount);
+            }
+
         }
 
         this.#applySE(data);

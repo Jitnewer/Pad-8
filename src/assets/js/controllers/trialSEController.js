@@ -4,14 +4,16 @@
 
 import { Controller } from "./controller.js";
 import {TrialSERepository} from "../repositories/trialSERepository.js";
+import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 
 export class TrialSEController extends Controller {
     #trialSEView;
-    #trialSERepository
-
+    #trialSERepository;
+    #adminDashboardTrialLessonRepository;
     constructor(name, id) {
         super();
         this.#trialSERepository = new TrialSERepository();
+        this.#adminDashboardTrialLessonRepository = new AdminDashboardTrialLessonRepository();
         this.#setupView(name, id);
     }
 
@@ -22,8 +24,7 @@ export class TrialSEController extends Controller {
         this.#trialSEView.querySelector(".name").appendChild(textNode);
 
         this.#trialSEView.querySelector(".input-apply").addEventListener("click",
-            (event) => this.#apply(event, id)
-        )
+            (event) => this.#apply(event, id))
     }
 
     async #apply (event, id) {
@@ -60,6 +61,10 @@ export class TrialSEController extends Controller {
         } else {
             try {
                const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
+               alert("u heeft zich ingeschreven");
+               // adds +1 to the clicked column in the database
+               await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+               window.location.replace("index.html");
                 console.log(data);
             } catch (e) {
                 console.log(e);

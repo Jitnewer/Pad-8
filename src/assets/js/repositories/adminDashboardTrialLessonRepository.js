@@ -14,9 +14,13 @@ export class AdminDashboardTrialLessonRepository {
     saveTestlesson(name, timeDuration, date, location, room, subject, time){
         console.log(this.#route);
         return this.#networkManager.doRequest(this.#route, "POST",
-            {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject, time: time})
+            {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject, time: time, clicked:0})
     }
     deleteTestlesson(id) {
         return this.#networkManager.doRequest(`${this.#route}/${id}`, "DELETE");
+    }
+    updateClickedCount(id) {
+        const route = `${this.#route}/updateClicked/${id}`;
+        return this.#networkManager.doRequest(route, "PUT");
     }
 }

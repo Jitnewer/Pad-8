@@ -148,3 +148,11 @@
 #apply_Button_position{
     margin: auto auto auto 84px;
 }
+.countText{
+    font-size: 0.7rem;
+    margin-left: 2.2rem;
+}
+.countFull{
+    font-size: 1.4rem;
+    margin-left: 1.4rem;
+}
