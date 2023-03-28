@@ -7,7 +7,9 @@ class ChatboxRoutes {
         this.#app = app;
         this.#createChat();
         this.#getQuestions();
+        this.#getAnswer();
     }
+
 
     #createChat() {
         this.#app.get("/chatbot", async (req, res) => {
@@ -28,7 +30,8 @@ class ChatboxRoutes {
         this.#app.get("/chatbot/questions", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "SELECT question FROM chatbot LIMIT 3",
+                    // Include 'id' field in the SELECT query
+                    query: "SELECT id, question FROM chatbot LIMIT 3",
                 });
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
@@ -38,6 +41,25 @@ class ChatboxRoutes {
             }
         });
     }
+    #getAnswer() {
+        this.#app.get("/chatbot/answer/:id", async (req, res) => {
+            try {
+                const questionId = req.params.id;
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "SELECT answer FROM chatbot WHERE id = ?",
+                    values: [questionId],
+                });
+                console.log("Answer data:", data); // Log the response
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data[0]);
+            } catch (e) {
+                res
+                    .status(this.#httpErrorCodes.BAD_REQUEST_CODE)
+                    .json({ reason: e });
+            }
+        });
+    }
+
+
 }
 
 module.exports = ChatboxRoutes;
