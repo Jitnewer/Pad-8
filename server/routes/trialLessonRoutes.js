@@ -29,6 +29,5 @@ class trialLessonRoutes{
             }
         })
     }
-
 }
 module.exports = trialLessonRoutes;

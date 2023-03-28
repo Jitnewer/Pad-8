@@ -1,26 +1,35 @@
+/**
+ * @author Jit Newer
+ */
+
 import { Controller } from "./controller.js";
+import {TrialSERepository} from "../repositories/trialSERepository.js";
+import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 
 export class TrialSEController extends Controller {
     #trialSEView;
-
-    constructor(name) {
+    #trialSERepository;
+    #adminDashboardTrialLessonRepository;
+    constructor(name, id) {
         super();
-        this.#setupView(name);
+        this.#trialSERepository = new TrialSERepository();
+        this.#adminDashboardTrialLessonRepository = new AdminDashboardTrialLessonRepository();
+        this.#setupView(name, id);
     }
 
-    async #setupView(name) {
+    async #setupView(name, id) {
         this.#trialSEView = await super.loadHtmlIntoContent("html_views/trialSE.html");
 
         let textNode = document.createTextNode(name + " proefles");
         this.#trialSEView.querySelector(".name").appendChild(textNode);
 
         this.#trialSEView.querySelector(".input-apply").addEventListener("click",
-            (event) => this.#apply(event, name)
-        )
+            (event) => this.#apply(event, id))
     }
 
-    #apply (event, name) {
+    async #apply (event, id) {
         event.preventDefault();
+
         const regexName = /^[A-Za-z]{3,40}$/;
         const regexMail = /^(?=.{10,40}$).*@.*/;
         const borderErrorColor = "1px solid red";
@@ -51,7 +60,12 @@ export class TrialSEController extends Controller {
             errorMessage.style.display = "block";
         } else {
             try {
-
+               const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
+               alert("u heeft zich ingeschreven");
+               // adds +1 to the clicked column in the database
+               await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+               window.location.replace("index.html");
+                console.log(data);
             } catch (e) {
                 console.log(e);
             }
