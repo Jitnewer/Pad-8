@@ -10,7 +10,6 @@ export class AdminDashboardStudyController extends Controller {
     #adminDashboardStudyView;
     #adminDashboardStudyRepository;
 
-
     constructor() {
         super();
         this.#adminDashboardStudyRepository = new AdminDashboardStudyRepository();

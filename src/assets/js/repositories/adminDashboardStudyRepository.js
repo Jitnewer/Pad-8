@@ -12,4 +12,19 @@ export class AdminDashboardStudyRepository {
         this.#route = "/study";
         this.#networkManager = new NetworkManager();
     }
+
+    getAdminDashboardStudyInformation(nameStudy, information) {
+        console.log(this.#route);
+        return this.#networkManager.doRequest(this.#route, "GET");
+    }
+
+    sendAdminDashboardStudyInformation(nameStudy, information) {
+        console.log(this.#route);
+        return this.#networkManager.doRequest(this.#route, "POST");
+    }
+
+    deleteAdminDashboardStudyInformation(nameStudy, information) {
+        console.log(this.#route);
+        return this.#networkManager.doRequest(this.#route, "POST");
+    }
 }
