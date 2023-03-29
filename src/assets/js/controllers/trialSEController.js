@@ -2,7 +2,7 @@
  * @author Jit Newer
  */
 
-import { Controller } from "./controller.js";
+import {Controller} from "./controller.js";
 import {TrialSERepository} from "../repositories/trialSERepository.js";
 import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 
@@ -10,6 +10,7 @@ export class TrialSEController extends Controller {
     #trialSEView;
     #trialSERepository;
     #adminDashboardTrialLessonRepository;
+
     constructor(name, id) {
         super();
         this.#trialSERepository = new TrialSERepository();
@@ -27,7 +28,7 @@ export class TrialSEController extends Controller {
             (event) => this.#apply(event, id))
     }
 
-    async #apply (event, id) {
+    async #apply(event, id) {
         event.preventDefault();
 
         const regexName = /^[A-Za-z]{3,40}$/;
@@ -60,12 +61,11 @@ export class TrialSEController extends Controller {
             errorMessage.style.display = "block";
         } else {
             try {
-               const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
-               alert("u heeft zich ingeschreven");
-               // adds +1 to the clicked column in the database
-               await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
-               window.location.replace("index.html");
-                console.log(data);
+                const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
+                alert("u heeft zich ingeschreven");
+                // adds +1 to the clicked column in the database
+                await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+                window.location.replace("index.html");
             } catch (e) {
                 console.log(e);
             }

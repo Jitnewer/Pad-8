@@ -1,4 +1,4 @@
-import { Controller } from "./controller.js";
+import {Controller} from "./controller.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
 import {TrialSEController} from "./trialSEController.js";
 import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
@@ -16,16 +16,16 @@ export class TrialLessonController extends Controller {
     }
 
     async #setupView() {
-       this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
+        this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
-       this.#createTrialLesson();
+        this.#createTrialLesson();
     }
 
     #applySE(data) {
         const buttons = this.#trialLessonView.querySelectorAll(".Apply");
 
         for (let i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener("click", ()=> {
+            buttons[i].addEventListener("click", () => {
                 new TrialSEController(data[i].name, data[i].id);
             });
         }
@@ -36,7 +36,7 @@ export class TrialLessonController extends Controller {
      * Creates all trial lessons from database
      * @returns {Promise<void>}
      */
-    async #createTrialLesson () {
+    async #createTrialLesson() {
         const CLASS_NAME_ITEM = "trialLi";
         let textNode;
         let elementLi;
@@ -53,7 +53,6 @@ export class TrialLessonController extends Controller {
 
         //Create trial lessons
         for (let i = 0; i < data.length; i++) {
-            //TrialLesson box
             const trialLesson = document.createElement("div");
             trialLesson.classList.add("Testlesson-container");
             trialLessonContainer.appendChild(trialLesson);
@@ -119,23 +118,21 @@ export class TrialLessonController extends Controller {
              * this makes sure a user can apply for a trialleson when it's full
              * @type {HTMLParagraphElement}
              */
-            // this the text thats been added to indicate how many spots are left for the specific triallesson
+                // this the text thats been added to indicate how many spots are left for the specific triallesson
             const clickCount = document.createElement("p");
             const clickCountFull = document.createElement("p");
             clickCountFull.classList.add("countFull");
             clickCount.classList.add("countText");
-            if(data[i].clicked > 30){
+            if (data[i].clicked > 30) {
                 clickCountFull.textContent = "Proef les is vol"
                 applyButton.remove();
                 infoList.appendChild(clickCountFull)
-            }
-            else {
+            } else {
                 clickCount.textContent = "nog " + (30 - data[i].clicked) + " plaatsen over"
                 infoList.appendChild(clickCount);
             }
 
+            this.#applySE(data);
         }
-
-        this.#applySE(data);
     }
 }

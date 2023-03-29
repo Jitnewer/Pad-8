@@ -14,7 +14,7 @@ class trialLessonRoutes{
 
     /**
      * @author Jit Newer
-     * Get all trial lessons that are created from Database
+     * Get all trial lessons from Database
      */
     #getLessons() {
         this.#app.get("/trialLesson", async (req, res)=> {
@@ -25,7 +25,7 @@ class trialLessonRoutes{
 
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(test);
             } catch (e) {
-                console.log(e);
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
             }
         })
     }

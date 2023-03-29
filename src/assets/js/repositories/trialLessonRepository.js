@@ -8,12 +8,12 @@ export class TrialLessonRepository {
     #route
 
     constructor() {
-        this.#route = "/trialLesson"
+        this.#route = "/trialLesson";
         this.#networkManager = new NetworkManager();
     }
 
     /**
-     * Request to DB to get all trial lessons
+     * Request to database to get all trial lessons
      * @returns {Promise<*>}
      */
     getTrialLessons() {

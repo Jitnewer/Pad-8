@@ -161,11 +161,11 @@ export class AdminDashboardTrialLessonController extends Controller {
             applyButton.addEventListener("click", () => this.#deleteTestlesson(data[i].id));
 
             const applyText = document.createElement("i");
-            applyText.classList.add("fa-solid", "fa-trash", "trashcan-icon");
+            applyText.classList.add("trashcan-icon");
             // const applyText = document.createElement("img");
-            // applyText.classList.add("trash_png");
-            // applyText.src = "src/assets/img/Trashcan.png";
-            // applyText.alt = "Trashcan";
+            applyText.classList.add("trash_png");
+            applyText.src = "src/assets/img/Trashcan.png";
+            applyText.alt = "Trashcan";
             applyButton.appendChild(applyText);
         }
     }

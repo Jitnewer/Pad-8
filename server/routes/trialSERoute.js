@@ -28,7 +28,7 @@ class trialSERoute{
 
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
-                console.log(e);
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
             }
         })
     }

@@ -30,8 +30,8 @@ export class WelcomeController extends Controller{
         this.#welcomeView = await super.loadHtmlIntoContent("html_views/welcome.html")
 
         const plattegrond = this.#welcomeView.querySelector(".plattegrond");
-        const chatbot = this.#welcomeView.querySelector(".chatbot");
-        const opleiding = this.#welcomeView.querySelector(".opleiding");
+        const chatbot = this.#welcomeView.querySelector(".chatbox");
+        const opleiding = this.#welcomeView.querySelector(".studyButton");
         const proefles = this.#welcomeView.querySelector(".proefles");
 
         plattegrond.addEventListener("click", (e) => this.#handleClickPlattegrondButton(e));
@@ -56,7 +56,7 @@ export class WelcomeController extends Controller{
 
     #handleClickChatbotButton(e) {
         e.preventDefault();
-        this.#welcomeView.querySelector(".chatbot").addEventListener("click", async (e) => {
+        this.#welcomeView.querySelector(".chatbox").addEventListener("click", async (e) => {
             e.preventDefault();
             window.location.href = ""
         })
@@ -65,7 +65,7 @@ export class WelcomeController extends Controller{
     #handleClickStudyButton(e) {
         e.preventDefault();
 
-        this.#welcomeView.querySelector(".opleiding").addEventListener("click", async (e) => {
+        this.#welcomeView.querySelector(".studyButton").addEventListener("click", async (e) => {
             e.preventDefault();
             window.location.href = "html_views/study.html";
         })
