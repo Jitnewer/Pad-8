@@ -29,7 +29,6 @@ export class AdminDashboardTrialLessonController extends Controller {
             (event) => this.#saveTestlesson(event));
     }
 
-
     async #saveTestlesson(event) {
         event.preventDefault();
 
