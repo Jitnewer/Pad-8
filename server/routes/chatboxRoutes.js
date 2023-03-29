@@ -49,7 +49,7 @@ class ChatboxRoutes {
                     query: "SELECT answer FROM chatbot WHERE id = ?",
                     values: [questionId],
                 });
-                console.log("Answer data:", data); // Log the response
+                console.log("Answer data:", data);
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data[0]);
             } catch (e) {
                 res
