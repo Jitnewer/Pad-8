@@ -110,10 +110,8 @@ export class AdminDashboardStudyController extends Controller {
             container.appendChild(button);
             button.addEventListener("click", () => this.#handleClickDeleteButton(data[i].nameStudy));
 
-            const buttonImage = document.createElement("img");
-            buttonImage.classList.add("adminDashboardStudyPicture");
-            buttonImage.src = "src/assets/img/Trashcan.png";
-            buttonImage.alt = "Trashcan";
+            const buttonImage = document.createElement("i");
+            buttonImage.classList.add("fa-solid", "fa-trash", "trashcan-icon");
             button.appendChild(buttonImage);
         }
     }
