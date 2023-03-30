@@ -41,7 +41,7 @@ export class AdminDashboardStudyController extends Controller {
         //     )
         // );
     }
-    #saveStudy(event) {
+    async #saveStudy(event) {
         event.preventDefault();
 
         const name = this.#adminDashboardStudyView.querySelector("#inputName").value;
@@ -51,10 +51,19 @@ export class AdminDashboardStudyController extends Controller {
         if (name.length === 0 || information.length === 0 ) {
             error.innerHTML = "Er kan alleen een nieuwe " +
                 "studie toegevoegd worden als beide velden zijn ingevuld";
-        } else {
-            error.innerHTML = "";
+            return;
         }
+        error.innerHTML = "";
+
         console.log(name + " " + information)
+        try {
+            const data = await this.#adminDashboardStudyRepository.createStudy(name, information);
+            console.log(data)
+        } catch (e) {
+            error.innerHTML = "Er is iets fout gegaan bij het opslaan"
+            console.log(e)
+        }
+
     }
 
     async #createStudy() {

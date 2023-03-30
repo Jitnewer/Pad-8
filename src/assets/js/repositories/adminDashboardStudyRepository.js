@@ -13,10 +13,9 @@ export class AdminDashboardStudyRepository {
         this.#networkManager = new NetworkManager();
     }
 
-    saveStudy(name, location){
-        console.log(this.#route);
-        return this.#networkManager.doRequest(this.#route, "POST",
-            {name: name,location: location})
+    createStudy(nameStudy, information) {
+        return this.#networkManager.doRequest(this.#route,
+            "POST", {nameStudy: nameStudy,information: information})
     }
     getAdminDashboardStudyInformation(nameStudy, information) {
         console.log(this.#route);

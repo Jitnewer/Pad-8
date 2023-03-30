@@ -36,7 +36,7 @@ class AdminDashboardStudyRoutes {
             try {
                 const data = await this.#databaseHelper.handleQuery({
                     query: "INSERT INTO study (nameStudy, Admin_idAdmin, information) VALUES (?,1,?)",
-                    values: [req.body.name, req.body.information]
+                    values: [req.body.nameStudy, req.body.information]
                 });
                 if (data.affectedRows > 0) {
                     res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({message: "Study sent successfully."});
