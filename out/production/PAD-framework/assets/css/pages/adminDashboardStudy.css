@@ -1,0 +1,30 @@
+.admin-Study-add-container {
+    position: absolute;
+    left: 70%;
+    top: 27%;
+    width: 25%;
+    height: 50%;
+    background: lightgray;
+}
+
+.admin-Study-exist-container {
+    position: absolute;
+    left: 10%;
+    top: 27%;
+    width: 50%;
+    height: 50%;
+    background: gray;
+}
+.input-study-info{
+    display: flex;
+    flex-direction: column;
+}
+label {
+    height: fit-content;
+}
+.input-info-textarea {
+    resize: none;
+    /*margin-top: 5%;*/
+    width: 70%;
+    height: 22em;
+}

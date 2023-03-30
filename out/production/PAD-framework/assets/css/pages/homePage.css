@@ -1,6 +1,9 @@
 .home {
     background-image: url("./uploads/background-image.jpg");
 }
+body {
+    overflow: auto;
+}
 
 .inleidng {
     font-size: 400%;
@@ -23,12 +26,12 @@
     cursor: pointer;
 }
 
-.chatbot{
-    height: 10%;
-    width: 10%;
-    margin-right: 5%;
-    cursor: pointer;
-}
+/*.chatbot{*/
+/*    height: 10%;*/
+/*    width: 10%;*/
+/*    margin-right: 5%;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .opleiding {
     height: 10%;
@@ -63,7 +66,7 @@
     margin-top: -1%;
 }
 
-.bot {
+.box {
     position: absolute;
     font-weight: bold;
     font-size: 1.8vw;

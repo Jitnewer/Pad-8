@@ -6,7 +6,7 @@
     left: 0;
     margin: auto;
     width: 400px;
-    height: 350px;
+    height: min-content;
     padding: 2rem;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
@@ -42,11 +42,12 @@
 .form-button {
     margin-top: 20px;
     width: 100%;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     font-weight: bold;
     font-size: 1.1rem;
     color: #ffffff;
     border-radius: 8px;
+    max-height: 65px;
     border: none;
     outline: none;
     cursor: pointer;

@@ -5,7 +5,7 @@
  * @author Justin Chan
  */
 
-class StudyRoutes {
+class AdminDashboardStudyRoutes {
     #app;
     #databaseHelper = require("../framework/utils/databaseHelper.js");
     #httpErrorCodes = require("../framework/utils/httpErrorCodes.js");
@@ -31,4 +31,4 @@ class StudyRoutes {
     }
 }
 
-module.exports = StudyRoutes;
+module.exports = AdminDashboardStudyRoutes;
