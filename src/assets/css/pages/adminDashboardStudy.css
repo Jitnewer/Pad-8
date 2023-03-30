@@ -28,6 +28,11 @@ label {
     width: 70%;
     height: 22em;
 }
+
+.error-study {
+    color: red;
+
+}
 .adminStudyContainer {
     display: flex;
     background: white;

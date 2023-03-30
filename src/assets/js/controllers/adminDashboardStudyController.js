@@ -21,6 +21,11 @@ export class AdminDashboardStudyController extends Controller {
         this.#adminDashboardStudyView = await super.loadHtmlIntoContent("html_views/adminDashboardStudy.html");
         console.log(this.#adminDashboardStudyView);
 
+        this.#adminDashboardStudyView.querySelector(".Toevoegen").addEventListener("click",
+            (event) => this.#saveStudy(event));
+
+
+
         this.#createStudy().then(
             () => this.#loadContent()
         );
@@ -35,6 +40,21 @@ export class AdminDashboardStudyController extends Controller {
         //         }
         //     )
         // );
+    }
+    #saveStudy(event) {
+        event.preventDefault();
+
+        const name = this.#adminDashboardStudyView.querySelector("#inputName").value;
+        const information = this.#adminDashboardStudyView.querySelector("#inputInformation").value;
+        const error = this.#adminDashboardStudyView.querySelector(".error-study")
+
+        if (name.length === 0 || information.length === 0 ) {
+            error.innerHTML = "Er kan alleen een nieuwe " +
+                "studie toegevoegd worden als beide velden zijn ingevuld";
+        } else {
+            error.innerHTML = "";
+        }
+        console.log(name + " " + information)
     }
 
     async #createStudy() {

@@ -16,6 +16,7 @@ class AdminDashboardStudyRoutes {
 
         this.#getStudy();
         this.#deleteStudy();
+        this.#postStudy();
     }
 
     #getStudy() {
@@ -27,6 +28,23 @@ class AdminDashboardStudyRoutes {
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(study);
             } catch (e) {
                 console.log(e);
+            }
+        })
+    }
+    #postStudy() {
+        this.#app.post("/adminDashboardstudy", async (req, res) => {
+            try {
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "INSERT INTO study (nameStudy, Admin_idAdmin, information) VALUES (?,1,?)",
+                    values: [req.body.name, req.body.information]
+                });
+                if (data.affectedRows > 0) {
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({message: "Study sent successfully."});
+                } else {
+                    res.status(this.#httpErrorCodes.ROUTE_NOT_FOUND_CODE).json({message: "Study did not send"});
+                }
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
             }
         })
     }
