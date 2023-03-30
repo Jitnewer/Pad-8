@@ -58,6 +58,7 @@ export class AdminDashboardStudyController extends Controller {
             //Create Study box
             const container = document.createElement("div");
             container.classList.add("adminStudyContainer");
+            container.id = data[i].nameStudy;
             adminStudyContainer.appendChild(container);
 
             //Create Study name
@@ -68,11 +69,11 @@ export class AdminDashboardStudyController extends Controller {
             container.appendChild(studyName);
             // console.log(nameStudy);
 
-            //Create informtion
-            const information = document.createElement("p");
-            information.classList.add("StudyInfo");
-            info = document.createTextNode(data[i].information);
-            container.appendChild(information);
+            // //Create informtion
+            // const information = document.createElement("p");
+            // information.classList.add("StudyInfo");
+            // info = document.createTextNode(data[i].information);
+            // container.appendChild(information);
 
             //Create button
             const button = document.createElement("button");
@@ -88,7 +89,7 @@ export class AdminDashboardStudyController extends Controller {
         }
     }
 
-    async #loadContent() {
+    async #loadContent(nameStudy) {
         /**
          * Get data
          */
@@ -98,10 +99,21 @@ export class AdminDashboardStudyController extends Controller {
         /**
          * Show study
          */
+        const studyNames = this.#adminDashboardStudyView.querySelectorAll(".StudyName");
         for (let i = 0; i < data.length; i++) {
-            this.#adminDashboardStudyView.querySelector(".StudyName").innerHTML = data[i].nameStudy;
-            this.#adminDashboardStudyView.querySelector(".StudyInfo").innerHTML = data[i].information;
+            studyNames[i].innerHTML = data[i].nameStudy;
         }
+        // const study = data.find(s => s.nameStudy === nameStudy)
+        // if (study) {
+        //     const studyNameElement = this.#adminDashboardStudyView.querySelectorAll(`#${nameStudy} .StudyName`).innerHTML = data[i].nameStudy;
+        //     studyNameElement.innerHTML = study.nameStudy;
+        // }
+
+        // for (let i = 0; i < data.length; i++) {
+        //     const study = data.find(s => s.nameStudy === nameStudy)
+        //     this.#adminDashboardStudyView.querySelector(`#${nameStudy} .StudyName`).innerHTML = data[i].nameStudy;
+        //     // this.#adminDashboardStudyView.querySelector(".StudyInfo").innerHTML = data[i].information;
+        // }
     }
 
     async #handleClickDeleteButton(nameStudy) {
@@ -110,6 +122,7 @@ export class AdminDashboardStudyController extends Controller {
         try {
             if (confirm("Weet u zeker dat je het wilt verwijderen?") === true) {
                 await this.#adminDashboardStudyRepository.deleteAdminDashboardStudyInformation(nameStudy);
+                this.#loadContent(nameStudy);
                 location.reload();
             }
         } catch (e) {
