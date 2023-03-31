@@ -1,19 +1,20 @@
 <!--<div id="chatPopup" style="display: none;">-->
-<!--    <h1>Chat</h1>-->
-<!--    <ul id="questionList"></ul>-->
-<!--    <div id="answerContainer"></div>-->
+<!--    <li class="chatbot-list"></li>-->
 <!--    <button id="closeChatButton">Close</button>-->
 <!--</div>-->
 
 <!--<button  class="openForm" id="openForm"><img class="image" src="assets/images/chatbot.png"></button>-->
 
-<!--    <div class="qa-container"></div>-->
-<!--    <table id="questionTable">-->
-<!--        <tbody></tbody>-->
-<!--    </table>-->
-<div id="chatPopup" style="display: none;">
-    <li class="chatbot-list"></li>
-    <button id="closeChatButton">Close</button>
+<div id="chatPopup">
+    <div class="chatbox-header">
+        <h4>Chatbot</h4>
+        <button id="closeChatButton">&times;</button>
+    </div>
+    <div class="chatbox-body">
+        <ul class="chatbot-list"></ul>
+    </div>
+    <div class="chatbox-footer">
+        <textarea placeholder="Ask me anything..."></textarea>
+        <button type="submit">Send</button>
+    </div>
 </div>
-
-<button  class="openForm" id="openForm"><img class="image" src="assets/images/chatbot.png"></button>

@@ -120,6 +120,7 @@ export class ChatbotController extends Controller {
                     listItem.innerText = `id: ${chat.id},Question: ${chat.question}, Answer: ${chat.answer}`;
                     list.appendChild(listItem);
                 });
+            //
             })
             .catch((error) => console.error(error));
 
