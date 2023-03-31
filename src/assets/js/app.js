@@ -38,6 +38,7 @@ export class App {
     static CONTROLLER_TRIALSE = "trailSE";
     static CONTROLLER_CHATBOT = "chatbot";
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
+    static CONTROLLER_ADMIN = "admin";
 
     constructor() {
         //Always load the navigation
@@ -98,6 +99,10 @@ export class App {
             case App.CONTROLLER_ADMIN_LOGIN:
                 App.setCurrentController(name);
                 App.isLoggedIn(()=> new AdminDashboardTrialLessonController(), ()=> new AdminLoginController());
+                break;
+            case App.CONTROLLER_ADMIN:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new AdminController(), () => new AdminLoginController());
                 break;
             case App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson:
                 App.setCurrentController(name);
