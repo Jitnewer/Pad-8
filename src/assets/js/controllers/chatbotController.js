@@ -1,3 +1,8 @@
+/**
+ * @author: Kevin Isaza Arias
+ * Class representing Controller  for chatbox API
+ */
+
 import { Controller } from "./controller.js";
 
 export class ChatbotController extends Controller {

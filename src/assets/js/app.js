@@ -19,6 +19,8 @@ import { AdminDashboardTrialLessonController} from "./controllers/adminDashboard
 import {TrialSEController} from "./controllers/trialSEController.js";
 import {ChatbotController} from "./controllers/chatbotController.js";
 import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyController.js";
+import { ChatbotQAController } from "./controllers/ChatbotQAController.js";
+
 
 export class App {
     //we only need one instance of the sessionManager, thus static use here
@@ -38,6 +40,7 @@ export class App {
     static CONTROLLER_TRIALSE = "trailSE";
     static CONTROLLER_CHATBOT = "chatbot";
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
+    static CONTROLLER_CHATBOT_QA = "ChatbotQA";
 
     constructor() {
         //Always load the navigation
@@ -95,6 +98,10 @@ export class App {
                 App.setCurrentController(name);
                new createappointmentController();
                break;
+            case App.CONTROLLER_CHATBOT_QA:
+                App.setCurrentController(name);
+                new ChatbotQAController();
+                break;
             case App.CONTROLLER_ADMIN_LOGIN:
                 App.setCurrentController(name);
                 App.isLoggedIn(()=> new AdminDashboardTrialLessonController(), ()=> new AdminLoginController());
