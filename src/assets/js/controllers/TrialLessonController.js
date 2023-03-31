@@ -21,6 +21,10 @@ export class TrialLessonController extends Controller {
         this.#createTrialLesson();
     }
 
+    /**
+     * Gives all the buttons a eventlisteren that opens application form
+     * @param data
+     */
     #applySE(data) {
         const buttons = this.#trialLessonView.querySelectorAll(".Apply");
 
