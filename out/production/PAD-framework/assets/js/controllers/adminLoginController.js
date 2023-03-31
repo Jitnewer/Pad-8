@@ -55,7 +55,7 @@ export class AdminLoginController extends Controller {
         try {
             const user = await this.#adminLoginRepository.loginAdmin(username, password);
             App.sessionManager.set("username", user.username);
-            App.loadController(App.CONTROLLER_ADMIN_DASHBOARD);
+            App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson);
         } catch (e) {
             this.#adminLoginView.querySelector(".error-message").innerHTML = e.reason;
             this.#adminLoginView.querySelector(".form-container").style.height = "400px";

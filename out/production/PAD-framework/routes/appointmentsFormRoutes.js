@@ -16,7 +16,7 @@ class AppointmentsFormRoutes{
       this.#app.post("/appointments",async(req, res)=>{
           try{
              const data = await this.#databaseHelper.handleQuery({
-                 query: "INSERT INTO appointment(name,email,date)VALUES(?,?,?)",
+                 query: "   INSERT INTO appointment(name,email,date)VALUES(?,?,?)",
                   values:[req.body.name, req.body.email, req.body.date ]
               });
 

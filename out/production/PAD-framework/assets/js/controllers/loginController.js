@@ -1,4 +1,4 @@
-/**
+r/**
  * Controller responsible for all events in login view
  * @author Pim Meijer
  */

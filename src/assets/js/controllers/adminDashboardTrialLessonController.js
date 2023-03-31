@@ -29,7 +29,6 @@ export class AdminDashboardTrialLessonController extends Controller {
             (event) => this.#saveTestlesson(event));
     }
 
-
     async #saveTestlesson(event) {
         event.preventDefault();
 
@@ -161,10 +160,12 @@ export class AdminDashboardTrialLessonController extends Controller {
             // giving the delete button a function that deletes the selected triallesson
             applyButton.addEventListener("click", () => this.#deleteTestlesson(data[i].id));
 
-            const applyText = document.createElement("img");
-            applyText.classList.add("trash_png");
-            applyText.src = "src/assets/img/Trashcan.png";
-            applyText.alt = "Trashcan";
+            const applyText = document.createElement("i");
+            applyText.classList.add("fa-solid", "fa-trash", "trashcan-icon");
+            // const applyText = document.createElement("img");
+            // applyText.classList.add("trash_png");
+            // applyText.src = "src/assets/img/Trashcan.png";
+            // applyText.alt = "Trashcan";
             applyButton.appendChild(applyText);
         }
     }
