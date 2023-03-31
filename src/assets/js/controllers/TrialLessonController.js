@@ -123,8 +123,8 @@ export class TrialLessonController extends Controller {
             const clickCountFull = document.createElement("p");
             clickCountFull.classList.add("countFull");
             clickCount.classList.add("countText");
-            if (data[i].clicked > 30) {
-                clickCountFull.textContent = "Proef les is vol"
+            if (data[i].clicked > 29) {
+                clickCountFull.textContent = "Proefles is vol"
                 applyButton.remove();
                 infoList.appendChild(clickCountFull)
             } else {
