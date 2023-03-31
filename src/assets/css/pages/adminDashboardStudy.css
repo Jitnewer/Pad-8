@@ -1,9 +1,7 @@
 .adminDashboardStudyPosistion {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     /*margin: 100px 50px 40px 50px;*/
-    width: 20%;
     height: 460px;
     margin-top: 100px;
     background: #f3f3f3;
@@ -44,7 +42,7 @@ label {
     margin-top: 5%;
     align-self: center;
     resize: none;
-    width: 100%;
+    width: 80%;
     height: 14em;
 }
 
