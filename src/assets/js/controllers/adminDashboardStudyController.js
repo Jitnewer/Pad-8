@@ -146,6 +146,9 @@ export class AdminDashboardStudyController extends Controller {
     async #handleClickDeleteButton(nameStudy) {
         console.log("klik");
 
+        /**
+         * Delete a Study
+         */
         try {
             if (confirm("Weet u zeker dat je het wilt verwijderen?") === true) {
                 await this.#adminDashboardStudyRepository.deleteAdminDashboardStudyInformation(nameStudy);

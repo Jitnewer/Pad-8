@@ -39,6 +39,12 @@ class adminDashboardTrialLessonRoute {
                     query: "DELETE FROM testlesson WHERE id = ?",
                     values: [req.params.id]
                 });
+
+                const test = await this.#databaseHelper.handleQuery({
+                    query: "DELETE FROM participant WHERE id = ?",
+                    values: [req.params.id]
+                });
+
                 if (data.affectedRows > 0) {
                     res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({message: "Testlesson deleted successfully."});
                 } else {

@@ -49,6 +49,9 @@ class AdminDashboardStudyRoutes {
         })
     }
 
+    /**
+     * Delete query for study
+     */
     #deleteStudy() {
         this.#app.delete("/adminDashboardStudy/:nameStudy", async (req, res) => {
             try {
