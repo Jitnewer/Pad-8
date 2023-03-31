@@ -1,0 +1,101 @@
+* {
+ padding:0;
+ margin:0;
+ font-family: Arial, serif;
+}
+
+#wrapper {
+ margin:0 auto;
+ max-width:922px;
+}
+
+#header {
+ color: #ffffff;
+ text-align: center;
+ width:900px;
+ float:left;
+ padding:10px;
+ border:1px #ccc;
+ border-radius: 5px;
+ height:100px;
+ margin:10px 0 5px 0;
+ background-color: rgb(64, 74, 123);
+}
+
+#leftcolumn {
+ color: #000000;
+ border:1px #ccc;
+ border-radius: 5px;
+ background: rgba(88, 130, 237, 0.67);
+ margin:0 5px 5px 0;
+ padding:10px;
+ height:450px;
+ width:280px;
+ float:left;
+}
+
+#content {
+ float:left;
+ color: #000000;
+ border:1px #ccc;
+ border-radius: 5px;
+ background: rgba(82, 131, 255, 0.67);
+ margin:0 5px 5px 0;
+ padding:10px;
+ height:450px;
+ width:280px;
+ display:inline;
+}
+
+#editer{
+ text-align: center;
+}
+
+#editer:hover{
+  color: #e80808;
+}
+
+.icons {
+ text-align: center;
+
+}
+
+#rightcolumn {
+ color: #000000;
+ border:1px #ccc;
+ border-radius: 5px;
+ background: rgba(64, 110, 227, 0.67);
+ margin:0 0 5px 0;
+ padding:10px;
+ height:450px;
+ width:280px;
+ float:left;
+}
+
+.chatbot-container {
+ margin-left: auto;
+ margin-right: auto;
+ display: block;
+}
+
+.proefles-container{
+ margin-left: auto;
+ margin-right: auto;
+ display: block;
+}
+
+#footer {
+ width:900px;
+ clear:both;
+ color: #000000;
+ border:1px #ccc;
+ border-radius: 5px;
+ background-color:#404A7BC5;
+ margin:0 0 10px 0;
+ padding:10px;
+ text-align: center;
+}
+
+
+
+

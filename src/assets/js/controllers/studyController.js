@@ -21,8 +21,6 @@ export class StudyController extends Controller {
         this.#studyView = await super.loadHtmlIntoContent("html_views/study.html");
         console.log(this.#studyView);
 
-        const homeIcon = this.#studyView.querySelector("#home");
-
         this.#createStudyButton().then(
             () => {
                 let knop = this.#studyView.querySelectorAll(".StudyButton");
@@ -44,7 +42,6 @@ export class StudyController extends Controller {
     // }
 
     async #createStudyButton() {
-
         /**
          * Get study data
          */
