@@ -42,15 +42,17 @@ export class App {
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
 
+
     constructor() {
-        //Always load the navigation
+        // Always load the navigation
         App.loadController(App.CONTROLLER_NAVBAR);
-        App.loadController(App.CONTROLLER_CHATBOT);
 
+        if (App.shouldLoadChatbot()) {
+            App.loadController(App.CONTROLLER_CHATBOT);
+        }
 
-        //Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
+        // Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
         App.loadControllerFromUrl(App.CONTROLLER_WELCOME);
-
     }
 
     /**
@@ -59,6 +61,23 @@ export class App {
      * @param controllerData - data to pass from on controller to another - default empty object
      * @returns {boolean} - successful controller change
      */
+
+    static loadChatbot() {
+        new ChatbotController();
+    }
+    static unloadChatbot() {
+        const chatboxElement = document.querySelector(".chatbox");
+        if (chatboxElement) {
+            chatboxElement.innerHTML = "";
+        }
+    }
+
+    static shouldLoadChatbot() {
+        const currentControllerName = App.getCurrentController()?.name;
+        return currentControllerName !== App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson &&
+            currentControllerName !== App.CONTROLLER_ADMIN_DASHBOARD_Study;
+    }
+
     static loadController(name, controllerData) {
         console.log("loadController: " + name);
 
@@ -67,14 +86,19 @@ export class App {
             console.log(controllerData);
         }
 
+
+
         //Check for a special controller that shouldn't modify the URL
+        // Check for a special controller that shouldn't modify the URL
         switch(name) {
             case App.CONTROLLER_NAVBAR:
                 new NavbarController();
                 return true;
 
             case App.CONTROLLER_CHATBOT:
-                new ChatbotController();
+                if (App.shouldLoadChatbot()) {
+                    new ChatbotController();
+                }
                 return true;
 
             case App.CONTROLLER_LOGOUT:
@@ -82,16 +106,14 @@ export class App {
                 return true;
         }
 
+
         //Otherwise, load any of the other controllers
         App.setCurrentController(name, controllerData);
         
         switch (name) {
-            // case App.CONTROLLER_LOGIN:
-            //     App.isLoggedIn(() => new WelcomeController(), () => new LoginController());
-            //     break;
+
 
             case App.CONTROLLER_WELCOME:
-                // App.isLoggedIn(() => new WelcomeController(), () => new AdminLoginController());
                 new WelcomeController();
                 break;
             case App.CONTROLLER_CREATE_APPOINTMENT:
@@ -106,14 +128,18 @@ export class App {
                 App.setCurrentController(name);
                 App.isLoggedIn(()=> new AdminDashboardTrialLessonController(), ()=> new AdminLoginController());
                 break;
-            case App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson:
-                App.setCurrentController(name);
-                App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
-                break
-            case App.CONTROLLER_ADMIN_DASHBOARD_Study:
-                App.setCurrentController(name);
-                App.isLoggedIn(() => new AdminDashboardStudyController(), () => new AdminLoginController());
-                break
+                case App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson:
+                        App.setCurrentController(name);
+                        App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
+                        App.unloadChatbot();
+                        break;
+
+                    case App.CONTROLLER_ADMIN_DASHBOARD_Study:
+                        App.setCurrentController(name);
+                        App.isLoggedIn(() => new AdminDashboardStudyController(), () => new AdminLoginController());
+                        App.unloadChatbot();
+                        break;
+
             case App.CONTROLLER_STUDY:
               new StudyController();
                 break;
@@ -221,8 +247,9 @@ export class App {
     static handleLogout() {
         App.sessionManager.remove("username");
 
+        App.loadChatbot();
         //go to login screen
-        App.loadController(App.CONTROLLER_LOGIN);
+        App.loadController(App.CONTROLLER_ADMIN_LOGIN);
     }
 }
 
