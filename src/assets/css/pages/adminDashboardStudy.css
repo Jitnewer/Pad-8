@@ -8,6 +8,7 @@
     border-radius: 10px;
     float: right;
     margin-right: 2.5%;
+    padding-top: 1%;
     padding-right: 3%;
 }
 
@@ -76,7 +77,7 @@ label {
     flex-direction: column;
     flex-wrap: wrap;
     width: 300px;
-    height: 500px;
+    height: 490px;
     margin-left: 10%;
 }
 .Toevoegen {
