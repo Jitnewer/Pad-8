@@ -89,7 +89,7 @@ export class TrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].timeDuration + " uur proefles");
+            textNode = document.createTextNode(data[i].timeDuration + " lesuren " + "("+(data[i].timeDuration * 50) + "min)");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
@@ -133,12 +133,12 @@ export class TrialLessonController extends Controller {
             const clickCountFull = document.createElement("p");
             clickCountFull.classList.add("countFull");
             clickCount.classList.add("countText");
-            if (data[i].clicked > 29) {
+            if (data[i].clicked >= data[i].capacity) {
                 clickCountFull.textContent = "Proefles is vol"
                 applyButton.remove();
                 infoList.appendChild(clickCountFull)
             } else {
-                clickCount.textContent = "nog " + (30 - data[i].clicked) + " plaatsen over"
+                clickCount.textContent = "nog " + (data[i].capacity - data[i].clicked) + " plaatsen over";
                 infoList.appendChild(clickCount);
             }
 

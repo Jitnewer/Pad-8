@@ -20,8 +20,8 @@ class adminDashboardTrialLessonRoute {
         this.#app.post("/adminDashboard", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "INSERT INTO testlesson (name,Admin_idAdmin,timeDuration, date, location, room, subject,time, clicked) VALUES(?,1,?,?,?,?,?,?,0)",
-                    values: [req.body.name, req.body.timeDuration, req.body.date, req.body.location, req.body.room, req.body.subject, req.body.time]
+                    query: "INSERT INTO testlesson (name,Admin_idAdmin,timeDuration, date, location, room, subject,time, clicked, capacity) VALUES(?,1,?,?,?,?,?,?,0,?)",
+                    values: [req.body.name, req.body.timeDuration, req.body.date, req.body.location, req.body.room, req.body.subject, req.body.time, req.body.capacity]
                 });
                 if (data.insertId) {
                     res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.insertId});

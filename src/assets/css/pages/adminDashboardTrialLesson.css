@@ -10,6 +10,7 @@
     margin-top: 20px;
     margin-left: 120px;
     flex-direction: column;
+    line-height: 1.2;
 }
 
 .adminDashboard-name{
@@ -78,7 +79,7 @@
 .trash_Button_position{
     display:flex;
     flex-direction: row;
-    margin: 1px 40px auto 60px;
+    margin: 0 36% auto;
     border:none;
     border-radius: 10px;
 
@@ -166,3 +167,13 @@
     font-size: 1.4rem;
     margin-left: 1.4rem;
 }
+
+.dropdownTrial{
+    margin: 6% 0 0 3%;
+}
+
+.dropdownTrial select{
+    margin-left: 27.5%;;
+}
+
+
