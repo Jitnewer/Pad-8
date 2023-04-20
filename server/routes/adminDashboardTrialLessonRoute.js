@@ -1,6 +1,6 @@
 /**
  * Routes file for adminDashboard entity
- * @author Chant Balci
+ * @author Chant Balci & Jit Newer
  */
 
 class adminDashboardTrialLessonRoute {
@@ -35,12 +35,14 @@ class adminDashboardTrialLessonRoute {
     #deleteTestlesson() {
         this.#app.delete("/adminDashboard/:id", async (req, res) => {
             try {
+                // Delete trial lesson
                 const data = await this.#databaseHelper.handleQuery({
                     query: "DELETE FROM testlesson WHERE id = ?",
                     values: [req.params.id]
                 });
 
-                const test = await this.#databaseHelper.handleQuery({
+                // Delete all participants from database table where id equals trial lesson id
+                await this.#databaseHelper.handleQuery({
                     query: "DELETE FROM participant WHERE id = ?",
                     values: [req.params.id]
                 });
@@ -55,6 +57,7 @@ class adminDashboardTrialLessonRoute {
             }
         });
     }
+
     // the function is meant to count the amount of sended triallessons in order to give the user an indication about how many spots are left
     #updateClickedCount() {
         this.#app.put("/adminDashboard/updateClicked/:id", async (req, res) => {
