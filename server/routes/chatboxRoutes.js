@@ -1,3 +1,8 @@
+/**
+ * @author Kevin Isaza
+ * Class representing routes for chatbox API
+ */
+
 class ChatboxRoutes {
     #app;
     #httpErrorCodes = require("../framework/utils/httpErrorCodes.js");
