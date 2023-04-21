@@ -47,17 +47,18 @@ export class AdminDashboardStudyController extends Controller {
         const name = this.#adminDashboardStudyView.querySelector("#inputName").value;
         const information = this.#adminDashboardStudyView.querySelector("#inputInformation").value;
         const error = this.#adminDashboardStudyView.querySelector(".error-study")
+        const type = this.#adminDashboardStudyView.querySelector("#inputType").value;
 
         if (name.length === 0 || information.length === 0 ) {
             error.innerHTML = "Er kan alleen een nieuwe " +
-                "studie toegevoegd worden als beide velden zijn ingevuld";
+                "studie toegevoegd worden als alle velden zijn ingevuld";
             return;
         }
         error.innerHTML = "";
 
-        console.log(name + " " + information)
+        console.log(name + " " + information+ " " + type)
         try {
-            const data = await this.#adminDashboardStudyRepository.createStudy(name, information);
+            const data = await this.#adminDashboardStudyRepository.createStudy(name,information,type);
             console.log(data)
         } catch (e) {
             error.innerHTML = "Er is iets fout gegaan bij het opslaan"
@@ -78,19 +79,26 @@ export class AdminDashboardStudyController extends Controller {
          */
         const adminStudyContainer = this.#adminDashboardStudyView.querySelector(".adminStudyPosistion");
         let name;
-        let info;
+        let type;
+        // let info;
 
         /**
          * Create content container
          */
         for (let i = 0; i < data.length; i++) {
-            //Create Study box
+            //Create Content box
             const container = document.createElement("div");
             container.classList.add("adminStudyContainer");
             container.id = data[i].nameStudy;
             adminStudyContainer.appendChild(container);
 
-            //Create Study name
+            //Create Content type
+            const contentType = document.createElement("p");
+            contentType.classList.add("ContentType");
+            type = document.createTextNode(data[i].type);
+            container.appendChild(contentType);
+
+            //Create Content name
             const studyName = document.createElement("p");
             studyName.classList.add("StudyName");
             studyName.id = data[i].nameStudy;
@@ -124,11 +132,13 @@ export class AdminDashboardStudyController extends Controller {
         console.log(data);
 
         /**
-         * Show study
+         * Show content
          */
         const studyNames = this.#adminDashboardStudyView.querySelectorAll(".StudyName");
+        const contentType = this.#adminDashboardStudyView.querySelectorAll(".ContentType")
         for (let i = 0; i < data.length; i++) {
             studyNames[i].innerHTML = data[i].nameStudy;
+            contentType[i].innerHTML = data[i].type;
         }
         // const study = data.find(s => s.nameStudy === nameStudy)
         // if (study) {

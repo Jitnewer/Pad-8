@@ -41,6 +41,7 @@ export class App {
     static CONTROLLER_CHATBOT = "chatbot";
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
+    static CONTROLLER_ADMIN = "admin";
 
 
     constructor() {
