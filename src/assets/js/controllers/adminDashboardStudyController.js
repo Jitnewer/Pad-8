@@ -24,11 +24,15 @@ export class AdminDashboardStudyController extends Controller {
         this.#adminDashboardStudyView.querySelector(".Toevoegen").addEventListener("click",
             (event) => this.#saveStudy(event));
 
-
-
         this.#createStudy().then(
-            () => this.#loadContent()
+            () => this.#loadContent().then(
+                this.#handleFilterButton()
+            )
         );
+
+        // this.#adminDashboardStudyView.querySelectorAll(".adminContentButton").addEventListener("click",
+        //     (event) => this.#handleFilterButton(event));
+
         // this.#createStudy()
         //     .then(
         //     () => this.#loadContent().then(
@@ -41,6 +45,7 @@ export class AdminDashboardStudyController extends Controller {
         //     )
         // );
     }
+
     async #saveStudy(event) {
         event.preventDefault();
 
@@ -49,17 +54,18 @@ export class AdminDashboardStudyController extends Controller {
         const error = this.#adminDashboardStudyView.querySelector(".error-study")
         const type = this.#adminDashboardStudyView.querySelector("#inputType").value;
 
-        if (name.length === 0 || information.length === 0 ) {
+        if (name.length === 0 || information.length === 0) {
             error.innerHTML = "Er kan alleen een nieuwe " +
                 "studie toegevoegd worden als alle velden zijn ingevuld";
             return;
         }
         error.innerHTML = "";
 
-        console.log(name + " " + information+ " " + type)
+        console.log(name + " " + information + " " + type)
         try {
-            const data = await this.#adminDashboardStudyRepository.createStudy(name,information,type);
+            const data = await this.#adminDashboardStudyRepository.createStudy(name, information, type);
             console.log(data)
+            location.reload();
         } catch (e) {
             error.innerHTML = "Er is iets fout gegaan bij het opslaan"
             console.log(e)
@@ -88,7 +94,7 @@ export class AdminDashboardStudyController extends Controller {
         for (let i = 0; i < data.length; i++) {
             //Create Content box
             const container = document.createElement("div");
-            container.classList.add("adminStudyContainer");
+            container.classList.add("adminStudyContainer", data[i].type);
             container.id = data[i].nameStudy;
             adminStudyContainer.appendChild(container);
 
@@ -153,9 +159,49 @@ export class AdminDashboardStudyController extends Controller {
         // }
     }
 
-    async #handleClickDeleteButton(nameStudy) {
-        console.log("klik");
+    async #handleFilterButton() {
+        /**
+         * Get data
+         */
+        const data = await this.#adminDashboardStudyRepository.getAdminDashboardStudyInformation();
+        console.log(data);
 
+        let all = this.#adminDashboardStudyView.querySelector("#adminContentAllButton");
+        let general = this.#adminDashboardStudyView.querySelector("#adminContentGeneralButton");
+        let study = this.#adminDashboardStudyView.querySelector("#adminContentStudyButton");
+
+        const generalData = this.#adminDashboardStudyView.querySelectorAll(".Algemeen");
+        const studyData = this.#adminDashboardStudyView.querySelectorAll(".Opleiding");
+        const content = this.#adminDashboardStudyView.querySelectorAll(".adminStudyContainer")
+        console.log(content);
+        all.addEventListener("click", () => {
+            for (let i = 0; i < content.length; i++) {
+                content[i].style.display = "flex";
+            }
+        });
+        general.addEventListener("click", () => {
+            for (let i = 0; i < generalData.length; i++) {
+                const a = data[i].type;
+                generalData[i].style.display = "flex";
+                console.log(a);
+            }
+            for (let i = 0; i < studyData.length; i++) {
+                studyData[i].style.display = "none";
+            }
+        });
+        study.addEventListener("click", () => {
+            for (let i = 0; i < studyData.length; i++) {
+                const a = data[i].type;
+                studyData[i].style.display = "flex";
+                console.log(a);
+            }
+            for (let i = 0; i < generalData.length; i++) {
+                generalData[i].style.display = "none";
+            }
+        });
+    }
+
+    async #handleClickDeleteButton(nameStudy) {
         /**
          * Delete a Study
          */
