@@ -141,10 +141,10 @@ export class AdminDashboardStudyController extends Controller {
          * Show content
          */
         const studyNames = this.#adminDashboardStudyView.querySelectorAll(".StudyName");
-        const contentType = this.#adminDashboardStudyView.querySelectorAll(".ContentType")
+        // const contentType = this.#adminDashboardStudyView.querySelectorAll(".ContentType")
         for (let i = 0; i < data.length; i++) {
             studyNames[i].innerHTML = data[i].nameStudy;
-            contentType[i].innerHTML = data[i].type;
+            // contentType[i].innerHTML = data[i].type;
         }
         // const study = data.find(s => s.nameStudy === nameStudy)
         // if (study) {
