@@ -4,11 +4,13 @@
  font-family: Arial, serif;
 }
 
+
 #wrapper {
  margin:0 auto;
  max-width:922px;
 
 }
+
 
 #header {
  color: #ffffff;
@@ -98,5 +100,30 @@
 }
 
 
+@media (max-width: 1200px){
+ #header {
+  width:auto;
+  padding:10px;
+  border:1px #ccc;
+  border-radius: 5px;
+  height:100px;
+  margin:10px 0 5px 0;
+ }
+ #footer {
+  width:auto;
+
+ }
+ #rightcolumn {
+  width:auto;
+
+ }
+ #leftcolumn {
+  width: auto;
+ }
+
+#content {
+ width: auto;
+}
+}
 
 
