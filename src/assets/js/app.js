@@ -37,7 +37,6 @@ export class App {
     static CONTROLLER_ADMIN_DASHBOARD_TrialLesson = "adminDashboard";
     static CONTROLLER_STUDY = "study";
     static CONTROLLER_TRIALLESSON="trialLesson";
-    static CONTROLLER_TRIALSE = "trailSE";
     static CONTROLLER_CHATBOT = "chatbot";
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";

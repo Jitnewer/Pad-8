@@ -1,6 +1,5 @@
 import {Controller} from "./controller.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
-// import {TrialSEController} from "./trialSEController.js";
 import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 import {TrialSERepository} from "../repositories/trialSERepository.js";
 
@@ -8,16 +7,14 @@ export class TrialLessonController extends Controller {
     #trialLessonView;
     #trialLessonRepository;
     #adminDashboardTrialLessonRepository;
-
-    //test
     #trialSERepository
 
     constructor() {
         super();
         this.#trialLessonRepository = new TrialLessonRepository();
         this.#adminDashboardTrialLessonRepository = new AdminDashboardTrialLessonRepository();
-        //test
         this.#trialSERepository = new TrialSERepository();
+
         this.#setupView();
     }
 
@@ -36,7 +33,6 @@ export class TrialLessonController extends Controller {
 
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener("click", () => {
-                // new TrialSEController(data[i].name, data[i].id);
                 this.#applyForm(data[i].name, data[i].id);
             });
         }
@@ -53,7 +49,6 @@ export class TrialLessonController extends Controller {
 
         //Get trial lesson data
         const data = await this.#trialLessonRepository.getTrialLessons();
-        console.log(data);
 
         //Trial lessons container
         const trialLessonContainer = this.#trialLessonView.querySelector(".Testlesson-position");
@@ -89,7 +84,7 @@ export class TrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].timeDuration + " uur proefles");
+            textNode = document.createTextNode(data[i].timeDuration + " lesuren " + "("+(data[i].timeDuration * 50) + "min)");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
@@ -133,12 +128,12 @@ export class TrialLessonController extends Controller {
             const clickCountFull = document.createElement("p");
             clickCountFull.classList.add("countFull");
             clickCount.classList.add("countText");
-            if (data[i].clicked > 29) {
+            if (data[i].clicked >= data[i].capacity) {
                 clickCountFull.textContent = "Proefles is vol"
                 applyButton.remove();
                 infoList.appendChild(clickCountFull)
             } else {
-                clickCount.textContent = "nog " + (30 - data[i].clicked) + " plaatsen over"
+                clickCount.textContent = "nog " + (data[i].capacity - data[i].clicked) + " plaatsen over";
                 infoList.appendChild(clickCount);
             }
 
@@ -152,21 +147,21 @@ export class TrialLessonController extends Controller {
      * @param id: the id of the triallesson
      */
     async #applyForm(name, id) {
-        await super.loadHtmlIntoCustomElement("html_views/test.html", document.querySelector(".form")).then(
-             () => {
-                 // Give form triallesson name
-                 const textNode = document.createTextNode(name + " proefles");
-                 document.querySelector(".name").appendChild(textNode);
+        await super.loadHtmlIntoCustomElement("html_views/trialLessonForm.html", document.querySelector(".form")).then(
+            () => {
+                // Give form triallesson name
+                const textNode = document.createTextNode(name + " proefles");
+                document.querySelector(".name").appendChild(textNode);
 
-                 //Button to close apply form
-                 let xButton = document.querySelector(".x");
-                 xButton.addEventListener("click", () => {
-                     document.querySelector(".applyFormContainer").remove();
-                 });
+                //Button to close apply form
+                let xButton = document.querySelector(".x");
+                xButton.addEventListener("click", () => {
+                    document.querySelector(".applyFormContainer").remove();
+                });
 
-                 document.querySelector(".input-apply").addEventListener("click", () => {
-                     this.#validate(id);
-                 });
+                document.querySelector(".input-apply").addEventListener("click", (event) => {
+                    this.#validate(event, id);
+                });
             }
         );
     }
@@ -174,7 +169,8 @@ export class TrialLessonController extends Controller {
     /**
      *  Checks if input fields are falid
      */
-    async #validate(id) {
+    async #validate(event, id) {
+        event.preventDefault()
         const regexName = /^[A-Za-z]{3,40}$/;
         const regexMail = /^(?=.{10,40}$).*@.*/;
         const borderErrorColor = "1px solid red";
@@ -192,28 +188,59 @@ export class TrialLessonController extends Controller {
         const lastNameEmpty = lastname.value.length === 0;
         const mailEmpty = mail.value.length === 0;
 
+        const mailIsUsed = this.#checkParticipantMail(mail, id);
+
         const firstNameIsValid = !firstNameEmpty && regexName.test(firstname.value);
         const lastNameIsValid = !lastNameEmpty && regexName.test(lastname.value);
-        const mailIsValid = !mailEmpty && regexMail.test(mail.value);
+        const mailIsValid = !mailEmpty && regexMail.test(mail.value)
 
         firstname.style.border = (firstNameIsValid ? null : borderErrorColor);
         lastname.style.border = (lastNameIsValid ? null : borderErrorColor);
         mail.style.border = (mailIsValid ? null : borderErrorColor);
 
         if (!firstNameIsValid || !lastNameIsValid || !mailIsValid) {
-            errorMessage.innerHTML = "Vul alle velden in!";
-            errorMessage.style.display = "block";
+            if (!firstNameIsValid) {
+                errorMessage.innerHTML = "Naam moet 3 tot 40 karakters bevatten";
+            } else if (!lastNameIsValid) {
+                errorMessage.innerHTML = "Achternaam moet 3 tot 40 karakters bevatten";
+            } else if (!mailIsValid) {
+                errorMessage.innerHTML = "Ongeldige email"
+            } else {
+                errorMessage.innerHTML = "Vul alle velden in!";
+                errorMessage.style.display = "block";
+            }
         } else {
-            try {
-                document.querySelector(".applyFormContainer").remove();
-                const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
-                alert("u heeft zich ingeschreven");
-                // adds +1 to the clicked column in the database
-                await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
-                // window.location.replace("index.html");
-            } catch (e) {
-                console.log(e);
+            if (!mailIsUsed) {
+                try {
+                    // adds +1 to the clicked column in the database
+                    await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+
+                    const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
+                    alert("u heeft zich ingeschreven");
+
+                    document.querySelector(".applyFormContainer").remove();
+                } catch (e) {
+                    console.log(e);
+                }
+            } else {
+                errorMessage.innerHTML = "Mail is al in gebruik voor deze proefles!";
+                errorMessage.style.display = "block";
             }
         }
+    }
+
+    async #checkParticipantMail(mail, id) {
+       const participantMail = await this.#trialSERepository.getParticipants();
+
+       //Gives the index of participantMail if there is a object with equal id and mail as function parameters
+       const index = participantMail.findIndex(object =>{
+            return object.id === id && object.email === mail;
+        })
+
+        // if index is not higher or equal than 0 mail is not in use
+        if (index !== -1) {
+            return true;
+        }
+       return false;
     }
 }
