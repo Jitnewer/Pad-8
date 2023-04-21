@@ -11,10 +11,10 @@ export class AdminDashboardTrialLessonRepository {
         this.#route = "/adminDashboard";
         this.#networkManager = new NetworkManager();
     }
-    saveTestlesson(name, timeDuration, date, location, room, subject, time){
+    saveTestlesson(name, timeDuration, date, location, room, subject, time, capacity){
         console.log(this.#route);
         return this.#networkManager.doRequest(this.#route, "POST",
-            {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject, time: time, clicked:0})
+            {name: name,Admin_idAdmin:1, timeDuration: timeDuration, date: date, location: location, room: room, subject: subject, time: time, clicked:0, capacity: capacity})
     }
     deleteTestlesson(id) {
         return this.#networkManager.doRequest(`${this.#route}/${id}`, "DELETE");

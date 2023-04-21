@@ -9,13 +9,13 @@ class ChatbotQARoute {
         this.#createQuestionAnswer();
         this.#deleteQuestionAnswer();
         this.#getAllQuestionsAnswers();
+        this.#updateQuestionAnswer();
     }
-
     #createQuestionAnswer() {
         this.#app.post("/chatbot", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "INSERT INTO chatbotqa (id, question, answer) VALUES(?, ?, ?)",
+                    query: "INSERT INTO chatbot ( question, answer) VALUES( ?, ?)",
                     values: [req.body.id, req.body.question, req.body.answer]
                 });
                 if (data.insertId) {
@@ -31,7 +31,7 @@ class ChatbotQARoute {
         this.#app.delete("/chatbot/:id", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "DELETE FROM chatbotqa WHERE id = ?",
+                    query: "DELETE FROM chatbot WHERE id = ?",
                     values: [req.params.id]
                 });
                 if (data.affectedRows > 0) {
@@ -49,11 +49,29 @@ class ChatbotQARoute {
         this.#app.get("/chatbot", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "SELECT * FROM chatbotqa"
+                    query: "SELECT * FROM chatbot"
                 });
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({data});
             } catch (e) {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+            }
+        });
+    }
+
+    #updateQuestionAnswer() {
+        this.#app.put("/chatbot/:id", async (req, res) => {
+            try {
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "UPDATE chatbot SET question = ?, answer = ? WHERE id = ?",
+                    values: [req.body.question, req.body.answer, req.params.id]
+                });
+                if (data.affectedRows > 0) {
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({ message: "Question and answer updated successfully." });
+                } else {
+                    res.status(this.#httpErrorCodes.ROUTE_NOT_FOUND_CODE).json({ message: "Question and answer not found." });
+                }
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
             }
         });
     }

@@ -40,6 +40,7 @@ export class App {
     static CONTROLLER_CHATBOT = "chatbot";
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
+    static CONTROLLER_ADMIN = "admin";
 
 
     constructor() {
@@ -120,7 +121,7 @@ export class App {
                new createappointmentController();
                break;
             case App.CONTROLLER_CHATBOT_QA:
-                App.setCurrentController(name);
+                // App.setCurrentController(name);
                 new ChatbotQAController();
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
