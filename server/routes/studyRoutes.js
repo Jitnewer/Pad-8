@@ -21,7 +21,7 @@ class StudyRoutes {
         this.#app.get("/study", async (req, res) => {
             try {
                 const study = await this.#databaseHelper.handleQuery({
-                    query: "SELECT * FROM study WHERE Admin_idAdmin"
+                    query: "SELECT * FROM study"
                 })
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(study);
             } catch (e) {
