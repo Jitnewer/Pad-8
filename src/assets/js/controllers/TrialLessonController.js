@@ -84,7 +84,7 @@ export class TrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].timeDuration + " lesuren " + "("+(data[i].timeDuration * 50) + "min)");
+            textNode = document.createTextNode(data[i].timeDuration + " lesuren " + "(" + (data[i].timeDuration * 50) + "min)");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
@@ -188,8 +188,6 @@ export class TrialLessonController extends Controller {
         const lastNameEmpty = lastname.value.length === 0;
         const mailEmpty = mail.value.length === 0;
 
-        const mailIsUsed = this.#checkParticipantMail(mail, id);
-
         const firstNameIsValid = !firstNameEmpty && regexName.test(firstname.value);
         const lastNameIsValid = !lastNameEmpty && regexName.test(lastname.value);
         const mailIsValid = !mailEmpty && regexMail.test(mail.value)
@@ -198,22 +196,24 @@ export class TrialLessonController extends Controller {
         lastname.style.border = (lastNameIsValid ? null : borderErrorColor);
         mail.style.border = (mailIsValid ? null : borderErrorColor);
 
-        if (!firstNameIsValid || !lastNameIsValid || !mailIsValid) {
-            if (!firstNameIsValid) {
-                errorMessage.innerHTML = "Naam moet 3 tot 40 karakters bevatten";
-            } else if (!lastNameIsValid) {
-                errorMessage.innerHTML = "Achternaam moet 3 tot 40 karakters bevatten";
-            } else if (!mailIsValid) {
-                errorMessage.innerHTML = "Ongeldige email"
-            } else {
-                errorMessage.innerHTML = "Vul alle velden in!";
-                errorMessage.style.display = "block";
-            }
-        } else {
-            if (!mailIsUsed) {
+        if (!firstNameIsValid && !lastNameIsValid && !mailIsValid) {
+            errorMessage.innerHTML = "Vul alle velden in!";
+            errorMessage.style.display = "block";
+        }
+            // else if (!firstNameIsValid) {
+            //     errorMessage.innerHTML = "Naam moet 3 tot 40 letters bevatten!";
+            //     errorMessage.style.display = "block";
+            // } else if (!lastNameIsValid) {
+            //     errorMessage.innerHTML = "Achternaam moet 3 tot 40 letters bevatten!";
+            //     errorMessage.style.display = "block";
+            // } else if (!mailIsValid) {
+            //     errorMessage.innerHTML = "Ongeldige email!";
+            //     errorMessage.style.display = "block"
+        // } else{
+        else {
                 try {
                     // adds +1 to the clicked column in the database
-                    await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+                    // await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
 
                     const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
                     alert("u heeft zich ingeschreven");
@@ -221,26 +221,9 @@ export class TrialLessonController extends Controller {
                     document.querySelector(".applyFormContainer").remove();
                 } catch (e) {
                     console.log(e);
+
                 }
-            } else {
-                errorMessage.innerHTML = "Mail is al in gebruik voor deze proefles!";
-                errorMessage.style.display = "block";
-            }
         }
-    }
-
-    async #checkParticipantMail(mail, id) {
-       const participantMail = await this.#trialSERepository.getParticipants();
-
-       //Gives the index of participantMail if there is a object with equal id and mail as function parameters
-       const index = participantMail.findIndex(object =>{
-            return object.id === id && object.email === mail;
-        })
-
-        // if index is not higher or equal than 0 mail is not in use
-        if (index !== -1) {
-            return true;
-        }
-       return false;
     }
 }
+
