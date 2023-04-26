@@ -39,14 +39,16 @@ export class AdminDashboardStudyController extends Controller {
         const error = this.#adminDashboardStudyView.querySelector(".error-study")
         const type = this.#adminDashboardStudyView.querySelector("#inputType").value;
 
+        if (name.endsWith(" ")) {
+            name.trim();
+        }
+        
         if (name.length === 0 || information.length === 0) {
             error.innerHTML = "Er kan alleen een nieuwe " +
                 "studie toegevoegd worden als alle velden zijn ingevuld";
             return;
         }
-        if (name.endsWith(" ")) {
-            name.trim();
-        }
+
         error.innerHTML = "";
 
         console.log(name + " " + information + " " + type)
