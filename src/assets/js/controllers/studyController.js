@@ -28,6 +28,10 @@ export class StudyController extends Controller {
                     knop[i].addEventListener("click", (e) => this.#handleClickButton(e, i));
                 }
             }
+        ).then(
+            () => {
+                this.#handleFilterButton();
+            }
         );
 
         // homeIcon.addEventListener("click", (e) => this.#handleClickHomeButton(e));
@@ -59,7 +63,7 @@ export class StudyController extends Controller {
          */
         for (let i = 0; i < data.length; i++) {
             const studyButton = document.createElement("button");
-            studyButton.classList.add("StudyButton");
+            studyButton.classList.add("StudyButton", data[i].type);
             studyButton.id = data[i].nameStudy;
             name = document.createTextNode(data[i].nameStudy);
             studyButton.appendChild(name);
@@ -70,7 +74,7 @@ export class StudyController extends Controller {
 
     async #handleClickButton(e, index) {
         e.preventDefault();
-        console.log("klik");
+        // console.log("klik");
 
         /**
          * Removes title & text
@@ -84,7 +88,9 @@ export class StudyController extends Controller {
          * Moves button
          */
         let buttonContainer = this.#studyView.querySelector(".button-posistion");
+        let filterContainer = this.#studyView.querySelector(".contentFilterContainer")
         buttonContainer.style.left = "15%";
+        filterContainer.style.left = "3%";
 
         /**
          * Get data
@@ -102,10 +108,43 @@ export class StudyController extends Controller {
         }
     }
 
-    // #applyTrialLesson() {
-    //     let applyButton = document.querySelectorAll(".apply-triallesson");
-    //     applyButton.addEventListener("click", () =>
-    //         window.location.href = "./html_views/triallesson.html"
-    //     );
-    // }
+    async #handleFilterButton() {
+        const data = this.#studyRepository.getStudyInformation();
+        console.log(data);
+
+        let all = this.#studyView.querySelector("#contentAllButton");
+        let general = this.#studyView.querySelector("#contentGeneralButton");
+        let study = this.#studyView.querySelector("#contentStudyButton");
+
+        const generalData = this.#studyView.querySelectorAll(".Algemeen");
+        const studyData = this.#studyView.querySelectorAll(".Opleiding");
+        let buttons = this.#studyView.querySelectorAll(".StudyButton");
+
+        all.addEventListener("click", () => {
+            for (let i = 0; i < buttons.length; i++) {
+                generalData[i].style.display = "block";
+                studyData[i].style.display = "block";
+            }
+        });
+        general.addEventListener("click", () => {
+            for (let i = 0; i < generalData.length; i++) {
+                const a = data[i].type;
+                generalData[i].style.display = "block";
+                console.log(a);
+            }
+            for (let i = 0; i < studyData.length; i++) {
+                studyData[i].style.display = "none";
+            }
+        });
+        study.addEventListener("click", () => {
+            for (let i = 0; i < studyData.length; i++) {
+                const a = data[i].type;
+                studyData[i].style.display = "block";
+                console.log(a);
+            }
+            for (let i = 0; i < generalData.length; i++) {
+                generalData[i].style.display = "none";
+            }
+        });
+    }
 }

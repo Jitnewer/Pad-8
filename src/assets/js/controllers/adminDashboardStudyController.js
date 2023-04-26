@@ -29,21 +29,6 @@ export class AdminDashboardStudyController extends Controller {
                 this.#handleFilterButton()
             )
         );
-
-        // this.#adminDashboardStudyView.querySelectorAll(".adminContentButton").addEventListener("click",
-        //     (event) => this.#handleFilterButton(event));
-
-        // this.#createStudy()
-        //     .then(
-        //     () => this.#loadContent().then(
-        //         () => {
-        //             let content = this.#adminDashboardStudyView.querySelectorAll(".adminStudyContainer");
-        //             for (let i = 0; i < content.length; i++) {
-        //                 content[i].addEventListener("click", () => this.#handleClickDeleteButton(i));
-        //             }
-        //         }
-        //     )
-        // );
     }
 
     async #saveStudy(event) {
@@ -86,7 +71,6 @@ export class AdminDashboardStudyController extends Controller {
         const adminStudyContainer = this.#adminDashboardStudyView.querySelector(".adminStudyPosistion");
         let name;
         let type;
-        // let info;
 
         /**
          * Create content container
@@ -110,13 +94,6 @@ export class AdminDashboardStudyController extends Controller {
             studyName.id = data[i].nameStudy;
             name = document.createTextNode(data[i].nameStudy);
             container.appendChild(studyName);
-            // console.log(nameStudy);
-
-            // //Create informtion
-            // const information = document.createElement("p");
-            // information.classList.add("StudyInfo");
-            // info = document.createTextNode(data[i].information);
-            // container.appendChild(information);
 
             //Create button
             const button = document.createElement("button");
@@ -130,33 +107,19 @@ export class AdminDashboardStudyController extends Controller {
         }
     }
 
-    async #loadContent(nameStudy) {
+    async #loadContent() {
         /**
          * Get data
          */
         const data = await this.#adminDashboardStudyRepository.getAdminDashboardStudyInformation();
-        console.log(data);
 
         /**
          * Show content
          */
         const studyNames = this.#adminDashboardStudyView.querySelectorAll(".StudyName");
-        // const contentType = this.#adminDashboardStudyView.querySelectorAll(".ContentType")
         for (let i = 0; i < data.length; i++) {
             studyNames[i].innerHTML = data[i].nameStudy;
-            // contentType[i].innerHTML = data[i].type;
         }
-        // const study = data.find(s => s.nameStudy === nameStudy)
-        // if (study) {
-        //     const studyNameElement = this.#adminDashboardStudyView.querySelectorAll(`#${nameStudy} .StudyName`).innerHTML = data[i].nameStudy;
-        //     studyNameElement.innerHTML = study.nameStudy;
-        // }
-
-        // for (let i = 0; i < data.length; i++) {
-        //     const study = data.find(s => s.nameStudy === nameStudy)
-        //     this.#adminDashboardStudyView.querySelector(`#${nameStudy} .StudyName`).innerHTML = data[i].nameStudy;
-        //     // this.#adminDashboardStudyView.querySelector(".StudyInfo").innerHTML = data[i].information;
-        // }
     }
 
     async #handleFilterButton() {
@@ -164,7 +127,6 @@ export class AdminDashboardStudyController extends Controller {
          * Get data
          */
         const data = await this.#adminDashboardStudyRepository.getAdminDashboardStudyInformation();
-        console.log(data);
 
         let all = this.#adminDashboardStudyView.querySelector("#adminContentAllButton");
         let general = this.#adminDashboardStudyView.querySelector("#adminContentGeneralButton");
@@ -173,7 +135,6 @@ export class AdminDashboardStudyController extends Controller {
         const generalData = this.#adminDashboardStudyView.querySelectorAll(".Algemeen");
         const studyData = this.#adminDashboardStudyView.querySelectorAll(".Opleiding");
         const content = this.#adminDashboardStudyView.querySelectorAll(".adminStudyContainer")
-        console.log(content);
         all.addEventListener("click", () => {
             for (let i = 0; i < content.length; i++) {
                 content[i].style.display = "flex";
