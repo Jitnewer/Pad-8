@@ -42,7 +42,7 @@ export class AdminDashboardStudyController extends Controller {
          let namedd = "fewfwe    "
         if (namedd.endsWith(" ")) {
             for (let i = 0; i < namedd.length; i++) {
-                namedd.trim();
+                namedd = namedd.trim();
             }
             console.log(namedd)
         }
