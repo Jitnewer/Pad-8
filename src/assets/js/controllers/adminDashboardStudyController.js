@@ -40,9 +40,11 @@ export class AdminDashboardStudyController extends Controller {
         const type = this.#adminDashboardStudyView.querySelector("#inputType").value;
 
         if (name.endsWith(" ")) {
-            name.trim();
+            for (let i = 0; i < name.length; i++) {
+                name.trim();
+            }
         }
-        
+
         if (name.length === 0 || information.length === 0) {
             error.innerHTML = "Er kan alleen een nieuwe " +
                 "studie toegevoegd worden als alle velden zijn ingevuld";
