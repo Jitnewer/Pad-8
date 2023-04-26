@@ -10,7 +10,6 @@ class trialSERoute{
     constructor(app) {
         this.#app = app;
         this.#apply();
-        this.#getTriallessonParticipant();
     }
 
     #apply() {

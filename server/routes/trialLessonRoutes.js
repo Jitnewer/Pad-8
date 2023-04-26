@@ -19,11 +19,11 @@ class trialLessonRoutes{
     #getLessons() {
         this.#app.get("/trialLesson", async (req, res)=> {
             try {
-                const test = await this.#databaseHelper.handleQuery({
+                const data = await this.#databaseHelper.handleQuery({
                     query: "SELECT * FROM testlesson WHERE Admin_idAdmin"
                 })
 
-                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(test);
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
             }

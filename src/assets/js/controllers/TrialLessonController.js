@@ -196,33 +196,36 @@ export class TrialLessonController extends Controller {
         lastname.style.border = (lastNameIsValid ? null : borderErrorColor);
         mail.style.border = (mailIsValid ? null : borderErrorColor);
 
-        if (!firstNameIsValid && !lastNameIsValid && !mailIsValid) {
+        if (firstNameEmpty && lastNameEmpty && mailEmpty) {
             errorMessage.innerHTML = "Vul alle velden in!";
             errorMessage.style.display = "block";
-        }
-            // else if (!firstNameIsValid) {
-            //     errorMessage.innerHTML = "Naam moet 3 tot 40 letters bevatten!";
-            //     errorMessage.style.display = "block";
-            // } else if (!lastNameIsValid) {
-            //     errorMessage.innerHTML = "Achternaam moet 3 tot 40 letters bevatten!";
-            //     errorMessage.style.display = "block";
-            // } else if (!mailIsValid) {
-            //     errorMessage.innerHTML = "Ongeldige email!";
-            //     errorMessage.style.display = "block"
-        // } else{
-        else {
-                try {
-                    // adds +1 to the clicked column in the database
-                    // await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+        } else if (!mailIsValid) {
+            errorMessage.innerHTML = "Ongeldige email!";
+            errorMessage.style.display = "block"
+        } else if (!firstNameIsValid) {
+            errorMessage.innerHTML = "Naam moet 3 tot 40 letters bevatten!";
+            errorMessage.style.display = "block";
+        } else if (!lastNameIsValid) {
+            errorMessage.innerHTML = "Achternaam moet 3 tot 40 letters bevatten!";
+            errorMessage.style.display = "block";
+        } else {
+            try {
+                await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id).then(
+                    async () => {
+                        // adds +1 to the clicked column in the database
+                        await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+                    }
+                );
 
-                    const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
-                    alert("u heeft zich ingeschreven");
+                alert("u heeft zich ingeschreven");
 
-                    document.querySelector(".applyFormContainer").remove();
-                } catch (e) {
-                    console.log(e);
-
-                }
+                document.querySelector(".applyFormContainer").remove();
+            } catch (e) {
+                console.log(e);
+                errorMessage.innerHTML = "Email is al ingeschreven";
+                errorMessage.style.display = "block";
+                mail.style.border = "1px solid red";
+            }
         }
     }
 }
