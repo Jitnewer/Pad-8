@@ -122,15 +122,21 @@ export class StudyController extends Controller {
 
         all.addEventListener("click", () => {
             for (let i = 0; i < buttons.length; i++) {
-                generalData[i].style.display = "block";
-                studyData[i].style.display = "block";
+                // generalData[i].style.display = "block";
+                // studyData[i].style.display = "block";
+                try {
+                    generalData[i].style.display = "block";
+                    studyData[i].style.display = "block";
+                } catch (e) {
+                }
+
             }
         });
         general.addEventListener("click", () => {
             for (let i = 0; i < generalData.length; i++) {
-                const a = data[i].type;
+                // const a = data[i].type;
                 generalData[i].style.display = "block";
-                console.log(a);
+                // console.log(a);
             }
             for (let i = 0; i < studyData.length; i++) {
                 studyData[i].style.display = "none";
@@ -138,9 +144,9 @@ export class StudyController extends Controller {
         });
         study.addEventListener("click", () => {
             for (let i = 0; i < studyData.length; i++) {
-                const a = data[i].type;
+                // const a = data[i].type;
                 studyData[i].style.display = "block";
-                console.log(a);
+                // console.log(a);
             }
             for (let i = 0; i < generalData.length; i++) {
                 generalData[i].style.display = "none";
