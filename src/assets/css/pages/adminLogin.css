@@ -58,18 +58,21 @@
     background: #2b2b8a;
 }
 
-.error-message {
-    color: #ff0015;
-    font-size: 18px;
-}
-
 .form-message {
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 5px; color: #ff0015;
+    font-size: 18px;
 }
 
 .input-error-message {
     margin-top: 0;
     display: block;
     color: red;
+}
+
+/* Responsivenes */
+@media(max-width: 500px) {
+    .form-container {
+        width: 300px;
+    }
 }

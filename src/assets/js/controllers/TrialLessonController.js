@@ -22,7 +22,7 @@ export class TrialLessonController extends Controller {
         this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
         this.#createTrialLesson();
-    }
+}
 
     /**
      * Gives all the buttons a eventlisteren that opens application form
