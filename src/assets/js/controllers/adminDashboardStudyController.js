@@ -34,17 +34,15 @@ export class AdminDashboardStudyController extends Controller {
     async #saveStudy(event) {
         event.preventDefault();
 
-        const name = this.#adminDashboardStudyView.querySelector("#inputName").value;
+        let name = this.#adminDashboardStudyView.querySelector("#inputName").value;
         const information = this.#adminDashboardStudyView.querySelector("#inputInformation").value;
         const error = this.#adminDashboardStudyView.querySelector(".error-study")
         const type = this.#adminDashboardStudyView.querySelector("#inputType").value;
 
-         let namedd = "fewfwe    "
-        if (namedd.endsWith(" ")) {
-            for (let i = 0; i < namedd.length; i++) {
-                namedd = namedd.trim();
+        if (name.endsWith(" ")) {
+            for (let i = 0; i < name.length; i++) {
+                name = name.trim();
             }
-            console.log(namedd)
         }
 
         if (name.length === 0 || information.length === 0) {
