@@ -29,7 +29,9 @@ export class StudyController extends Controller {
                 }
             }
         ).then(
-            this.#handleFilterButton()
+            () => {
+                this.#handleFilterButton();
+            }
         );
 
         // homeIcon.addEventListener("click", (e) => this.#handleClickHomeButton(e));
@@ -72,7 +74,7 @@ export class StudyController extends Controller {
 
     async #handleClickButton(e, index) {
         e.preventDefault();
-        console.log("klik");
+        // console.log("klik");
 
         /**
          * Removes title & text
@@ -110,9 +112,9 @@ export class StudyController extends Controller {
         const data = this.#studyRepository.getStudyInformation();
         console.log(data);
 
-        let all = this.#studyView.querySelector(".contentAllButton");
-        let general = this.#studyView.querySelector(".contentGeneralButton");
-        let study = this.#studyView.querySelector(" .contentStudyButton");
+        let all = this.#studyView.querySelector("#contentAllButton");
+        let general = this.#studyView.querySelector("#contentGeneralButton");
+        let study = this.#studyView.querySelector("#contentStudyButton");
 
         const generalData = this.#studyView.querySelectorAll(".Algemeen");
         const studyData = this.#studyView.querySelectorAll(".Opleiding");
