@@ -44,6 +44,9 @@ export class AdminDashboardStudyController extends Controller {
                 "studie toegevoegd worden als alle velden zijn ingevuld";
             return;
         }
+        if (name.endsWith(" ")) {
+            name.trim();
+        }
         error.innerHTML = "";
 
         console.log(name + " " + information + " " + type)
