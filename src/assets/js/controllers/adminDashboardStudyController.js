@@ -39,10 +39,12 @@ export class AdminDashboardStudyController extends Controller {
         const error = this.#adminDashboardStudyView.querySelector(".error-study")
         const type = this.#adminDashboardStudyView.querySelector("#inputType").value;
 
-        if (name.endsWith(" ")) {
-            for (let i = 0; i < name.length; i++) {
-                name.trim();
+         let namedd = "fewfwe    "
+        if (namedd.endsWith(" ")) {
+            for (let i = 0; i < namedd.length; i++) {
+                namedd.trim();
             }
+            console.log(namedd)
         }
 
         if (name.length === 0 || information.length === 0) {
