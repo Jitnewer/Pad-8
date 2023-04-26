@@ -19,4 +19,9 @@ export class TrialLessonRepository {
     getTrialLessons() {
         return this.#networkManager.doRequest(`${this.#route}`, "GET");
     }
+
+    getCount(id) {
+        const countRoute = `${this.#route}/${id}`;
+        return this.#networkManager.doRequest(countRoute, "GET");
+    }
 }

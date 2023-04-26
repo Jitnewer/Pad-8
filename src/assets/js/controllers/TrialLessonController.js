@@ -28,12 +28,12 @@ export class TrialLessonController extends Controller {
      * Gives all the buttons a eventlisteren that opens application form
      * @param data: the list of triallessons
      */
-    #applySE(data) {
+    #handleApplyBtn(data) {
         const buttons = this.#trialLessonView.querySelectorAll(".Apply");
 
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener("click", () => {
-                this.#applyForm(data[i].name, data[i].id);
+                this.#openForm(data[i].name, data[i].id);
             });
         }
     }
@@ -137,7 +137,7 @@ export class TrialLessonController extends Controller {
                 infoList.appendChild(clickCount);
             }
 
-            this.#applySE(data);
+            this.#handleApplyBtn(data);
         }
     }
 
@@ -146,7 +146,7 @@ export class TrialLessonController extends Controller {
      * @param name: the name of the triallesson
      * @param id: the id of the triallesson
      */
-    async #applyForm(name, id) {
+    async #openForm(name, id) {
         await super.loadHtmlIntoCustomElement("html_views/trialLessonForm.html", document.querySelector(".form")).then(
             () => {
                 // Give form triallesson name
@@ -209,23 +209,28 @@ export class TrialLessonController extends Controller {
             errorMessage.innerHTML = "Achternaam moet 3 tot 40 letters bevatten!";
             errorMessage.style.display = "block";
         } else {
-            try {
-                await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id).then(
-                    async () => {
-                        // adds +1 to the clicked column in the database
-                        await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
-                    }
-                );
+            await this.#apply(firstname, lastname, prefix, mail, id, errorMessage);
+        }
+    }
 
-                alert("u heeft zich ingeschreven");
+    async #apply(firstname, lastname, prefix, mail, id, errorMessage, ) {
+        try {
+            await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id).then(
+                async () => {
+                    // adds +1 to the clicked column in the database
+                    await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+                    location.reload();
+                }
+            );
 
-                document.querySelector(".applyFormContainer").remove();
-            } catch (e) {
-                console.log(e);
-                errorMessage.innerHTML = "Email is al ingeschreven";
-                errorMessage.style.display = "block";
-                mail.style.border = "1px solid red";
-            }
+            alert("u heeft zich ingeschreven");
+
+            document.querySelector(".applyFormContainer").remove();
+        } catch (e) {
+            console.log(e);
+            errorMessage.innerHTML = "Email is al ingeschreven";
+            errorMessage.style.display = "block";
+            mail.style.border = "1px solid red";
         }
     }
 }
