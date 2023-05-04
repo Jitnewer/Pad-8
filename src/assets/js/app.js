@@ -20,7 +20,7 @@ import {TrialSEController} from "./controllers/trialSEController.js";
 import {ChatbotController} from "./controllers/chatbotController.js";
 import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyController.js";
 import { ChatbotQAController } from "./controllers/ChatbotQAController.js";
-import {LandingpageController} from "./controllers/landingpageController";
+import {LandingpageController} from "./controllers/landingpageController.js";
 
 
 export class App {
@@ -42,7 +42,7 @@ export class App {
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
     static CONTROLLER_ADMIN = "admin";
-    static CONTROLLER_LANDINGPAGE = "landingpage"
+    static CONTROLLER_LANDINGPAGE = "landingpage";
 
 
     constructor() {
