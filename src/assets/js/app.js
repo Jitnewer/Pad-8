@@ -20,6 +20,7 @@ import {TrialSEController} from "./controllers/trialSEController.js";
 import {ChatbotController} from "./controllers/chatbotController.js";
 import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyController.js";
 import { ChatbotQAController } from "./controllers/ChatbotQAController.js";
+import {LandingpageController} from "./controllers/landingpageController";
 
 
 export class App {
@@ -41,6 +42,7 @@ export class App {
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
     static CONTROLLER_ADMIN = "admin";
+    static CONTROLLER_LANDINGPAGE = "landingpage"
 
 
     constructor() {
@@ -154,6 +156,10 @@ export class App {
             case App.CONTROLLER_TRIALSE:
                 App.setCurrentController(name);
                 new TrialSEController();
+                break;
+            case App.CONTROLLER_LANDINGPAGE:
+                App.setCurrentController(name);
+                new LandingpageController();
                 break;
 
             default:
