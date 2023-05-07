@@ -14,13 +14,13 @@ export class chatbotRepository {
         this.#networkManager = new NetworkManager();
     }
 
-    getStudyInformation(id = null) {
-        let query = "SELECT * FROM chatbot";
-        if (id !== null) {
-            query += ` WHERE id = ${id}`;
-        }
-        return this.#networkManager.doRequest(this.#route, "GET", { query });
-    }
+    // getStudyInformation(id = null) {
+    //     let query = "SELECT * FROM chatbot";
+    //     if (id !== null) {
+    //         query += ` WHERE id = ${id}`;
+    //     }
+    //     return this.#networkManager.doRequest(this.#route, "GET", { query });
+    // }
 
 
 }

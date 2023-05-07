@@ -13,6 +13,7 @@ class ChatboxRoutes {
         this.#createChat();
         this.#getQuestions();
         this.#getAnswer();
+
     }
 
 
@@ -50,12 +51,23 @@ class ChatboxRoutes {
         this.#app.get("/chatbot/answer/:id", async (req, res) => {
             try {
                 const questionId = req.params.id;
-                const data = await this.#databaseHelper.handleQuery({
+                const answerData = await this.#databaseHelper.handleQuery({
                     query: "SELECT answer FROM chatbot WHERE id = ?",
                     values: [questionId],
                 });
-                console.log("Answer data:", data);
-                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data[0]);
+
+                const relatedQuestionsData = await this.#databaseHelper.handleQuery({
+                    query: "SELECT c.id, c.question FROM relatedquestions r JOIN chatbot c ON r.vraagid = c.id WHERE r.parentVraagid = ?",
+                    values: [questionId],
+                });
+
+                const responseData = {
+                    answer: answerData[0].answer,
+                    relatedQuestions: relatedQuestionsData
+                };
+
+                console.log("Answer and related questions data:", responseData);
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(responseData);
             } catch (e) {
                 res
                     .status(this.#httpErrorCodes.BAD_REQUEST_CODE)
@@ -63,6 +75,8 @@ class ChatboxRoutes {
             }
         });
     }
+
+
 
 
 }

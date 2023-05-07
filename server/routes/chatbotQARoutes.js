@@ -10,6 +10,11 @@ class ChatbotQARoute {
         this.#deleteQuestionAnswer();
         this.#getAllQuestionsAnswers();
         this.#updateQuestionAnswer();
+        this.#getRelatedQuestions();
+        this.#createRelatedQuestion();
+        this.#updateRelatedQuestion();
+        this.#deleteRelatedQuestion();
+
     }
     #createQuestionAnswer() {
         this.#app.post("/chatbot", async (req, res) => {
@@ -75,6 +80,72 @@ class ChatbotQARoute {
             }
         });
     }
+
+
+    #createRelatedQuestion() {
+    this.#app.post("/relatedquestions", async (req, res) => {
+        try {
+            const data = await this.#databaseHelper.handleQuery({
+                query: "INSERT INTO relatedquestions (parentVraagid, vraagid) VALUES(?, ?)",
+                values: [req.body.parentVraagid, req.body.vraagid]
+            });
+            if (data.insertId) {
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.insertId});
+            }
+        } catch (e) {
+            res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+        }
+    });
 }
+    #getRelatedQuestions() {
+        this.#app.get("/relatedquestions/:parentVraagid", async (req, res) => {
+            try {
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "SELECT * FROM relatedquestions WHERE parentVraagid = ?",
+                    values: [req.params.parentVraagid]
+                });
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({data});
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+            }
+        });
+    }
+    #updateRelatedQuestion() {
+        this.#app.put("/relatedquestions/:id", async (req, res) => {
+            try {
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "UPDATE relatedquestions SET parentVraagid = ?, vraagid = ? WHERE id = ?",
+                    values: [req.body.parentVraagid, req.body.vraagid, req.params.id]
+                });
+                if (data.affectedRows > 0) {
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({ message: "Related question updated successfully." });
+                } else {
+                    res.status(this.#httpErrorCodes.ROUTE_NOT_FOUND_CODE).json({ message: "Related question not found." });
+                }
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
+            }
+        });
+    }
+
+    #deleteRelatedQuestion() {
+        this.#app.delete("/relatedquestions/:id", async (req, res) => {
+            try {
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "DELETE FROM relatedquestions WHERE id = ?",
+                    values: [req.params.id]
+                });
+                if (data.affectedRows > 0) {
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({ message: "Related question deleted successfully." });
+                } else {
+                    res.status(this.#httpErrorCodes.ROUTE_NOT_FOUND_CODE).json({ message: "Related question not found." });
+                }
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
+            }
+        });
+    }
+}
+
 
 module.exports = ChatbotQARoute;

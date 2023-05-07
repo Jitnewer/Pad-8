@@ -25,4 +25,28 @@ export class ChatbotQARepository {
     deleteQuestionAnswer(id) {
         return this.#networkManager.doRequest(`${this.#route}/${id}`, "DELETE");
     }
+
+    async createRelatedQuestion(parentVraagid, vraagid) {
+        return this.#networkManager.doRequest("/relatedquestions", "POST", { parentVraagid, vraagid });
+    }
+
+    async deleteRelatedQuestion(id) {
+        return this.#networkManager.doRequest(`/relatedquestions/${id}`, "DELETE");
+    }
+
+
+    updateRelatedQuestion(id, parentVraagid, vraagid) {
+        return this.#networkManager.doRequest(`/relatedquestions/${id}`, "PUT", { parentVraagid, vraagid });
+    }
+
+
+    async getQuestionAnswerById(id) {
+        const response = await this.#networkManager.doRequest(`${this.#route}/${id}`, "GET");
+        return response.data;
+    }
+    async getRelatedQuestions(parentVraagid) {
+        const response = await this.#networkManager.doRequest(`/relatedquestions/${parentVraagid}`, "GET");
+        return response.data || [];
+    }
+
 }
