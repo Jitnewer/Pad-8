@@ -26,26 +26,30 @@ export class AdminLoginController extends Controller {
     async #handleLoginClick(event) {
         event.preventDefault();
 
-        const username = this.#adminLoginView.querySelector(".username").value;
+        const email = this.#adminLoginView.querySelector(".email").value;
         const password = this.#adminLoginView.querySelector(".password").value;
 
-        const usernameErrorElement = this.#adminLoginView.querySelector(".username-error");
+        const emailErrorElement = this.#adminLoginView.querySelector(".email-error");
         const passwordErrorElement = this.#adminLoginView.querySelector(".password-error");
-        usernameErrorElement.innerHTML = "";
-        passwordErrorElement.innerHTML = "";
+        const errorMessageElement = this.#adminLoginView.querySelector(".form-message");
 
-        if (username.length === 0 && password.length === 0) {
-            this.#errorMessage(usernameErrorElement, passwordErrorElement);
-            this.#adminLoginView.querySelector(".username").focus();
-            this.#adminLoginView.querySelector(".username").style.border = "1px solid red";
+        emailErrorElement.innerHTML = "";
+        passwordErrorElement.innerHTML = "";
+        errorMessageElement.innerHTML = "";
+
+
+        if (email.length === 0 && password.length === 0) {
+            this.#errorMessage(emailErrorElement, passwordErrorElement);
+            this.#adminLoginView.querySelector(".email").focus();
+            this.#adminLoginView.querySelector(".email").style.border = "1px solid red";
             this.#adminLoginView.querySelector(".password").style.border = "1px solid red";
             return;
-        } else if (username.length === 0 && password.length !== 0) {
-            this.#errorMessage(usernameErrorElement);
-            this.#adminLoginView.querySelector(".username").focus();
+        } else if (email.length === 0) {
+            this.#errorMessage(emailErrorElement);
+            this.#adminLoginView.querySelector(".email").focus();
             this.#adminLoginView.querySelector(".username").style.border = "1px solid red";
             return;
-        } else if (password.length === 0 && username.length !== 0) {
+        } else if (password.length === 0) {
             this.#errorMessage(passwordErrorElement);
             this.#adminLoginView.querySelector(".password").focus();
             this.#adminLoginView.querySelector(".password").style.border = "1px solid red";
@@ -53,13 +57,13 @@ export class AdminLoginController extends Controller {
         }
 
         try {
-            const user = await this.#adminLoginRepository.loginAdmin(username, password);
+            const user = await this.#adminLoginRepository.loginAdmin(email, password);
             App.sessionManager.set("username", user.username);
             App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson);
         } catch (e) {
-            this.#adminLoginView.querySelector(".error-message").innerHTML = e.reason;
-            this.#adminLoginView.querySelector(".form-container").style.height = "400px";
-            console.log(e);
+            errorMessageElement.innerHTML = e.reason;
+            this.#adminLoginView.querySelector(".email").style.border = "1px solid red";
+            this.#adminLoginView.querySelector(".password").style.border = "1px solid red";
         }
     }
 

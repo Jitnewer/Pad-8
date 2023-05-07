@@ -1,5 +1,4 @@
 body {
-
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -31,12 +30,30 @@ body {
     font-size: 25px;
     line-height: 30px;
 }
-
+.contentFilterContainer{
+    position: absolute;
+    width: 11%;
+    height: 65%;
+    left: 50%;
+    top: 152px;
+}
+.FilterButton {
+    width: 100%;
+    height: 10%;
+    margin-bottom: 8.1%;
+    border-radius: 21px ;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Inter';
+    /*background: rgba(255, 255, 255, 0.7);*/
+}
 .button-posistion {
+    /*display: flex;*/
+    /*flex-direction: column;*/
     position: absolute;
     width: 24%;
     height: 65%;
-    left: 55%;
+    left: 65%;
     top: 152px;
     background: rgba(255, 255, 255, 0.3);
     overflow-y: scroll; 

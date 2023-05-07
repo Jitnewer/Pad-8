@@ -104,3 +104,12 @@
     margin: auto;
     z-index: 1;
 }
+
+/* Responsivenes*/
+
+@media (max-width: 412px) {
+    .trial-container {
+        width: 300px;
+        /*padding: 2rem;*/
+    }
+}

@@ -1,28 +1,32 @@
-<div class="adminStudyPosistion">
-    <!--    <div class="adminStudyContainer">-->
-    <!--        <div class="StudyName"></div>-->
-    <!--        <div class="StudyInfo"></div>-->
-    <!--    </div>-->
-</div>
-<div class="adminDashboardStudyPosistion">
-    <div class="admin-Study-add-container">
-        <div class="input-opleiding">
-            <label>Opleiding: </label>
-            <input type="text" id="inputName" placeholder="Naam opleiding">
+<div class="adminContentPage">
+    <div class="adminContentSelector">
+        <button class="adminContentButton" id="adminContentAllButton">Alles</button>
+        <button class="adminContentButton" id="adminContentGeneralButton">Algemeen</button>
+        <button class="adminContentButton" id="adminContentStudyButton">Opleiding</button>
+    </div>
+    <div class="adminContentContainer">
+        <div class="adminStudyPosistion">
         </div>
-        <div>
-            <label>Type: </label>
-            <select id="inputType">
-                <option value="Algemeen">Algemeen</option>
-                <option value="Opleiding">Opleiding</option>
-            </select>
+        <div class="adminDashboardStudyPosistion">
+            <div class="admin-Study-add-container">
+                <div class="input-opleiding">
+                    <label>Content: </label>
+                    <input type="text" id="inputName" placeholder="Naam opleiding">
+                </div>
+                <div>
+                    <label>Type: </label>
+                    <select id="inputType">
+                        <option value="Algemeen">Algemeen</option>
+                        <option value="Opleiding">Opleiding</option>
+                    </select>
+                </div>
+                <div class="input-study-info">
+                    <label class="informationLabel">Information: </label>
+                    <textarea class="input-info-textarea" id="inputInformation"></textarea>
+                </div>
+                <div class="error-study"></div>
+                <button class="Toevoegen">Toevoegen</button>
+            </div>
         </div>
-        <div class="input-study-info">
-            <label class="informationLabel">Information: </label>
-            <textarea class="input-info-textarea" id="inputInformation"></textarea>
-        </div>
-        <div class="error-study"></div>
-        <button class="Toevoegen" >Toevoegen</button>
     </div>
 </div>
-

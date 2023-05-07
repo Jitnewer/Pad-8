@@ -1,17 +1,26 @@
+.adminContentPage {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.admibnContentContainer {
+    display: flex;
+    flex-direction: row;
+}
 .adminDashboardStudyPosistion {
     display: flex;
     flex-direction: column;
     /*margin: 100px 50px 40px 50px;*/
     height: 0%;
-    margin-top: 100px;
+    margin-top: 1.5%;
     background: #f3f3f3;
     border-radius: 10px;
     float: right;
-    margin-right: 2.5%;
+    margin-right: 10%;
     padding-top: 1%;
     padding-right: 3%;
 }
-
 .adminStudyPosistion {
     display: flex;
     flex-direction: row;
@@ -19,7 +28,7 @@
     overflow-y: auto;
     width: 65vw;
     max-height: 510px;
-    margin: 70px auto 38px auto;
+    margin: 2% 5% 5% auto;
     float: left;
 }
 .input-opleiding {
@@ -94,4 +103,15 @@ p {
 }
 .ContentType {
     margin-top: 2.5%;
+}
+.adminContentSelector {
+    display: flex;
+    margin: 2.5% auto auto 30%;
+}
+.adminContentButton {
+    border-radius: 10px;
+    display: flex;
+    margin-left: 1%;
+    font-family: 'Inter';
+    font-size: 18px;
 }

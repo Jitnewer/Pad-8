@@ -1,6 +1,5 @@
 import {Controller} from "./controller.js";
 import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
-// import {TrialSEController} from "./trialSEController.js";
 import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
 import {TrialSERepository} from "../repositories/trialSERepository.js";
 
@@ -8,16 +7,14 @@ export class TrialLessonController extends Controller {
     #trialLessonView;
     #trialLessonRepository;
     #adminDashboardTrialLessonRepository;
-
-    //test
     #trialSERepository
 
     constructor() {
         super();
         this.#trialLessonRepository = new TrialLessonRepository();
         this.#adminDashboardTrialLessonRepository = new AdminDashboardTrialLessonRepository();
-        //test
         this.#trialSERepository = new TrialSERepository();
+
         this.#setupView();
     }
 
@@ -25,19 +22,18 @@ export class TrialLessonController extends Controller {
         this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
         this.#createTrialLesson();
-    }
+}
 
     /**
      * Gives all the buttons a eventlisteren that opens application form
      * @param data: the list of triallessons
      */
-    #applySE(data) {
+    #handleApplyBtn(data) {
         const buttons = this.#trialLessonView.querySelectorAll(".Apply");
 
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener("click", () => {
-                // new TrialSEController(data[i].name, data[i].id);
-                this.#applyForm(data[i].name, data[i].id);
+                this.#openForm(data[i].name, data[i].id);
             });
         }
     }
@@ -53,7 +49,6 @@ export class TrialLessonController extends Controller {
 
         //Get trial lesson data
         const data = await this.#trialLessonRepository.getTrialLessons();
-        console.log(data);
 
         //Trial lessons container
         const trialLessonContainer = this.#trialLessonView.querySelector(".Testlesson-position");
@@ -89,7 +84,7 @@ export class TrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].timeDuration + " lesuren " + "("+(data[i].timeDuration * 50) + "min)");
+            textNode = document.createTextNode(data[i].timeDuration + " lesuren " + "(" + (data[i].timeDuration * 50) + "min)");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
@@ -142,7 +137,7 @@ export class TrialLessonController extends Controller {
                 infoList.appendChild(clickCount);
             }
 
-            this.#applySE(data);
+            this.#handleApplyBtn(data);
         }
     }
 
@@ -151,22 +146,22 @@ export class TrialLessonController extends Controller {
      * @param name: the name of the triallesson
      * @param id: the id of the triallesson
      */
-    async #applyForm(name, id) {
-        await super.loadHtmlIntoCustomElement("html_views/test.html", document.querySelector(".form")).then(
-             () => {
-                 // Give form triallesson name
-                 const textNode = document.createTextNode(name + " proefles");
-                 document.querySelector(".name").appendChild(textNode);
+    async #openForm(name, id) {
+        await super.loadHtmlIntoCustomElement("html_views/trialLessonForm.html", document.querySelector(".form")).then(
+            () => {
+                // Give form triallesson name
+                const textNode = document.createTextNode(name + " proefles");
+                document.querySelector(".name").appendChild(textNode);
 
-                 //Button to close apply form
-                 let xButton = document.querySelector(".x");
-                 xButton.addEventListener("click", () => {
-                     document.querySelector(".applyFormContainer").remove();
-                 });
+                //Button to close apply form
+                let xButton = document.querySelector(".x");
+                xButton.addEventListener("click", () => {
+                    document.querySelector(".applyFormContainer").remove();
+                });
 
-                 document.querySelector(".input-apply").addEventListener("click", () => {
-                     this.#validate(id);
-                 });
+                document.querySelector(".input-apply").addEventListener("click", (event) => {
+                    this.#validate(event, id);
+                });
             }
         );
     }
@@ -174,7 +169,8 @@ export class TrialLessonController extends Controller {
     /**
      *  Checks if input fields are falid
      */
-    async #validate(id) {
+    async #validate(event, id) {
+        event.preventDefault()
         const regexName = /^[A-Za-z]{3,40}$/;
         const regexMail = /^(?=.{10,40}$).*@.*/;
         const borderErrorColor = "1px solid red";
@@ -194,26 +190,48 @@ export class TrialLessonController extends Controller {
 
         const firstNameIsValid = !firstNameEmpty && regexName.test(firstname.value);
         const lastNameIsValid = !lastNameEmpty && regexName.test(lastname.value);
-        const mailIsValid = !mailEmpty && regexMail.test(mail.value);
+        const mailIsValid = !mailEmpty && regexMail.test(mail.value)
 
         firstname.style.border = (firstNameIsValid ? null : borderErrorColor);
         lastname.style.border = (lastNameIsValid ? null : borderErrorColor);
         mail.style.border = (mailIsValid ? null : borderErrorColor);
 
-        if (!firstNameIsValid || !lastNameIsValid || !mailIsValid) {
+        if (firstNameEmpty && lastNameEmpty && mailEmpty) {
             errorMessage.innerHTML = "Vul alle velden in!";
             errorMessage.style.display = "block";
+        } else if (!mailIsValid) {
+            errorMessage.innerHTML = "Ongeldige email!";
+            errorMessage.style.display = "block"
+        } else if (!firstNameIsValid) {
+            errorMessage.innerHTML = "Naam moet 3 tot 40 letters bevatten!";
+            errorMessage.style.display = "block";
+        } else if (!lastNameIsValid) {
+            errorMessage.innerHTML = "Achternaam moet 3 tot 40 letters bevatten!";
+            errorMessage.style.display = "block";
         } else {
-            try {
-                document.querySelector(".applyFormContainer").remove();
-                const data = await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id);
-                alert("u heeft zich ingeschreven");
-                // adds +1 to the clicked column in the database
-                await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
-                // window.location.replace("index.html");
-            } catch (e) {
-                console.log(e);
-            }
+            await this.#apply(firstname, lastname, prefix, mail, id, errorMessage);
+        }
+    }
+
+    async #apply(firstname, lastname, prefix, mail, id, errorMessage, ) {
+        try {
+            await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id).then(
+                async () => {
+                    // adds +1 to the clicked column in the database
+                    await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
+                    location.reload();
+                }
+            );
+
+            alert("u heeft zich ingeschreven");
+
+            document.querySelector(".applyFormContainer").remove();
+        } catch (e) {
+            console.log(e);
+            errorMessage.innerHTML = "Email is al ingeschreven";
+            errorMessage.style.display = "block";
+            mail.style.border = "1px solid red";
         }
     }
 }
+

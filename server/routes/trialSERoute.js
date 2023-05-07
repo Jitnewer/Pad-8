@@ -22,7 +22,7 @@ class trialSERoute{
 
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "INSERT INTO participant (firstname, lastname, prefix, email, id) value (?, ?, ?, ?, ?)",
+                    query: "INSERT INTO participant (firstname, lastname, prefix, email, testlesson_id) value (?, ?, ?, ?, ?)",
                     values: [firstname, lastname, prefix, email, id]
                 })
 
