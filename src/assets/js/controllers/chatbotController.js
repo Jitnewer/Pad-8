@@ -1,8 +1,3 @@
-/**
- * @author: Kevin Isaza Arias
- * Class representing Controller  for chatbox API
- */
-
 import { Controller } from "./controller.js";
 
 export class ChatbotController extends Controller {
@@ -15,19 +10,51 @@ export class ChatbotController extends Controller {
     }
 
     fetchAnswer = async (questionId) => {
-
         const url = `/chatbot/answer/${questionId}`;
         try {
             const response = await fetch(url);
             console.log("Server response:", response);
-            const answer = await response.json();
-            return answer;
+            const data = await response.json();
+            return data;
         } catch (error) {
             console.error(error);
         }
     };
 
+    addRelatedQuestions = (relatedQuestions, listItem) => {
+        relatedQuestions.forEach(question => {
+            const relatedQuestionItem = document.createElement("li");
+            relatedQuestionItem.innerText = question.question;
+            relatedQuestionItem.dataset.questionId = question.id;
+            relatedQuestionItem.classList.add('question');
+            relatedQuestionItem.style.cursor = "pointer";
 
+            relatedQuestionItem.addEventListener("click", async () => {
+                // Show loading animation
+                loading.style.display = "block";
+
+                const data = await this.fetchAnswer(relatedQuestionItem.dataset.questionId);
+
+                // Add a 3-second delay before showing the answer
+                await new Promise(resolve => setTimeout(resolve, 2500));
+
+                // Hide loading animation
+                loading.style.display = "none";
+
+                const answerListItem = document.createElement("li");
+                answerListItem.innerText = data.answer;
+                answerListItem.classList.add('answer');
+
+                // Insert the answer after the clicked question
+                relatedQuestionItem.insertAdjacentElement('afterend', answerListItem);
+
+                // Add related questions underneath the answer
+                this.addRelatedQuestions(data.relatedQuestions, answerListItem);
+            });
+
+            listItem.insertAdjacentElement('afterend', relatedQuestionItem);
+        });
+    };
 
     async #setupView() {
         const view = (this.#chatboxView = await this.loadHtmlIntoCustomElement(
@@ -48,38 +75,7 @@ export class ChatbotController extends Controller {
             chatPopup.style.display = "none";
         });
 
-        const addQuestions = (data) => {
-            const list = document.querySelector('.chatbot-list');
-            data.forEach(question => {
-                const listItem = document.createElement('li');
-                listItem.innerText = question.question;
-                listItem.dataset.questionId = question.id;
-                listItem.classList.add('question');
-                listItem.style.cursor = "pointer";
-
-                listItem.addEventListener("click", async () => {
-                    // Show loading animation
-                    loading.style.display = "block";
-
-                    const answer = await this.fetchAnswer(listItem.dataset.questionId);
-
-                    // Add a 3-second delay before showing the answer
-                    await new Promise(resolve => setTimeout(resolve, 2500));
-
-                    // Hide loading animation
-                    loading.style.display = "none";
-
-                    const answerListItem = document.createElement("li");
-                    answerListItem.innerText = answer.answer;
-                    answerListItem.classList.add('answer');
-
-                    // Insert the answer after the clicked question
-                    listItem.insertAdjacentElement('afterend', answerListItem);
-                });
-
-                list.appendChild(listItem);
-            });
-        };
+        const list = document.querySelector('.chatbot-list');
 
         let url = '/chatbot/questions';
 
@@ -87,8 +83,40 @@ export class ChatbotController extends Controller {
             .then(response => response.json())
             .then(data => {
                 console.log('Questions data:', data);
-                addQuestions(data);
-            })
-            .catch(error => console.error(error));
-    }
-}
+                data.forEach(question => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = question.question;
+                    listItem.dataset.questionId = question.id;
+                    listItem.classList.add('question');
+                    listItem.style.cursor = "pointer";
+
+                    listItem.addEventListener("click", async () => {
+                        // Show loading animation
+                        loading.style.display = "block";
+
+                        const answerData = await this.fetchAnswer(listItem.dataset.questionId);
+
+                        // Add a 3-second delay before showing the answer
+                        await new Promise(resolve => setTimeout(resolve, 2500));
+
+                        // Hide loading animation
+                        loading.style.display = "none";
+
+                        const answerListItem = document.createElement("li");
+                        answerListItem.innerText = answerData.answer;
+                        answerListItem.classList.add('answer');
+
+                        // Insert the answer after the clicked question
+                        listItem.insertAdjacentElement('afterend', answerListItem);
+
+                        // Add related questions underneath the answer
+                        this.addRelatedQuestions(answerData.relatedQuestions, answerListItem);
+                    });
+
+                    list.appendChild(listItem);
+                });
+
+
+
+            });
+        };}
