@@ -153,9 +153,24 @@ body {
 }
 
 @media (max-width: 680px) {
- #header {
-  height: 0px;
+ #wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
  }
+
+ .inconsRedirect {
+  display: flex;
+  /*flex-direction: column;*/
+  flex-wrap: nowrap;
+  justify-content: center;
+  width: 100%;
+ }
+
+ .content-container {
+  height: 57%;
+ }
+
 }
 
 /*@media (max-width: 1200px){*/
