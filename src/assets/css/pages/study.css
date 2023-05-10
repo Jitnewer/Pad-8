@@ -21,13 +21,6 @@ html {
     font-size: 14px;
 }
 
-body {
-    width: calc(145vw + ((55vw - 5vw - 40vw) / 2));
-    height: 100vh;
-    background-size: cover;
-    overflow: hidden;
-}
-
 
 h1 {
     font-size: 3.5rem;
@@ -40,8 +33,9 @@ h2 {
 /* ==================== FIRST CONTAINER ==================== */
 .study-container {
     display: flex;
-    width: 100%;
+    width: calc(145vw + ((55vw - 5vw - 40vw) / 2));
     height: 100vh;
+    background-size: cover;
     overflow: hidden;
     transition: transform 0.6s ease-in-out; /* add transition */
 }
@@ -97,7 +91,7 @@ p {
 }
 
 /* ==================== MIDDLE CONTAINER ==================== */
-.button-posistion {
+.button-position {
     width: 55vw;
     position: relative;
     display: flex;
@@ -179,7 +173,7 @@ p {
 }
 
 /*  ==================== LAST CONTAINER ==================== */
-.information-posistion {
+.information-position {
     width: calc(45vw + ((55vw - 5vw - 40vw) / 2));
     height: 100vh;
 }

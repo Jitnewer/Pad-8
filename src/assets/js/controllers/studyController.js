@@ -84,11 +84,12 @@ export class StudyController extends Controller {
         const content = document.querySelector('.study-container');
         const backButton = document.querySelector('#back-button');
 
-        studyButtons.forEach(studyButton => {
-            studyButton.addEventListener('click', () => {
-                content.classList.add('shift-left');
-            });
-        });
+        // studyButtons.forEach(studyButton => {
+        //     studyButton.addEventListener('click', () => {
+        //         content.classList.add('shift-left');
+        //     });
+        // });
+        content.classList.add('shift-left');
 
         backButton.addEventListener('click', () => {
             content.classList.remove('shift-left');
