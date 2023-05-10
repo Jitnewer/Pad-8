@@ -81,7 +81,7 @@ export class StudyController extends Controller {
          * shifting the page to the right after clicking and back with the back button
          */
         const studyButtons = document.querySelectorAll('.StudyButton');
-        const content = document.querySelector('.content-container');
+        const content = document.querySelector('.study-container');
         const backButton = document.querySelector('#back-button');
 
         studyButtons.forEach(studyButton => {

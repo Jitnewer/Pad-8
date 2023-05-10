@@ -38,7 +38,7 @@ h2 {
 }
 
 /* ==================== FIRST CONTAINER ==================== */
-.content-container {
+.study-container {
     display: flex;
     width: 100%;
     height: 100vh;
@@ -115,7 +115,6 @@ p {
     display: flex;
     flex-direction: column;
     padding-bottom: 2rem;
-    overflow: hidden;
 }
 
 .StudyButton {
