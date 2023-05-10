@@ -55,8 +55,9 @@ export class StudyController extends Controller {
         /**
          * Study container
          */
-        const studyContainer = this.#studyView.querySelector(".button-posistion");
+        const studyContainer = this.#studyView.querySelector(".button-list");
         let name;
+
 
         /**
          * Create study buttons
@@ -77,20 +78,21 @@ export class StudyController extends Controller {
         // console.log("klik");
 
         /**
-         * Removes title & text
+         * shifting the page to the right after clicking and back with the back button
          */
-        let titel = this.#studyView.querySelector("#title");
-        titel.style.display = "none";
-        let tekst = this.#studyView.querySelector("#text");
-        tekst.style.display = "none";
+        const studyButtons = document.querySelectorAll('.StudyButton');
+        const content = document.querySelector('.content-container');
+        const backButton = document.querySelector('#back-button');
 
-        /**
-         * Moves button
-         */
-        let buttonContainer = this.#studyView.querySelector(".button-posistion");
-        let filterContainer = this.#studyView.querySelector(".contentFilterContainer")
-        buttonContainer.style.left = "15%";
-        filterContainer.style.left = "3%";
+        studyButtons.forEach(studyButton => {
+            studyButton.addEventListener('click', () => {
+                content.classList.add('shift-left');
+            });
+        });
+
+        backButton.addEventListener('click', () => {
+            content.classList.remove('shift-left');
+        })
 
         /**
          * Get data
