@@ -3,7 +3,7 @@
 
 import {Controller} from "./controller.js";
 
-export class adminController extends Controller{
+export class AdminController extends Controller{
   #adminView
 
   constructor() {
