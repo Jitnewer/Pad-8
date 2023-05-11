@@ -1,20 +1,35 @@
-// Gayl Reurslag
+import { Controller } from "./controller.js";
+import { App } from "../app.js";
 
-
-import {Controller} from "./controller.js";
-
-export class AdminController extends Controller{
-  #adminView
+export class AdminController extends Controller {
+  #adminView;
 
   constructor() {
     super();
-
     this.#setupView();
   }
 
-  async #setupView(){
+  async #setupView() {
     this.#adminView = await super.loadHtmlIntoContent("html_views/admin.html");
 
-    console.log(this.#adminView)
+    const editchatbotButton = this.#adminView.querySelector("#editchatbot");
+    editchatbotButton.addEventListener("click", () => {
+      App.loadController(App.CONTROLLER_CHATBOT_QA);
+    });
+
+
+    const editproefButton = this.#adminView.querySelector(".editproef");
+    editproefButton.addEventListener("click", () => {
+      App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson);
+    });
+
+    const editstudieButton = this.#adminView.querySelector(".editstudie");
+    editstudieButton.addEventListener("click", () => {
+      App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_Study);
+    });
+
+    console.log(this.#adminView);
+
+    document.getElementById("content").appendChild(this.#adminView);
   }
 }

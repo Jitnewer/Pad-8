@@ -59,7 +59,7 @@ export class AdminLoginController extends Controller {
         try {
             const user = await this.#adminLoginRepository.loginAdmin(email, password);
             App.sessionManager.set("username", user.username);
-            App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson);
+            App.loadController(App.CONTROLLER_ADMIN);
         } catch (e) {
             errorMessageElement.innerHTML = e.reason;
             this.#adminLoginView.querySelector(".email").style.border = "1px solid red";

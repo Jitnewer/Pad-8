@@ -15,7 +15,7 @@ export class ChatbotQARepository {
     }
 
     updateQuestionAnswer(id, question, answer) {
-        return this.#networkManager.doRequest(`${this.#route}/${id}`, "PUT", { question, answer });
+        return this.#networkManager.doRequest(`${this.#route}/${id}`, "PUT", `{ question, answer }`);
     }
 
     createQuestionAnswer(id, question, answer) {
