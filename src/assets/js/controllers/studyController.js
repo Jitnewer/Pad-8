@@ -84,7 +84,6 @@ export class StudyController extends Controller {
         const backButtonDiv = this.#studyView.querySelector("#back-div")
 
         content.classList.add('shift-left');
-        backButtonDiv.style.display = "block";
 
         backButton.addEventListener('click', () => {
             content.classList.remove('shift-left');
