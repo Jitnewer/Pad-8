@@ -63,12 +63,12 @@ export class TrialLessonController extends Controller {
             trialLessonContainer.appendChild(trialLesson);
 
             const nameContainer = document.createElement("div");
-            nameContainer.classList.add("Testlesson-name");
+            nameContainer.classList.add("apply-Testlesson-name");
             trialLesson.appendChild(nameContainer);
 
             //TrialLesson name
             const trialLessonName = document.createElement("h2");
-            trialLessonName.classList.add("trialH2");
+            trialLessonName.classList.add("trialLessonH2");
             textNode = document.createTextNode(data[i].name);
             trialLessonName.appendChild(textNode);
             nameContainer.appendChild(trialLessonName);
@@ -127,7 +127,7 @@ export class TrialLessonController extends Controller {
             const clickCount = document.createElement("p");
             const clickCountFull = document.createElement("p");
             clickCountFull.classList.add("countFull");
-            clickCount.classList.add("countText");
+            clickCount.classList.add("trialCountText");
             if (data[i].clicked >= data[i].capacity) {
                 clickCountFull.textContent = "Proefles is vol"
                 applyButton.remove();

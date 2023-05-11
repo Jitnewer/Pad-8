@@ -1,132 +1,208 @@
-body {
+
+
+:root {
+    --color-primary: #fff;
+    --color-secondary: #c0c0c0;
+
+    --border-dark: 1px solid black;
+    --border-dark-thicker: 2px solid black;
+    --border-light: 1px solid white;
+    --border-light-thicker: 2px solid white;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Inter, sans-serif;
+}
+
+html {
+    font-size: 14px;
+}
+
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-weight: normal;
+}
+
+/* ==================== FIRST CONTAINER ==================== */
+.study-container {
+    display: flex;
+    width: calc(145vw + ((55vw - 5vw - 40vw) / 2));
+    height: 100vh;
     background-size: cover;
-    width: 100%;
-    height: 100%;
     overflow: hidden;
+    transition: transform 0.6s ease-in-out; /* add transition */
 }
+
+.shift-left {
+    transform: translateX(calc(-45vw - ((55vw - 5vw - 40vw) / 2))); /* apply transform on button click */
+}
+
+.first-container {
+    display: flex;
+    flex-direction: column;
+    width: 45vw;
+}
+
 #title {
-    position: absolute;
-    width: 491px;
-    height: 147px;
-    left: 7.5%;
-    top: 15%;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 60px;
-    line-height: 73px;
+    display: flex;
+    height: 30vh;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 5rem;
+    margin-bottom: 1rem;
 }
+
 #text {
-    position: absolute;
-    width: 519px;
-    height: 120px;
-    left: 7.5%;
-    top: 35%;
+    display: flex;
+    min-height: 30vh;
+    max-height: 40vh;
+    padding: 0 5rem;
+}
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 30px;
+p {
+    color: black;
 }
-.contentFilterContainer{
-    position: absolute;
-    width: 11%;
-    height: 65%;
-    left: 50%;
-    top: 152px;
+
+.contentFilterContainer {
+    display: flex;
+    height: 20vh;
+    padding: 0 2rem 0 5rem;
 }
+
 .FilterButton {
-    width: 100%;
-    height: 10%;
-    margin-bottom: 8.1%;
-    border-radius: 21px ;
-    font-size: 25px;
-    font-weight: 600;
-    font-family: 'Inter';
-    /*background: rgba(255, 255, 255, 0.7);*/
+    height: 3.5rem;
+    flex: 1;
+    font-size: 1.3rem;
+    margin-right: 2rem;
+    border: none;
+    background-color: var(--color-primary);
+    border-radius: 1rem;
 }
-.button-posistion {
-    /*display: flex;*/
-    /*flex-direction: column;*/
+
+.FilterButton:hover {
+    border: var(--border-dark);
+}
+
+/* ==================== MIDDLE CONTAINER ==================== */
+.button-position {
+    width: 55vw;
+    position: relative;
+    display: flex;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.button-list {
+    min-height: 100vh;
+    height: auto;
+    width: 40vw;
+    background-color: rgba(255,255,255,.3);
     position: absolute;
-    width: 24%;
-    height: 65%;
-    left: 65%;
-    top: 152px;
-    background: rgba(255, 255, 255, 0.3);
-    overflow-y: scroll; 
+    left: calc((55vw - 5rem - 40vw) / 2);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
 }
+
 .StudyButton {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 8.1%;
-    border-radius: 21px ;
-    font-size: 25px;
-    font-weight: 600;
-    font-family: 'Inter';
-    background: rgba(255, 255, 255, 0.7);
+    font-size: 1.6rem;
+    font-weight: normal;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 1rem;
+    height: 10rem;
+    margin: 2rem 1.5rem 0 1.5rem;
 }
-button:hover {
-    cursor: pointer;
-    background: white   ;
+
+.StudyButton:hover {
+    border: var(--border-dark-thicker);
 }
-.information-posistion {
+
+/* ==================== SIDEBAR RIGHT SIDE ==================== */
+.third-container {
+    z-index: 9;
+    position: fixed;
+    right: 0;
+    width: 5rem;
+    height: 100%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+}
+
+.sidebar-items {
+    position: fixed;
+    right: 0;
+    top: 42.5vh;
+    width: 4.5rem;
+    height: 8rem;
+    background-color: var(--color-secondary);
+    border-radius: 1rem 0 0 1rem;
+}
+
+#back-div {
     position: absolute;
-    left: 50%;
-    margin-top: 7%;
+    margin-left: -2rem;
+    bottom: 1vh;
 }
+
+#back-button {
+    width: 6.5rem;
+    height: 3rem;
+    font-size: 1.4rem;
+    color: white;
+    background: var(--color-secondary);
+    border: var(--border-light);
+    border-radius: 0.8rem;
+    cursor: pointer;
+}
+#back-button:hover {
+    color: black;
+    border: var(--border-dark);
+}
+
+/*  ==================== LAST CONTAINER ==================== */
+.information-position {
+    width: calc(45vw + ((55vw - 5vw - 40vw) / 2));
+    height: 100vh;
+}
+
+.information-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: calc(100% - ((55vw - 5vw - 40vw) / 2) - 5vw);
+    height: 84%;
+    margin-top: 8%;
+}
+
 .study-title {
-    font-size: 50px;
-    font-weight: 750;
-    font-family: 'Inter';
-}
-.information-input {
-    margin-right: 30%;
-    font-size: 20px;
-    font-family: 'Inter';
-}
-.apply-triallesson {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 100px;
-    margin-bottom: 8.1%;
-    border-radius: 21px ;
-    font-size: 25px;
-    font-weight: 600;
-    font-family: 'Inter';
-    background: rgba(255, 255, 255, 0.7);
-    visibility: hidden;
+    border-bottom: var(--border-light-thicker);
+    height: fit-content;
+    padding: 1.5rem 0 1.5rem 0;
 }
 
-#sidebar {
-    position: absolute;
-    width: 110px;
-    height: 170px;
-    left: 93.85%;
-    top: 40%;
-}
-#home {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    /*left: 1436px;*/
-    /*top: 40%;*/
-
-    background-color: white;
-}
-#map {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    /*left: 0%;*/
-    /*right: 1.72%;*/
-    top: 34%;
-    /*bottom: 44.79%;*/
-}
-#home:hover {
-    cursor: pointer;
-}
-#map:hover {
-    cursor: pointer;
+.information-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: var(--border-light-thicker);
+    height: fit-content;
+    padding: 1.5rem 0 1.5rem 0;
 }
