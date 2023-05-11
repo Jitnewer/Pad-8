@@ -1,32 +1,30 @@
-//gayl
+import { Controller } from "./controller.js";
+import { LandingpageRepository } from "../repositories/landingpageRepository.js";
+import { App } from "../app.js";
 
-import {Controller} from "./controller.js";
-import {LandingpageRepository} from "../repositories/landingpageRepository.js";
+export class LandingpageController extends Controller {
+    #landingpageView;
 
+    constructor() {
+        super();
+        this.#setupView();
+    }
 
-export class LandingpageController extends Controller{
-  #landingpageRepository
-  #landingpageView
+    async #setupView() {
+        this.#landingpageView = await super.loadHtmlIntoContent("html_views/landingpage.html");
 
-  constructor() {
-    super();
-     this.#landingpageRepository = new LandingpageRepository();
+        const editproefButton = this.#landingpageView.querySelector(".editproef");
+        editproefButton.addEventListener("click", () => {
+            App.loadController(App.CONTROLLER_TRIALLESSON);
+        });
 
-    this.#setupView();
-  }
+        const editstudieButton = this.#landingpageView.querySelector(".editstudie");
+        editstudieButton.addEventListener("click", () => {
+            App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_Study);
+        });
 
-  async #setupView(){
-    this.#landingpageView = await super.loadHtmlIntoContent("html_views/landingpage.html");
+        console.log(this.#landingpageView);
 
-    await this.#set()
-    console.log(this.#landingpageView)
-  }
-
-   async #set () {
-    let data = await this.#landingpageRepository.getSubject();
-
-     console.log(data)
-   }
+        document.getElementById("content").appendChild(this.#landingpageView);
+    }
 }
-
-
