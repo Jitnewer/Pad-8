@@ -143,7 +143,6 @@ export class App {
                 break;
 
             case App.CONTROLLER_ADMIN_DASHBOARD_Study:
-                new AdminDashboardStudyController();
                 App.setCurrentController(name);
                 App.isLoggedIn(() => new AdminDashboardStudyController(), () => new AdminLoginController());
                 App.unloadChatbot();
