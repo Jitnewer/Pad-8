@@ -21,6 +21,8 @@ import {ChatbotController} from "./controllers/chatbotController.js";
 import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyController.js";
 import { ChatbotQAController } from "./controllers/ChatbotQAController.js";
 import {LandingpageController} from "./controllers/landingpageController.js";
+import {mapController} from "./controllers/mapController.js";
+import {adminMapController} from "./controllers/adminMapController.js";
 
 
 export class App {
@@ -43,6 +45,8 @@ export class App {
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
     static CONTROLLER_ADMIN = "admin";
     static CONTROLLER_LANDINGPAGE = "landingpage";
+    static CONTROLLER_MAP = "map";
+    static CONTROLLER_ADMINMAP = "adminMap";
 
 
     constructor() {
@@ -117,6 +121,14 @@ export class App {
 
             case App.CONTROLLER_WELCOME:
                 new WelcomeController();
+                break;
+            case App.CONTROLLER_MAP:
+                App.setCurrentController(name);
+                new mapController();
+                break;
+            case App.CONTROLLER_ADMINMAP:
+                App.setCurrentController(name);
+                new adminMapController();
                 break;
             case App.CONTROLLER_CREATE_APPOINTMENT:
                 App.setCurrentController(name);
