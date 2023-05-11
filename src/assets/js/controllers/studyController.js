@@ -75,21 +75,16 @@ export class StudyController extends Controller {
 
     async #handleClickButton(e, index) {
         e.preventDefault();
-        // console.log("klik");
 
         /**
          * shifting the page to the right after clicking and back with the back button
          */
-        const studyButtons = document.querySelectorAll('.StudyButton');
         const content = document.querySelector('.study-container');
         const backButton = document.querySelector('#back-button');
+        const backButtonDiv = this.#studyView.querySelector("#back-div")
 
-        // studyButtons.forEach(studyButton => {
-        //     studyButton.addEventListener('click', () => {
-        //         content.classList.add('shift-left');
-        //     });
-        // });
         content.classList.add('shift-left');
+        backButtonDiv.style.display = "block";
 
         backButton.addEventListener('click', () => {
             content.classList.remove('shift-left');

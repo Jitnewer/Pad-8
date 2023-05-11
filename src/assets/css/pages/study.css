@@ -66,7 +66,7 @@ h2 {
     padding: 0 5rem;
 }
 
-p {
+#infoText {
     color: black;
 }
 
@@ -112,7 +112,7 @@ p {
 }
 
 .StudyButton {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: normal;
     background-color: var(--color-primary);
     border: none;
@@ -138,10 +138,11 @@ p {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 100%;
+    height: 90%;
 }
 
 .sidebar-items {
+    display: none;
     position: fixed;
     right: 0;
     top: 42.5vh;
@@ -155,6 +156,7 @@ p {
     position: absolute;
     margin-left: -2rem;
     bottom: 1vh;
+    display: none;
 }
 
 #back-button {
@@ -195,6 +197,7 @@ p {
     border-bottom: var(--border-light-thicker);
     height: fit-content;
     padding: 1.5rem 0 1.5rem 0;
+    font-size: 3rem;
 }
 
 .information-input {
@@ -205,4 +208,5 @@ p {
     border-bottom: var(--border-light-thicker);
     height: fit-content;
     padding: 1.5rem 0 1.5rem 0;
+    font-size: 1.5rem;
 }
