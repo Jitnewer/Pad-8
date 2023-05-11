@@ -75,7 +75,7 @@ export class AdminDashboardStudyController extends Controller {
         /**
          * Study container
          */
-        const adminStudyContainer = this.#adminDashboardStudyView.querySelector(".adminStudyPosistion");
+        const adminStudyContainer = this.#adminDashboardStudyView.querySelector(".adminStudyPosition");
         let name;
         let type;
 

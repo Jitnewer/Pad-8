@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: row;
 }
-.adminDashboardStudyPosistion {
+.adminDashboardStudyPosition {
     display: flex;
     flex-direction: column;
     /*margin: 100px 50px 40px 50px;*/
@@ -22,7 +22,7 @@
     padding-top: 1%;
     padding-right: 3%;
 }
-.adminStudyPosistion {
+.adminStudyPosition {
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
@@ -149,7 +149,7 @@ p {
     .adminDashboardStudyButton {
         margin: 0 35% 0 35%;
     }
-    .adminDashboardStudyPosistion {
+    .adminDashboardStudyPosition {
         display: flex;
         width: 55%;
         justify-content: center;
