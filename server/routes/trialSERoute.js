@@ -1,8 +1,9 @@
 /**
  * Routes file for trialSE
- * @author Chant & Jit Newer
+ * @author Jit Newer
  */
-class trialSERoute{
+
+class trialSERoute {
     #app;
     #databaseHelper = require("../framework/utils/databaseHelper.js");
     #httpErrorCodes = require("../framework/utils/httpErrorCodes.js");
@@ -28,7 +29,7 @@ class trialSERoute{
 
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
-                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
             }
         })
     }

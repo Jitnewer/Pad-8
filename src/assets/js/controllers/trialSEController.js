@@ -65,7 +65,6 @@ export class TrialSEController extends Controller {
                 alert("u heeft zich ingeschreven");
                 // adds +1 to the clicked column in the database
                 await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
-                window.location.replace("index.html");
             } catch (e) {
                 console.log(e);
             }

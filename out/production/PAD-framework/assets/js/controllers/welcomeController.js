@@ -29,12 +29,12 @@ export class WelcomeController extends Controller{
         //await for when HTML is loaded
         this.#welcomeView = await super.loadHtmlIntoContent("html_views/welcome.html")
 
-        const plattegrond = this.#welcomeView.querySelector(".plattegrond");
+        // const plattegrond = this.#welcomeView.querySelector(".plattegrond");
         const chatbot = this.#welcomeView.querySelector(".chatbox");
         const opleiding = this.#welcomeView.querySelector(".studyButton");
         const proefles = this.#welcomeView.querySelector(".proefles");
 
-        plattegrond.addEventListener("click", (e) => this.#handleClickPlattegrondButton(e));
+        // plattegrond.addEventListener("click", (e) => this.#handleClickPlattegrondButton(e));
         chatbot.addEventListener("click", (e) => this.#handleClickChatbotButton(e));
         opleiding.addEventListener("click", (e) => this.#handleClickStudyButton(e));
         proefles.addEventListener("click", (e) => this.#handleClickTrialLessonButton(e))

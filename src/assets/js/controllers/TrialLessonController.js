@@ -1,13 +1,13 @@
-import {Controller} from "./controller.js";
-import {TrialLessonRepository} from "../repositories/trialLessonRepository.js";
-import {AdminDashboardTrialLessonRepository} from "../repositories/adminDashboardTrialLessonRepository.js";
-import {TrialSERepository} from "../repositories/trialSERepository.js";
+import { Controller } from "./controller.js";
+import { TrialLessonRepository } from "../repositories/trialLessonRepository.js";
+import { AdminDashboardTrialLessonRepository } from "../repositories/adminDashboardTrialLessonRepository.js";
+import { TrialSERepository } from "../repositories/trialSERepository.js";
 
 export class TrialLessonController extends Controller {
     #trialLessonView;
     #trialLessonRepository;
     #adminDashboardTrialLessonRepository;
-    #trialSERepository
+    #trialSERepository;
 
     constructor() {
         super();
@@ -22,7 +22,7 @@ export class TrialLessonController extends Controller {
         this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
         this.#createTrialLesson();
-}
+    }
 
     /**
      * Gives all the buttons a eventlisteren that opens application form
@@ -212,26 +212,31 @@ export class TrialLessonController extends Controller {
             await this.#apply(firstname, lastname, prefix, mail, id, errorMessage);
         }
     }
-
-    async #apply(firstname, lastname, prefix, mail, id, errorMessage, ) {
+    async #apply(firstname, lastname, prefix, mail, id, errorMessage) {
         try {
             await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id).then(
                 async () => {
                     // adds +1 to the clicked column in the database
                     await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
-                    location.reload();
+
                 }
             );
 
-            alert("u heeft zich ingeschreven");
-
+            alert("You have successfully applied!");
+            window.location.reload();
             document.querySelector(".applyFormContainer").remove();
         } catch (e) {
             console.log(e);
-            errorMessage.innerHTML = "Email is al ingeschreven";
+            errorMessage.innerHTML = "Email has already been registered";
             errorMessage.style.display = "block";
             mail.style.border = "1px solid red";
         }
+        // const subject = "Trial Lesson Application";
+        // const question = "Thank you for applying to the trial lesson. We will get back to you soon.";
+        await this.#trialSERepository.sendTrialLessonEmail(mail.value);
     }
+
 }
+
+
 
