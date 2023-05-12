@@ -21,6 +21,7 @@ export class chatbotRepository {
     //     }
     //     return this.#networkManager.doRequest(this.#route, "GET", { query });
     // }
+// dit is voor de tag
 
 
 }

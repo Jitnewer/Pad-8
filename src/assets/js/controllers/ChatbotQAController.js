@@ -1,7 +1,7 @@
 import {ChatbotQARepository} from "../repositories/chatbotQARepository.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const controller = new ChatbotQAController();
+
 });
 
 export class ChatbotQAController {
@@ -165,6 +165,7 @@ export class ChatbotQAController {
                     await this.updateQuestionAnswer(qa.id, updatedQuestion, updatedAnswer);
                 }
             });
+// dit is voor de tag
 
             table.appendChild(item);
         }

@@ -25,6 +25,8 @@ class LandingpageRoute {
 
 }
 }
+// dit is voor de tag
+
 
 module.exports = LandingpageRoute;
 

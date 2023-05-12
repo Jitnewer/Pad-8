@@ -54,5 +54,6 @@ export class ChatbotQARepository {
         return response.data || [];
     }
 
+// dit is voor de tag
 
 }
