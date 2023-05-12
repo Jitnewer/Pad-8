@@ -189,16 +189,18 @@ export class adminMapController extends Controller {
 
     async #setupView() {
         this.#adminMapView = await super.loadHtmlIntoContent("html_views/admin_Map.html");
-        this.#adminMapView.querySelector(".upload").addEventListener("click",
-            (event) => this.saveMap(event));
-        this.#saveMap();
+        let uploadButton = this.#adminMapView.querySelector(".upload");
+        if (uploadButton) {
+            uploadButton.addEventListener("click", (event) => this.#saveMap(event));
+        }
     }
+
 
     async #saveMap(event) {
         event.preventDefault();
 
-        const floor = this.#adminMapView.querySelector("#floor").value;
-        const filename = this.#adminMapView.querySelector("#filename").value;
+        let floor = this.#adminMapView.querySelector("#floor").value;
+        let filename = this.#adminMapView.querySelector("#filename").value;
 
 
         try {
@@ -208,7 +210,7 @@ export class adminMapController extends Controller {
                 alert("Naam van de opleiding mag niet langer dan 30 karakters zijn")
             } else {
                 if (confirm("weet u zeker dat u het wil toevoegen") === true) {
-                    await this.saveMap(floor, filename);
+                    await this.#adminMapRepository.saveMap(floor, filename);
                     location.reload();
                 }
             }

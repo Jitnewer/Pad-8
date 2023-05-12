@@ -8,18 +8,17 @@ class mapRoutes {
     constructor(app) {
         this.#app = app;
         this.#saveMap();
-
     }
 
     #saveMap() {
-        this.#app.post("/adminDashboard", async (req, res) => {
+        this.#app.post("/adminMap", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "INSERT INTO map (idMap, floor, files, filename, Admin_idAdmin) VALUES(?, ?, ?, ?)",
-                    values: [req.body.name, req.body.idMap, req.body.floor, req.body.files, req.body.filename, req.body.Admin_idAdmin]
+                    query: "INSERT INTO map (floor, filename) VALUES(? , ?)",
+                    values: [ req.body.floor, req.body.filename]
                 });
-                if (data.idMap) {
-                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.idMap});
+                if (data.floor) {
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.floor});
                 }
             } catch (e) {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});

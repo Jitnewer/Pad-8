@@ -5,11 +5,11 @@ export class adminMapRepository {
     #route;
 
     constructor() {
-        this.#route = "/map";
+        this.#route = "/adminMap";
         this.#networkManager = new NetworkManager();
     }
 
-    saveMap(idMap, floor, files, filename, Admin_idAdmin) {
-        return this.#networkManager.doRequest(this.#route, "POST", {idMap: idMap, floor: floor, files: files, filename: filename, Admin_idAdmin: Admin_idAdmin})
+    saveMap(floor, filename) {
+        return this.#networkManager.doRequest(this.#route, "POST", {floor: floor, filename: filename})
     }
 }
