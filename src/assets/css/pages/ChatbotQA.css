@@ -22,3 +22,38 @@
     overflow-y: auto;
     display: block;
 }
+
+.buttonchatqa{
+    color: black;
+    border: black;
+}
+
+.buttonchatqa:hover{
+    color: blue;
+}
+.update-button{
+    color: black;
+    border: black;
+}
+
+.update-button:hover{
+    color: green;
+}
+
+
+.delete-button{
+    color: black    ;
+}
+.delete-button:hover{
+    color: red;
+}
+
+
+.delete-related-button{
+    color: black;
+}
+
+.delete-related-button:hover{
+    color: red;
+    border: 1px;
+}

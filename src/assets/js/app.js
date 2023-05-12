@@ -22,14 +22,16 @@ import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyCo
 import {ChatbotQAController} from "./controllers/ChatbotQAController.js";
 import {LandingpageController} from "./controllers/landingpageController.js";
 import {AdminController} from "./controllers/adminController.js";
+import {mapController} from "./controllers/mapController.js";
+import {adminMapController} from "./controllers/adminMapController.js";
 
 
 export class App {
-    //we only need one instance of the sessionManager, thus static use here
-    // all classes should use this instance of sessionManager
+//we only need one instance of the sessionManager, thus static use here
+// all classes should use this instance of sessionManager
     static sessionManager = new SessionManager();
 
-    //controller identifiers, add new controllers here
+//controller identifiers, add new controllers here
     static CONTROLLER_NAVBAR = "navbar";
     static CONTROLLER_LOGOUT = "logout";
     static CONTROLLER_WELCOME = "welcome";
@@ -44,17 +46,20 @@ export class App {
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
     static CONTROLLER_ADMIN = "admin";
     static CONTROLLER_LANDINGPAGE = "landingpage";
+    static CONTROLLER_MAP = "map";
+    static CONTROLLER_ADMINMAP = "adminMap";
+
 
 
     constructor() {
-        // Always load the navigation
+// Always load the navigation
         App.loadController(App.CONTROLLER_NAVBAR);
 
         if (App.shouldLoadChatbot()) {
             App.loadController(App.CONTROLLER_CHATBOT);
         }
 
-        // Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
+// Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
         App.loadControllerFromUrl(App.CONTROLLER_WELCOME);
     }
 
@@ -85,14 +90,14 @@ export class App {
     static loadController(name, controllerData) {
         console.log("loadController: " + name);
 
-        //log the data if data is being passed via controllers
+//log the data if data is being passed via controllers
         if (controllerData && Object.entries(controllerData).length !== 0) {
             console.log(controllerData);
         }
 
 
-        //Check for a special controller that shouldn't modify the URL
-        // Check for a special controller that shouldn't modify the URL
+//Check for a special controller that shouldn't modify the URL
+// Check for a special controller that shouldn't modify the URL
         switch (name) {
             case App.CONTROLLER_NAVBAR:
                 new NavbarController();
@@ -110,7 +115,7 @@ export class App {
         }
 
 
-        //Otherwise, load any of the other controllers
+//Otherwise, load any of the other controllers
         App.setCurrentController(name, controllerData);
 
         switch (name) {
@@ -124,7 +129,7 @@ export class App {
                 new createappointmentController();
                 break;
             case App.CONTROLLER_CHATBOT_QA:
-                // App.setCurrentController(name);
+// App.setCurrentController(name);
                 new ChatbotQAController();
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
@@ -152,7 +157,7 @@ export class App {
                 new StudyController();
                 break;
             case App.CONTROLLER_UPLOAD:
-                // App.isLoggedIn(() => new UploadController(), () => new LoginController());
+// App.isLoggedIn(() => new UploadController(), () => new LoginController());
                 App.isLoggedIn(() => new UploadController(), () => new AdminLoginController());
                 break;
             case App.CONTROLLER_TRIALLESSON:
@@ -166,6 +171,11 @@ export class App {
             case App.CONTROLLER_LANDINGPAGE:
                 App.setCurrentController(name);
                 new LandingpageController();
+                break;
+            case App.CONTROLLER_ADMINMAP:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new adminMapController(), () => new AdminLoginController());
+                App.unloadChatbot();
                 break;
 
             default:
@@ -257,7 +267,7 @@ export class App {
         App.sessionManager.remove("username");
 
         App.loadChatbot();
-        //go to login screen
+//go to login screen
         App.loadController(App.CONTROLLER_ADMIN_LOGIN);
     }
 }

@@ -1,0 +1,17 @@
+.list-group-item{
+    color: white;
+    width: 335px;
+    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 9%;
+}
+
+input {
+    margin-left: 35%;
+}
+
+.upload {
+    margin-left: 30%;
+    margin-top: 3%;
+}

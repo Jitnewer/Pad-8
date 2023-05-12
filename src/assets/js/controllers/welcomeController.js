@@ -29,19 +29,23 @@ export class WelcomeController extends Controller{
         //await for when HTML is loaded
         this.#welcomeView = await super.loadHtmlIntoContent("html_views/welcome.html")
 
-        const editplateb = this.#welcomeView.querySelector(".editplate");
-        editplateb.addEventListener("click", () => {
+        const plattegrond_img = this.#welcomeView.querySelector(".plattegrond_img");
+        plattegrond_img.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_CREATE_APPOINTMENT);
         });
 
+        const map_img = this.#welcomeView.querySelector(".map_img");
+        map_img.addEventListener("click", () => {
+            App.loadController(App.CONTROLLER_MAP);
+        });
 
-        const editproefButton = this.#welcomeView.querySelector(".editproef");
-        editproefButton.addEventListener("click", () => {
+        const proef_img = this.#welcomeView.querySelector(".proef_img");
+        proef_img.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_TRIALLESSON);
         });
 
-        const editstudieButton = this.#welcomeView.querySelector(".editstudie");
-        editstudieButton.addEventListener("click", () => {
+        const studie_img = this.#welcomeView.querySelector(".studie_img");
+        studie_img.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_STUDY);
         });
 

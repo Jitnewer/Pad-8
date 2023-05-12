@@ -1,0 +1,37 @@
+<header><link rel="stylesheet" href="../assets/css/pages/adminMap.css"></header>
+
+<div class="container admin-floorplan">
+    <div class="d-flex flex-row flex-wrap justify-content-between">
+        <section>
+            <h3 class="mt-4 mb-3">Plattegrond management</h3>
+            <h5 class="mt-4 mb-3">kies een plattegrond</h5>
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action list-group-item-info active file">
+                    Plattegronden
+                </a>
+            </div>
+        </section>
+        <section>
+            <h3 class="mt-4 mb-3 form-title">Nieuwe plattegrond uploaden</h3>
+
+            <form method="post" encType="multipart/form-data" class="floorplan-create-form">
+                <img id="preview-image" class="mb-3" alt="Plattegrond foto voorvertoning" height="200px" style="display: none;">
+                <p class="align-content-center">
+                    <label for="floor">Verdieping: </label>
+                    <input id="floor" type="number" name="floor" required />
+                </p>
+                <p class="align-content-center">
+                    <label for="filename">Opleiding: </label>
+                    <input id="filename" type="text" name="filename" required />
+                </p>
+                <p class="align-content-center">
+                    <label for="file">Kies foto: </label>
+                    <input id="file" type="file" name="file" accept="image/*" />
+                </p>
+                <button type="submit" class="btn btn-primary upload">Plattegrond opslaan</button>
+                <button type="submit" class="btn btn-warning hotspot" style="display: none">Beheer hotspots</button>
+                <button type="submit" class="btn btn-danger delete" style="display: none">Plattegrond verwijderen</button>
+            </form>
+        </section>
+    </div>
+</div>
