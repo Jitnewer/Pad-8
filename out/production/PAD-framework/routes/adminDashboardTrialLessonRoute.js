@@ -1,6 +1,6 @@
 /**
  * Routes file for adminDashboard entity
- * @author Chant Balci
+ * @author Chant Balci & Jit Newer
  */
 
 class adminDashboardTrialLessonRoute {
@@ -20,8 +20,8 @@ class adminDashboardTrialLessonRoute {
         this.#app.post("/adminDashboard", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "INSERT INTO testlesson (name,Admin_idAdmin,timeDuration, date, location, room, subject,time, clicked) VALUES(?,1,?,?,?,?,?,?,0)",
-                    values: [req.body.name, req.body.timeDuration, req.body.date, req.body.location, req.body.room, req.body.subject, req.body.time]
+                    query: "INSERT INTO testlesson (name,Admin_idAdmin,timeDuration, date, location, room, subject,time, clicked, capacity) VALUES(?,1,?,?,?,?,?,?,0,?)",
+                    values: [req.body.name, req.body.timeDuration, req.body.date, req.body.location, req.body.room, req.body.subject, req.body.time, req.body.capacity]
                 });
                 if (data.insertId) {
                     res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.insertId});
@@ -35,10 +35,18 @@ class adminDashboardTrialLessonRoute {
     #deleteTestlesson() {
         this.#app.delete("/adminDashboard/:id", async (req, res) => {
             try {
+                // Delete trial lesson
                 const data = await this.#databaseHelper.handleQuery({
                     query: "DELETE FROM testlesson WHERE id = ?",
                     values: [req.params.id]
                 });
+
+                // Delete all participants from database table where id equals trial lesson id
+                await this.#databaseHelper.handleQuery({
+                    query: "DELETE FROM participant WHERE id = ?",
+                    values: [req.params.id]
+                });
+
                 if (data.affectedRows > 0) {
                     res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({message: "Testlesson deleted successfully."});
                 } else {
@@ -49,6 +57,7 @@ class adminDashboardTrialLessonRoute {
             }
         });
     }
+
     // the function is meant to count the amount of sended triallessons in order to give the user an indication about how many spots are left
     #updateClickedCount() {
         this.#app.put("/adminDashboard/updateClicked/:id", async (req, res) => {
