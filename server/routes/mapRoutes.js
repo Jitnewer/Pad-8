@@ -11,7 +11,7 @@ class mapRoutes {
     }
 
     #saveMap() {
-        this.#app.post("/adminMap", async (req, res) => {
+        this.#app.post("/aMap", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
                     query: "INSERT INTO map (floor, filename) VALUES(? , ?)",

@@ -34,6 +34,10 @@ export class WelcomeController extends Controller{
             App.loadController(App.CONTROLLER_CREATE_APPOINTMENT);
         });
 
+        const editmap = this.#welcomeView.querySelector(".editmap");
+        editmap.addEventListener("click", () => {
+            App.loadController(App.CONTROLLER_MAP);
+        });
 
         const editproefButton = this.#welcomeView.querySelector(".editproef");
         editproefButton.addEventListener("click", () => {
