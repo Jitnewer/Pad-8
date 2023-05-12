@@ -39,6 +39,7 @@ export class AdminDashboardTrialLessonController extends Controller {
         const room = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Room").value;
         const subject = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_Subject").value;
         const time = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Testlesson_time").value;
+        const capacity = this.#adminDashboardTrialLessonView.querySelector("#adminDashboard_Capacity").value;
 
         const durationMax = /^[0-5](\.\d+)?$/
 
@@ -81,7 +82,7 @@ export class AdminDashboardTrialLessonController extends Controller {
             }
             else{
                 if (confirm("weet u zeker dat u het wil toevoegen") === true) {
-                    await this.#adminDashboardTrialLessonRepository.saveTestlesson(name, duration, date, lessonLocation, room, subject, time);
+                    await this.#adminDashboardTrialLessonRepository.saveTestlesson(name, duration, date, lessonLocation, room, subject, time, capacity);
                     location.reload();
                 }
             }
@@ -131,7 +132,7 @@ export class AdminDashboardTrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].timeDuration + " uur proefles");
+            textNode = document.createTextNode(data[i].timeDuration + " lesuren " + "("+(data[i].timeDuration * 50) + "min)");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
@@ -149,7 +150,13 @@ export class AdminDashboardTrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
-            textNode = document.createTextNode(data[i].subject);
+            textNode = document.createTextNode(data[i].timeDuration + " uur proefles");
+            elementLi.appendChild(textNode);
+            ul.appendChild(elementLi);
+
+            elementLi = document.createElement("li");
+            elementLi.classList.add(CLASS_NAME_ITEM);
+            textNode = document.createTextNode("Max " + data[i].capacity + " participanten");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
 
@@ -161,11 +168,11 @@ export class AdminDashboardTrialLessonController extends Controller {
             applyButton.addEventListener("click", () => this.#deleteTestlesson(data[i].id));
 
             const applyText = document.createElement("i");
-            applyText.classList.add("trashcan-icon");
+            applyText.classList.add("fa-solid", "fa-trash", "trashcan-icon");
             // const applyText = document.createElement("img");
-            applyText.classList.add("trash_png");
-            applyText.src = "src/assets/img/Trashcan.png";
-            applyText.alt = "Trashcan";
+            // applyText.classList.add("trash_png");
+            // applyText.src = "src/assets/img/Trashcan.png";
+            // applyText.alt = "Trashcan";
             applyButton.appendChild(applyText);
         }
     }

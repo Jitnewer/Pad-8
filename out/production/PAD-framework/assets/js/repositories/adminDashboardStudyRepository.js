@@ -9,22 +9,21 @@ export class AdminDashboardStudyRepository {
     #route;
 
     constructor() {
-        this.#route = "/study";
+        this.#route = "/adminDashboardStudy";
         this.#networkManager = new NetworkManager();
     }
 
-    getAdminDashboardStudyInformation(nameStudy, information) {
+    createStudy(nameStudy, information, type) {
+        return this.#networkManager.doRequest(this.#route,
+            "POST", {nameStudy: nameStudy,information: information,type: type})
+    }
+    getAdminDashboardStudyInformation() {
         console.log(this.#route);
         return this.#networkManager.doRequest(this.#route, "GET");
     }
 
-    sendAdminDashboardStudyInformation(nameStudy, information) {
+    deleteAdminDashboardStudyInformation(nameStudy) {
         console.log(this.#route);
-        return this.#networkManager.doRequest(this.#route, "POST");
-    }
-
-    deleteAdminDashboardStudyInformation(nameStudy, information) {
-        console.log(this.#route);
-        return this.#networkManager.doRequest(this.#route, "POST");
+        return this.#networkManager.doRequest(`${this.#route}/${nameStudy}`, "DELETE");
     }
 }

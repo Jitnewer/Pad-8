@@ -1,5 +1,6 @@
 /**
- * @author Kevin Isaza
+ * @author: Kevin Isaza Arias
+ * Class representing Repository  for chatbox API
  */
 
 import {NetworkManager} from "../framework/utils/networkManager.js";
