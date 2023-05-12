@@ -9,11 +9,14 @@ export class ChatbotQAController {
     constructor() {
         this.chatbotRepository = new ChatbotQARepository();
         this.loadView();
+
+
+
     }
 
     async updateQuestionAnswer(id, question, answer) {
         await this.chatbotRepository.updateQuestionAnswer(id, question, answer);
-        this.updateQuestionsAnswersList();
+
     }
 
     async createQuestionAnswer(question, answer) {
@@ -37,6 +40,8 @@ export class ChatbotQAController {
         document.querySelector("main.content").innerHTML = html;
 
         const form = document.getElementById("create-question-answer-form");
+
+
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
 
@@ -61,52 +66,74 @@ export class ChatbotQAController {
             relatedQuestionsForm.elements["parentVraagid"].value = "";
             relatedQuestionsForm.elements["vraagid"].value = "";
         });
+        this.updateRelatedQuestionsList();
+
     }
 
-    async updateRelatedQuestionsList(parentVraagid) {
+    async updateRelatedQuestionsList(parentVraagid = null) {
         const relatedQuestionsList = document.getElementById("related-questions-list");
-        try {
-            const relatedQuestions = await this.chatbotRepository.getRelatedQuestions(parentVraagid);
+        let relatedQuestions;
 
-            if (!Array.isArray(relatedQuestions)) {
-                console.error("Error: relatedQuestions is not an array.");
-                return;
-            }
-
-            relatedQuestionsList.innerHTML = "";
-
-            for (const relatedQuestion of relatedQuestions) {
-                const parentQuestion = await this.chatbotRepository.getQuestionAnswerById(relatedQuestion.parentVraagid);
-                const relatedQuestionDetails = await this.chatbotRepository.getQuestionAnswerById(relatedQuestion.vraagid);
-
-                const item = document.createElement("div");
-                item.innerHTML = `
-            <p>ID: ${relatedQuestion.id}</p>
-            <p>Parent Question ID: ${relatedQuestion.parentVraagid} - ${parentQuestion.question}</p>
-            <p>Related Question ID: ${relatedQuestion.vraagid} - ${relatedQuestionDetails.question}</p>
-            <button data-id="${relatedQuestion.id}" class="delete-related-question-button">Delete</button>
-            <button data-id="${relatedQuestion.id}" class="update-related-question-button">Update</button>
-        `;
-
-                item.querySelector(".update-related-question-button").addEventListener("click", async () => {
-                    const updatedParentVraagid = prompt("Enter the updated parent question ID:", relatedQuestion.parentVraagid);
-                    const updatedVraagid = prompt("Enter the updated related question ID:", relatedQuestion.vraagid);
-                    if (updatedParentVraagid && updatedVraagid) {
-                        await this.chatbotRepository.updateRelatedQuestion(relatedQuestion.id, updatedParentVraagid, updatedVraagid);
-                        this.updateRelatedQuestionsList(parentVraagid);
-                    }
-                });
-
-                item.querySelector(".delete-related-question-button").addEventListener("click", async () => {
-                    await this.deleteRelatedQuestion(relatedQuestion.id, parentVraagid);
-                });
-
-                relatedQuestionsList.appendChild(item);
-            }
-        } catch (error) {
-            console.error("Error updating related questions list:", error);
+        if(parentVraagid){
+            relatedQuestions = await this.chatbotRepository.getRelatedQuestions(parentVraagid);
+        } else {
+            relatedQuestions = await this.chatbotRepository.getAllRelatedQuestions(); // Assuming you have this method
         }
+
+        relatedQuestionsList.innerHTML = "";
+
+        const table = document.createElement("table");
+        table.classList.add("scrollable-table");
+        for (const rq of relatedQuestions) {
+            const item = document.createElement("tr");
+            item.innerHTML = `
+        <td>ID: ${rq.id}</td>
+        <td>Parent Question ID: ${rq.parentVraagid}</td>
+        <td>Related Question ID: ${rq.vraagid}</td>
+        <td><button data-id="${rq.id}" class="delete-related-button">Delete</button></td>
+    `;
+
+            item.querySelector(".delete-related-button").addEventListener("click", async () => {
+                await this.chatbotRepository.deleteRelatedQuestion(rq.id);
+                if(parentVraagid){
+                    this.updateRelatedQuestionsList(parentVraagid);
+                } else {
+                    this.updateRelatedQuestionsList();
+                }
+            });
+
+            table.appendChild(item);
+        }
+        relatedQuestionsList.appendChild(table);
     }
+
+
+    // async updateRelatedQuestionsList(parentVraagid) {
+    //     const relatedQuestionsList = document.getElementById("related-questions-list");
+    //     const relatedQuestions = await this.chatbotRepository.getRelatedQuestions(parentVraagid);
+    //
+    //     relatedQuestionsList.innerHTML = "";
+    //
+    //     const table = document.createElement("table");
+    //     table.classList.add("scrollable-table");
+    //     for (const rq of relatedQuestions) {
+    //         const item = document.createElement("tr");
+    //         item.innerHTML = `
+    //         <td>ID: ${rq.id}</td>
+    //         <td>Parent Question ID: ${rq.parentVraagid}</td>
+    //         <td>Related Question ID: ${rq.vraagid}</td>
+    //         <td><button data-id="${rq.id}" class="delete-related-button">Delete</button></td>
+    //     `;
+    //
+    //         item.querySelector(".delete-related-button").addEventListener("click", async () => {
+    //             await this.chatbotRepository.deleteRelatedQuestion(rq.id);
+    //             this.updateRelatedQuestionsList(parentVraagid);
+    //         });
+    //
+    //         table.appendChild(item);
+    //     }
+    //     relatedQuestionsList.appendChild(table);
+    // }
 
 
     async updateQuestionsAnswersList() {

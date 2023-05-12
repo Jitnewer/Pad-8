@@ -48,9 +48,11 @@ export class ChatbotQARepository {
         const response = await this.#networkManager.doRequest(`${this.#route}/${id}`, "GET");
         return response.data;
     }
-    async getRelatedQuestions(parentVraagid) {
-        const response = await this.#networkManager.doRequest(`/relatedquestions/${parentVraagid}`, "GET");
+
+    async getAllRelatedQuestions() {
+        const response = await this.#networkManager.doRequest(`/relatedquestions`, "GET");
         return response.data || [];
     }
+
 
 }
