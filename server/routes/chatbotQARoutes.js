@@ -14,6 +14,7 @@ class ChatbotQARoute {
         this.#createRelatedQuestion();
         this.#updateRelatedQuestion();
         this.#deleteRelatedQuestion();
+        this.#getAllRelatedQuestions();
 
     }
     #createQuestionAnswer() {
@@ -127,6 +128,20 @@ class ChatbotQARoute {
             }
         });
     }
+    #getAllRelatedQuestions() {
+        this.#app.get("/relatedquestions", async (req, res) => {
+            try {
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "SELECT * FROM relatedquestions"
+                });
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({data});
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+            }
+        });
+    }
+
+
 
     #deleteRelatedQuestion() {
         this.#app.delete("/relatedquestions/:id", async (req, res) => {
