@@ -7,30 +7,29 @@
  * @author Lennard Fonteijn & Pim Meijer
  */
 
-import { SessionManager } from "./framework/utils/sessionManager.js"
-import { NavbarController }  from "./controllers/navbarController.js"
-import { UploadController }  from "./controllers/uploadController.js"
-import { WelcomeController }  from "./controllers/welcomeController.js"
+import {SessionManager} from "./framework/utils/sessionManager.js"
+import {NavbarController} from "./controllers/navbarController.js"
+import {UploadController} from "./controllers/uploadController.js"
+import {WelcomeController} from "./controllers/welcomeController.js"
 import {createappointmentController} from "./controllers/createappointmentController.js";
 import {AdminLoginController} from "./controllers/adminLoginController.js";
 import {TrialLessonController} from "./controllers/TrialLessonController.js";
-import { StudyController } from "./controllers/studyController.js";
-import { AdminDashboardTrialLessonController} from "./controllers/adminDashboardTrialLessonController.js";
+import {StudyController} from "./controllers/studyController.js";
+import {AdminDashboardTrialLessonController} from "./controllers/adminDashboardTrialLessonController.js";
 import {TrialSEController} from "./controllers/trialSEController.js";
 import {ChatbotController} from "./controllers/chatbotController.js";
 import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyController.js";
-import { ChatbotQAController } from "./controllers/ChatbotQAController.js";
+import {ChatbotQAController} from "./controllers/ChatbotQAController.js";
 import {LandingpageController} from "./controllers/landingpageController.js";
-import {mapController} from "./controllers/mapController.js";
-import {adminMapController} from "./controllers/adminMapController.js";
+import {AdminController} from "./controllers/adminController.js";
 
 
 export class App {
-    //we only need one instance of the sessionManager, thus static use here
-    // all classes should use this instance of sessionManager
+//we only need one instance of the sessionManager, thus static use here
+// all classes should use this instance of sessionManager
     static sessionManager = new SessionManager();
 
-    //controller identifiers, add new controllers here
+//controller identifiers, add new controllers here
     static CONTROLLER_NAVBAR = "navbar";
     static CONTROLLER_LOGOUT = "logout";
     static CONTROLLER_WELCOME = "welcome";
@@ -39,25 +38,23 @@ export class App {
     static CONTROLLER_ADMIN_LOGIN = "admin-login"
     static CONTROLLER_ADMIN_DASHBOARD_TrialLesson = "adminDashboard";
     static CONTROLLER_STUDY = "study";
-    static CONTROLLER_TRIALLESSON="trialLesson";
+    static CONTROLLER_TRIALLESSON = "trialLesson";
     static CONTROLLER_CHATBOT = "chatbot";
     static CONTROLLER_ADMIN_DASHBOARD_Study = "adminDashboardStudy";
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
     static CONTROLLER_ADMIN = "admin";
     static CONTROLLER_LANDINGPAGE = "landingpage";
-    static CONTROLLER_MAP = "map";
-    static CONTROLLER_ADMINMAP = "adminMap";
 
 
     constructor() {
-        // Always load the navigation
+// Always load the navigation
         App.loadController(App.CONTROLLER_NAVBAR);
 
         if (App.shouldLoadChatbot()) {
             App.loadController(App.CONTROLLER_CHATBOT);
         }
 
-        // Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
+// Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
         App.loadControllerFromUrl(App.CONTROLLER_WELCOME);
     }
 
@@ -71,6 +68,7 @@ export class App {
     static loadChatbot() {
         new ChatbotController();
     }
+
     static unloadChatbot() {
         const chatboxElement = document.querySelector(".chatbox");
         if (chatboxElement) {
@@ -87,16 +85,15 @@ export class App {
     static loadController(name, controllerData) {
         console.log("loadController: " + name);
 
-        //log the data if data is being passed via controllers
+//log the data if data is being passed via controllers
         if (controllerData && Object.entries(controllerData).length !== 0) {
             console.log(controllerData);
         }
 
 
-
-        //Check for a special controller that shouldn't modify the URL
-        // Check for a special controller that shouldn't modify the URL
-        switch(name) {
+//Check for a special controller that shouldn't modify the URL
+// Check for a special controller that shouldn't modify the URL
+        switch (name) {
             case App.CONTROLLER_NAVBAR:
                 new NavbarController();
                 return true;
@@ -113,53 +110,50 @@ export class App {
         }
 
 
-        //Otherwise, load any of the other controllers
+//Otherwise, load any of the other controllers
         App.setCurrentController(name, controllerData);
-        
+
         switch (name) {
 
 
             case App.CONTROLLER_WELCOME:
                 new WelcomeController();
                 break;
-            case App.CONTROLLER_MAP:
-                App.setCurrentController(name);
-                new mapController();
-                break;
-            case App.CONTROLLER_ADMINMAP:
-                App.setCurrentController(name);
-                new adminMapController();
-                break;
             case App.CONTROLLER_CREATE_APPOINTMENT:
                 App.setCurrentController(name);
-               new createappointmentController();
-               break;
+                new createappointmentController();
+                break;
             case App.CONTROLLER_CHATBOT_QA:
-                // App.setCurrentController(name);
+// App.setCurrentController(name);
                 new ChatbotQAController();
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
                 App.setCurrentController(name);
-                App.isLoggedIn(()=> new AdminDashboardTrialLessonController(), ()=> new AdminLoginController());
+                App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
                 break;
-                case App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson:
-                        App.setCurrentController(name);
-                        App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
-                        App.unloadChatbot();
-                        break;
+            case App.CONTROLLER_ADMIN:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new AdminController(), () => new AdminLoginController());
+                App.unloadChatbot();
+                break;
+            case App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
+                App.unloadChatbot();
+                break;
 
-                    case App.CONTROLLER_ADMIN_DASHBOARD_Study:
-                        App.setCurrentController(name);
-                        App.isLoggedIn(() => new AdminDashboardStudyController(), () => new AdminLoginController());
-                        App.unloadChatbot();
-                        break;
+            case App.CONTROLLER_ADMIN_DASHBOARD_Study:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new AdminDashboardStudyController(), () => new AdminLoginController());
+                App.unloadChatbot();
+                break;
 
             case App.CONTROLLER_STUDY:
-              new StudyController();
+                new StudyController();
                 break;
             case App.CONTROLLER_UPLOAD:
-                // App.isLoggedIn(() => new UploadController(), () => new LoginController());
-                App.isLoggedIn(()=> new UploadController(), ()=> new AdminLoginController());
+// App.isLoggedIn(() => new UploadController(), () => new LoginController());
+                App.isLoggedIn(() => new UploadController(), () => new AdminLoginController());
                 break;
             case App.CONTROLLER_TRIALLESSON:
                 App.setCurrentController(name);
@@ -204,20 +198,19 @@ export class App {
     static getCurrentController() {
         const fullPath = location.hash.slice(1);
 
-        if(!fullPath) {
+        if (!fullPath) {
             return undefined;
         }
 
         const queryStringIndex = fullPath.indexOf("?");
-        
+
         let path;
         let queryString;
 
-        if(queryStringIndex >= 0) {
+        if (queryStringIndex >= 0) {
             path = fullPath.substring(0, queryStringIndex);
             queryString = Object.fromEntries(new URLSearchParams(fullPath.substring(queryStringIndex + 1)));
-        }
-        else {
+        } else {
             path = fullPath;
             queryString = undefined
         }
@@ -233,15 +226,13 @@ export class App {
      * @param name
      */
     static setCurrentController(name, controllerData) {
-        if(App.dontSetCurrentController) {
+        if (App.dontSetCurrentController) {
             return;
         }
 
-        if(controllerData) {
-            history.pushState(undefined, undefined, `#${name}?${new URLSearchParams(controllerData)}`);    
-        }
-        else
-        {
+        if (controllerData) {
+            history.pushState(undefined, undefined, `#${name}?${new URLSearchParams(controllerData)}`);
+        } else {
             history.pushState(undefined, undefined, `#${name}`);
         }
     }
@@ -266,12 +257,12 @@ export class App {
         App.sessionManager.remove("username");
 
         App.loadChatbot();
-        //go to login screen
+//go to login screen
         App.loadController(App.CONTROLLER_ADMIN_LOGIN);
     }
 }
 
-window.addEventListener("hashchange", function() {
+window.addEventListener("hashchange", function () {
     App.dontSetCurrentController = true;
     App.loadControllerFromUrl(App.CONTROLLER_WELCOME);
     App.dontSetCurrentController = false;
