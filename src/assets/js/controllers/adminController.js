@@ -19,6 +19,11 @@ export class AdminController extends Controller {
       App.loadController(App.CONTROLLER_CHATBOT_QA);
     });
 
+    const editplateButton = this.#adminView.querySelector("#editplate");
+    editplateButton.addEventListener("click", () => {
+      App.loadController(App.CONTROLLER_ADMINMAP);
+    });
+
 
     const editproefButton = this.#adminView.querySelector(".editproef");
     editproefButton.addEventListener("click", () => {

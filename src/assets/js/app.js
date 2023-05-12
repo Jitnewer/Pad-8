@@ -22,6 +22,8 @@ import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyCo
 import {ChatbotQAController} from "./controllers/ChatbotQAController.js";
 import {LandingpageController} from "./controllers/landingpageController.js";
 import {AdminController} from "./controllers/adminController.js";
+import {mapController} from "./controllers/mapController.js";
+import {adminMapController} from "./controllers/adminMapController.js";
 
 
 export class App {
@@ -44,6 +46,9 @@ export class App {
     static CONTROLLER_CHATBOT_QA = "ChatbotQA";
     static CONTROLLER_ADMIN = "admin";
     static CONTROLLER_LANDINGPAGE = "landingpage";
+    static CONTROLLER_MAP = "map";
+    static CONTROLLER_ADMINMAP = "adminMap";
+
 
 
     constructor() {
@@ -166,6 +171,11 @@ export class App {
             case App.CONTROLLER_LANDINGPAGE:
                 App.setCurrentController(name);
                 new LandingpageController();
+                break;
+            case App.CONTROLLER_ADMINMAP:
+                App.setCurrentController(name);
+                App.isLoggedIn(() => new adminMapController(), () => new AdminLoginController());
+                App.unloadChatbot();
                 break;
 
             default:
