@@ -1,120 +1,120 @@
-/**/
-.text-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin-right: 10px;
-    margin-left: 30px;
-}
-/**/
-.text {
-    color: #FF7A00;
-    font-size: 16px;
-    margin-bottom: 0;
-}
-/**/
-#trialBody {
-    display: flex;
-    justify-content: center;
-}
-/**/
-.Testlesson-position {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 900px;
-    max-height: 470px;
-    overflow-y: auto;
-}
-/**/
-.Testlesson-position::-webkit-scrollbar {
-    width: 2px;
-}
-/**/
-.Testlesson-position::-webkit-scrollbar-thumb {
-    background-color: #5E5D5DD5;
-}
-/**/
-.Testlesson-container {
-    margin: 10px 20px;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    background-color: #EBEBEB;
-    border-radius: 15px;
-    box-shadow: 0 4px 0 #000000A5;
-}
-/**/
-.apply-Testlesson-name{
-    text-align: center;
-    width: 180px;
-}
-/**/
-.trialLessonH2 {
-    color: #000000;
-    font-family: Inter, serif;
-    font-size: 1.2rem;
-    padding: 3px;
-    margin-bottom: 0;
-}
-/**/
-.Testlesson-content {
-    text-align: left;
-    width: 180px;
-    height: 184px;
-    background: #F7F7F7;
-    border-radius: 0 0 15px 15px;
-}
-/**/
-.trialUl {
-    font-size: 13px;
-    padding-top: 1px;
-}
-/**/
-.trialLi {
-    margin-bottom: 8px;
-}
-/**/
-.trialCountText {
-    text-align: center;
-    font-size: 15px;
-}
+/*!**!*/
+/*.text-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    text-align: center;*/
+/*    margin-right: 10px;*/
+/*    margin-left: 30px;*/
+/*}*/
+/*!**!*/
+/*.text {*/
+/*    color: #FF7A00;*/
+/*    font-size: 16px;*/
+/*    margin-bottom: 0;*/
+/*}*/
+/*!**!*/
+/*#trialBody {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+/*!**!*/
+/*.Testlesson-position {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    width: 900px;*/
+/*    max-height: 470px;*/
+/*    overflow-y: auto;*/
+/*}*/
+/*!**!*/
+/*.Testlesson-position::-webkit-scrollbar {*/
+/*    width: 2px;*/
+/*}*/
+/*!**!*/
+/*.Testlesson-position::-webkit-scrollbar-thumb {*/
+/*    background-color: #5E5D5DD5;*/
+/*}*/
+/*!**!*/
+/*.Testlesson-container {*/
+/*    margin: 10px 20px;*/
+/*    display: flex;*/
+/*    text-align: center;*/
+/*    flex-direction: column;*/
+/*    background-color: #EBEBEB;*/
+/*    border-radius: 15px;*/
+/*    box-shadow: 0 4px 0 #000000A5;*/
+/*}*/
+/*!**!*/
+/*.apply-Testlesson-name{*/
+/*    text-align: center;*/
+/*    width: 180px;*/
+/*}*/
+/*!**!*/
+/*.trialLessonH2 {*/
+/*    color: #000000;*/
+/*    font-family: Inter, serif;*/
+/*    font-size: 1.2rem;*/
+/*    padding: 3px;*/
+/*    margin-bottom: 0;*/
+/*}*/
+/*!**!*/
+/*.Testlesson-content {*/
+/*    text-align: left;*/
+/*    width: 180px;*/
+/*    height: 184px;*/
+/*    background: #F7F7F7;*/
+/*    border-radius: 0 0 15px 15px;*/
+/*}*/
+/*!**!*/
+/*.trialUl {*/
+/*    font-size: 13px;*/
+/*    padding-top: 1px;*/
+/*}*/
+/*!**!*/
+/*.trialLi {*/
+/*    margin-bottom: 8px;*/
+/*}*/
+/*!**!*/
+/*.trialCountText {*/
+/*    text-align: center;*/
+/*    font-size: 15px;*/
+/*}*/
 
-/*for admin page*/
-.Testlesson-name{
-    text-align: center;
-    width: 180px;
-    height: 43px;
-    background: #EBEBEB;
-    border-radius: 15px 15px 0px 0px;
-}
-/**/
-.trialH2{
-    font-family: Inter, serif;
-    font-size: 1.2rem;
-    color: #000000;
-}
+/*!*for admin page*!*/
+/*.Testlesson-name{*/
+/*    text-align: center;*/
+/*    width: 180px;*/
+/*    height: 43px;*/
+/*    background: #EBEBEB;*/
+/*    border-radius: 15px 15px 0px 0px;*/
+/*}*/
+/*!**!*/
+/*.trialH2{*/
+/*    font-family: Inter, serif;*/
+/*    font-size: 1.2rem;*/
+/*    color: #000000;*/
+/*}*/
 
-/* Responsiveness*/
-@media (max-width: 1100px) {
-    .Testlesson-position {
-        width: 700px;
-    }
-}
-/**/
-@media (max-width: 750px){
-    .Testlesson-position {
-        justify-content: normal;
-        width: 450px;
-    }
-}
-/**/
-@media (max-width: 550px) {
-    .Testlesson-position {
-        width: 300px;
-        max-height: 320px;
-        justify-content: center;
-    }
-}
+/*!* Responsiveness*!*/
+/*@media (max-width: 1100px) {*/
+/*    .Testlesson-position {*/
+/*        width: 700px;*/
+/*    }*/
+/*}*/
+/*!**!*/
+/*@media (max-width: 750px){*/
+/*    .Testlesson-position {*/
+/*        justify-content: normal;*/
+/*        width: 450px;*/
+/*    }*/
+/*}*/
+/*!**!*/
+/*@media (max-width: 550px) {*/
+/*    .Testlesson-position {*/
+/*        width: 300px;*/
+/*        max-height: 320px;*/
+/*        justify-content: center;*/
+/*    }*/
+/*}*/
 
