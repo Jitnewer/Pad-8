@@ -176,4 +176,22 @@
     margin-left: 27.5%;;
 }
 
+@media (max-width: 1077px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+
+    #all{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .admin-Testlesson-container{
+        display: flex;
+        margin-bottom: 18%;
+    }
+
+}
+
+
 
