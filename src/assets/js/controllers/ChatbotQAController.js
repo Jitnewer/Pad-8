@@ -1,5 +1,4 @@
-
-import { ChatbotQARepository } from "../repositories/chatbotQARepository.js";
+import {ChatbotQARepository} from "../repositories/chatbotQARepository.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const controller = new ChatbotQAController();
@@ -9,7 +8,6 @@ export class ChatbotQAController {
     constructor() {
         this.chatbotRepository = new ChatbotQARepository();
         this.loadView();
-
 
 
     }
@@ -74,7 +72,7 @@ export class ChatbotQAController {
         const relatedQuestionsList = document.getElementById("related-questions-list");
         let relatedQuestions;
 
-        if(parentVraagid){
+        if (parentVraagid) {
             relatedQuestions = await this.chatbotRepository.getRelatedQuestions(parentVraagid);
         } else {
             relatedQuestions = await this.chatbotRepository.getAllRelatedQuestions(); // Assuming you have this method
@@ -95,7 +93,7 @@ export class ChatbotQAController {
 
             item.querySelector(".delete-related-button").addEventListener("click", async () => {
                 await this.chatbotRepository.deleteRelatedQuestion(rq.id);
-                if(parentVraagid){
+                if (parentVraagid) {
                     this.updateRelatedQuestionsList(parentVraagid);
                 } else {
                     this.updateRelatedQuestionsList();
