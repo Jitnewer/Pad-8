@@ -54,4 +54,6 @@ export class WelcomeController extends Controller{
         document.getElementById("content").appendChild(this.#welcomeView);
 
     }
+    // dit is voor de tag
+
 }

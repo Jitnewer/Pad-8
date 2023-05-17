@@ -116,6 +116,7 @@ export class ChatbotController extends Controller {
                     list.appendChild(listItem);
                 });
 
+// dit is voor de tag
 
 
             });

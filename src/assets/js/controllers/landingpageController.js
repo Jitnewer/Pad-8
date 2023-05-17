@@ -27,4 +27,5 @@ export class LandingpageController extends Controller {
 
         document.getElementById("content").appendChild(this.#landingpageView);
     }
-}
+}// dit is voor de tag
+
