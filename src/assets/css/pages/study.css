@@ -67,7 +67,7 @@ h2 {
 }
 
 #infoText {
-    color: black;
+    color: #FFFFFF;
 }
 
 .contentFilterContainer {
@@ -162,7 +162,7 @@ h2 {
     width: 6.5rem;
     height: 3rem;
     font-size: 1.4rem;
-    color: white;
+    color: #000000;
     background: var(--color-secondary);
     border: var(--border-light);
     border-radius: 0.8rem;
