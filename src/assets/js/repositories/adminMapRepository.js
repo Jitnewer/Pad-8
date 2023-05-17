@@ -9,7 +9,7 @@ export class adminMapRepository {
         this.#networkManager = new NetworkManager();
     }
 
-    saveMap(floor, filename) {
-        return this.#networkManager.doRequest(this.#route, "POST", {floor: floor, filename: filename})
+    saveMap(floor, files, filename) {
+        return this.#networkManager.doRequest(this.#route, "POST", {floor: floor, files: files, filename: filename})
     }
 }

@@ -1,6 +1,6 @@
 import {RoomsExampleRepository} from "../repositories/roomsExampleRepository.js";
 import {App} from "../app.js";
-import {adminMapRepository} from "../repositories/adminMapRepository.js";
+import {mapRepository} from "../repositories/mapRepository.js";
 import {Controller} from "./controller.js";
 
 export class mapController extends Controller{
@@ -9,7 +9,7 @@ export class mapController extends Controller{
 
     constructor() {
         super();
-        this.#mapRepository = new adminMapRepository();
+        this.#mapRepository = new mapRepository();
         this.#setupView();
     }
 

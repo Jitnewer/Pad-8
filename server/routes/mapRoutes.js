@@ -14,8 +14,8 @@ class mapRoutes {
         this.#app.post("/aMap", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "INSERT INTO map (floor, filename) VALUES(? , ?)",
-                    values: [ req.body.floor, req.body.filename]
+                    query: "INSERT INTO map (floor, files, filename) VALUES(? , ? , ?)",
+                    values: [req.body.floor, req.body.files, req.body.filename]
                 });
                 if (data.floor) {
                     res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.floor});

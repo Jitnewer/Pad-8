@@ -200,6 +200,7 @@ export class adminMapController extends Controller {
         event.preventDefault();
 
         let floor = this.#adminMapView.querySelector("#floor").value;
+        let files = this.#adminMapView.querySelector("#file").value;
         let filename = this.#adminMapView.querySelector("#filename").value;
 
 
@@ -210,7 +211,7 @@ export class adminMapController extends Controller {
                 alert("Naam van de opleiding mag niet langer dan 30 karakters zijn")
             } else {
                 if (confirm("weet u zeker dat u het wil toevoegen") === true) {
-                    await this.#adminMapRepository.saveMap(floor, filename);
+                    await this.#adminMapRepository.saveMap(floor, files, filename);
                     location.reload();
                 }
             }

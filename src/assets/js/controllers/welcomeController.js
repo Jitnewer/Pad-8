@@ -29,11 +29,6 @@ export class WelcomeController extends Controller{
         //await for when HTML is loaded
         this.#welcomeView = await super.loadHtmlIntoContent("html_views/welcome.html")
 
-        const plattegrond_img = this.#welcomeView.querySelector(".plattegrond_img");
-        plattegrond_img.addEventListener("click", () => {
-            App.loadController(App.CONTROLLER_CREATE_APPOINTMENT);
-        });
-
         const map_img = this.#welcomeView.querySelector(".map_img");
         map_img.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_MAP);

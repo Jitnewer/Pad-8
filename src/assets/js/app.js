@@ -128,6 +128,10 @@ export class App {
                 App.setCurrentController(name);
                 new createappointmentController();
                 break;
+                case App.CONTROLLER_MAP:
+                App.setCurrentController(name);
+                new mapController();
+                break;
             case App.CONTROLLER_CHATBOT_QA:
 // App.setCurrentController(name);
                 new ChatbotQAController();
