@@ -39,4 +39,6 @@ export class AdminController extends Controller {
 
     document.getElementById("content").appendChild(this.#adminView);
   }
+  // dit is voor de tag
+
 }

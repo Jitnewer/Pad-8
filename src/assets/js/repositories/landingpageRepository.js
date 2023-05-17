@@ -16,3 +16,4 @@ async getSubject(){
   return await this.#networkManager.doRequest(this.#route, "GET");
 }
 }
+// dit is voor de tag

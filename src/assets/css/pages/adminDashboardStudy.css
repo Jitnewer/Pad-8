@@ -21,6 +21,7 @@
     margin-right: 10%;
     padding-top: 1%;
     padding-right: 3%;
+    color: #000000;
 }
 .adminStudyPosition {
     display: flex;
@@ -70,6 +71,7 @@ label {
     height: 10rem;
     border-radius: 10px;
     font-size: 1.2rem;
+    color: #000000;
 }
 .adminDashboardStudyButton {
     display:flex;
