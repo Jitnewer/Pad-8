@@ -25,12 +25,12 @@ export class AdminController extends Controller {
     });
 
 
-    const editproefButton = this.#adminView.querySelector(".editproef");
+    const editproefButton = this.#adminView.querySelector("#editproef");
     editproefButton.addEventListener("click", () => {
       App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson);
     });
 
-    const editstudieButton = this.#adminView.querySelector(".editstudie");
+    const editstudieButton = this.#adminView.querySelector("#editstudie");
     editstudieButton.addEventListener("click", () => {
       App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_Study);
     });

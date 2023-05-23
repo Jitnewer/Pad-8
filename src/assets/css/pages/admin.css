@@ -70,7 +70,7 @@ body {
 }
 
 .editer:hover{
-  color: #e80808;
+ color: #e80808;
 }
 
 .icons {
@@ -105,29 +105,38 @@ body {
  width: 40%;
  height: 50%;
 }
-
+.chatbot-container:hover {
+ cursor: pointer;
+}
 .img-container {
  margin-left: auto;
  margin-right: auto;
  display: block;
- width: 70%;
+ width: 40%;
+ height: 50%;
 }
-
+.img-container:hover {
+ cursor: pointer;
+}
 .proefles-container{
  margin-left: auto;
  margin-right: auto;
  display: block;
- width: 60%;
- height: 89%;
+ width: 40%;
+ height: 50%;
 }
-
+.proefles-container {
+ cursor: pointer;
+}
 .content-container {
  margin: 0 auto 0 auto;
  display: block;
- width: 65%;
- height: 90%;
+ width: 40%;
+ height: 81%;
 }
-
+.content-container {
+ cursor: pointer;
+}
 #footer {
  display: flex;
  clear:both;
@@ -157,6 +166,4 @@ body {
  .content-container {
   height: 57%;
  }
-
 }
-
