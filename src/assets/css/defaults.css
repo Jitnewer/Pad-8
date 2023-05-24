@@ -20,7 +20,10 @@ footer {
 }
 
 body{
-    background-image: url("../../uploads/background2PAD.jpg");
-    background-size: contain;
-
+    background-image: url("../../uploads/imageetesst.jpg");
+    /*background-color: rgba(37,22,122,0.7);*/
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center;
 }
+
