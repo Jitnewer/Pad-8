@@ -5,7 +5,7 @@ export class ChatbotQARepository {
     #route;
 
     constructor() {
-        this.#route = "/chatbot";
+        this.#route = "/chatbot ";
         this.#networkManager = new NetworkManager();
     }
 
@@ -53,6 +53,12 @@ export class ChatbotQARepository {
         const response = await this.#networkManager.doRequest(`/relatedquestions`, "GET");
         return response.data || [];
     }
+
+    async getRelatedQuestions(parentVraagid) {
+        const allRelatedQuestions = await this.getAllRelatedQuestions();
+        return allRelatedQuestions.filter(rq => rq.parentVraagid === parentVraagid);
+    }
+
 
 // dit is voor de tag
 
