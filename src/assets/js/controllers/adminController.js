@@ -14,23 +14,23 @@ export class AdminController extends Controller {
   async #setupView() {
     this.#adminView = await super.loadHtmlIntoContent("html_views/admin.html");
 
-    const editchatbotButton = this.#adminView.querySelector("#editchatbot");
+    const editchatbotButton = this.#adminView.querySelector("#leftcolumn");
     editchatbotButton.addEventListener("click", () => {
       App.loadController(App.CONTROLLER_CHATBOT_QA);
     });
 
-    const editplateButton = this.#adminView.querySelector("#editplate");
+    const editplateButton = this.#adminView.querySelector("#content");
     editplateButton.addEventListener("click", () => {
       App.loadController(App.CONTROLLER_ADMINMAP);
     });
 
 
-    const editproefButton = this.#adminView.querySelector("#editproef");
+    const editproefButton = this.#adminView.querySelector("#rightcolumn");
     editproefButton.addEventListener("click", () => {
       App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson);
     });
 
-    const editstudieButton = this.#adminView.querySelector("#editstudie");
+    const editstudieButton = this.#adminView.querySelector("#contentColumn");
     editstudieButton.addEventListener("click", () => {
       App.loadController(App.CONTROLLER_ADMIN_DASHBOARD_Study);
     });

@@ -51,7 +51,10 @@ body {
  width: 40%;
  /*float:left;*/
 }
-
+#leftcolumn:hover{
+ background: rgba(177, 190, 243, 0.67);
+ cursor: pointer;
+}
 #content {
  /*float:left;*/
  color: #000000;
@@ -64,7 +67,10 @@ body {
  width: 40%;
  display:inline;
 }
-
+#content:hover{
+ background: rgba(177, 190, 243, 0.67);
+ cursor: pointer;
+}
 .editer{
  text-align: center;
 }
@@ -87,6 +93,10 @@ body {
  height:50%;
  width: 40%;
 }
+#rightcolumn:hover{
+ background: rgba(177, 190, 243, 0.67);
+ cursor: pointer;
+}
 
 #contentColumn {
  color: #000000;
@@ -96,6 +106,10 @@ body {
  margin:0 5px 5px 0;
  padding:10px;
  width: 40%;
+}
+#contentColumn:hover{
+ background: rgba(177, 190, 243, 0.67);
+ cursor: pointer;
 }
 
 .chatbot-container {
@@ -148,7 +162,10 @@ body {
  padding:10px;
  text-align: center;
 }
-
+#editstudie{
+ margin-top: 5%;
+ width: 38%;
+}
 @media (max-width: 680px) {
  #wrapper {
   display: flex;
