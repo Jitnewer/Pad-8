@@ -33,6 +33,9 @@ export class ChatbotController extends Controller {
                 // Show loading animation
                 loading.style.display = "block";
 
+                // Hide greeting message
+                document.getElementById("greeting").style.display = "none";
+
                 const data = await this.fetchAnswer(relatedQuestionItem.dataset.questionId);
 
                 // Add a 3-second delay before showing the answer
@@ -94,6 +97,9 @@ export class ChatbotController extends Controller {
                         // Show loading animation
                         loading.style.display = "block";
 
+                        // Hide greeting message
+                        document.getElementById("greeting").style.display = "none";
+
                         const answerData = await this.fetchAnswer(listItem.dataset.questionId);
 
                         // Add a 3-second delay before showing the answer
@@ -107,6 +113,9 @@ export class ChatbotController extends Controller {
                         answerListItem.classList.add('answer');
 
                         // Insert the answer after the clicked question
+                        // listItem.insertMy apologies for the abrupt cutoff of the previous message. Here is the continuation of the JavaScript code:
+
+                            // ```javascript
                         listItem.insertAdjacentElement('afterend', answerListItem);
 
                         // Add related questions underneath the answer
@@ -115,9 +124,6 @@ export class ChatbotController extends Controller {
 
                     list.appendChild(listItem);
                 });
-
-// dit is voor de tag
-
-
             });
-        };}
+        }
+}
