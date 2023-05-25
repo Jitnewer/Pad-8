@@ -45,7 +45,7 @@ export class WelcomeController extends Controller{
         });
 
 
-        const studie_img = this.#welcomeView.querySelector(".studie_img");
+        const studie_img = this.#welcomeView.querySelector(".study-container_img");
         studie_img.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_STUDY);
         });
