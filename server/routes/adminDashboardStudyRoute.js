@@ -2,7 +2,7 @@
  * This class contains ExpressJS routes specific for the study entity
  * this file is automatically loaded in app.js
  *
- * @author Justin Chan
+ * @author Justin Chan & Phillipe Bekkers
  */
 
 class AdminDashboardStudyRoutes {
@@ -17,15 +17,16 @@ class AdminDashboardStudyRoutes {
         this.#getStudy();
         this.#deleteStudy();
         this.#postStudy();
+        this.#getStudyType();
     }
 
     #getStudy() {
         this.#app.get("/adminDashboardStudy", async (req, res) => {
             try {
-                const study = await this.#databaseHelper.handleQuery({
+                const data = await this.#databaseHelper.handleQuery({
                     query: "SELECT * FROM study"
                 })
-                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(study);
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
                 console.log(e);
             }
@@ -64,6 +65,18 @@ class AdminDashboardStudyRoutes {
                 } else {
                     res.status(this.#httpErrorCodes.ROUTE_NOT_FOUND_CODE).json({message: "Study not found."})
                 }
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+            }
+        })
+    }
+    #getStudyType() {
+        this.#app.get("/adminDashboardStudy/:type", async (req, res) => {
+            try {
+                const data = await this.#databaseHelper.handleQuery({
+                    query: "SELECT DISTINCT type FROM study"
+                });
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
             }

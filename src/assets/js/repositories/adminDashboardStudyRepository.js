@@ -1,5 +1,5 @@
 /**
- * @author Justin Chan
+ * @author Justin Chan & Phillipe Bekkers
  */
 
 import {NetworkManager} from "../framework/utils/networkManager.js";
@@ -20,6 +20,11 @@ export class AdminDashboardStudyRepository {
     getAdminDashboardStudyInformation() {
         console.log(this.#route);
         return this.#networkManager.doRequest(this.#route, "GET");
+    }
+
+    getAdminDashboardStudyType() {
+        console.log(this.#route);
+        return this.#networkManager.doRequest("/adminDashboardStudy/:type", "GET");
     }
 
     deleteAdminDashboardStudyInformation(nameStudy) {

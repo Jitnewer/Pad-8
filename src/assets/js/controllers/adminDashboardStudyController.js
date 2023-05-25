@@ -1,7 +1,7 @@
 /**
  * Controller for study screen and interaction
  *
- * @author Justin Chan
+ * @author Justin Chan & Phillipe Bekkers
  */
 import {Controller} from "./controller.js";
 import {AdminDashboardStudyRepository} from "../repositories/adminDashboardStudyRepository.js";
@@ -25,10 +25,12 @@ export class AdminDashboardStudyController extends Controller {
             (event) => this.#saveStudy(event));
 
         this.#createStudy().then(
-            () => this.#loadContent().then(
-                this.#handleFilterButton()
-            )
+            this.#createFilterButton().then(
+            () => this.#loadContent())
         );
+        // this.#createFilterButton().then(
+        //     () => this.#handleFilterButton()
+        // );
     }
 
     async #saveStudy(event) {
@@ -37,7 +39,7 @@ export class AdminDashboardStudyController extends Controller {
         let name = this.#adminDashboardStudyView.querySelector("#inputName").value;
         const information = this.#adminDashboardStudyView.querySelector("#inputInformation").value;
         const error = this.#adminDashboardStudyView.querySelector(".error-study")
-        const type = this.#adminDashboardStudyView.querySelector("#inputType").value;
+        let type = this.#adminDashboardStudyView.querySelector("#inputType").value;
 
         if (name.endsWith(" ")) {
             for (let i = 0; i < name.length; i++) {
@@ -45,7 +47,13 @@ export class AdminDashboardStudyController extends Controller {
             }
         }
 
-        if (name.length === 0 || information.length === 0) {
+        if (type.endsWith(" ")) {
+            for (let i = 0; i < type.length; i++) {
+                type = type.trim();
+            }
+        }
+
+        if (name.length === 0 || information.length === 0 || type.length === 0) {
             error.innerHTML = "Er kan alleen een nieuwe " +
                 "studie toegevoegd worden als alle velden zijn ingevuld";
             return;
@@ -114,6 +122,34 @@ export class AdminDashboardStudyController extends Controller {
         }
     }
 
+    async #createFilterButton() {
+        /**
+         * Get type data
+         */
+        const data = await this.#adminDashboardStudyRepository.getAdminDashboardStudyType();
+        console.log(data)
+
+        /**
+         * Button container
+         */
+        const buttonContainer = this.#adminDashboardStudyView.querySelector(".adminContentSelector");
+
+        const showAllButton = document.createElement("button");
+        showAllButton.classList.add("adminContentButton");
+        showAllButton.textContent = "Alles";
+        buttonContainer.appendChild(showAllButton);
+        showAllButton.addEventListener("click", () => this.#handleFilterButton("all"));
+
+        for (let i = 0; i < data.length; i++) {
+            const button = document.createElement("button");
+            button.classList.add("adminContentButton");
+            button.id = data[i].type;
+            button.textContent = data[i].type;
+            buttonContainer.appendChild(button);
+            button.addEventListener("click", () => this.#handleFilterButton(data[i].type));
+        }
+    }
+
     async #loadContent() {
         /**
          * Get data
@@ -129,44 +165,21 @@ export class AdminDashboardStudyController extends Controller {
         }
     }
 
-    async #handleFilterButton() {
+    async #handleFilterButton(type) {
         /**
          * Get data
          */
         const data = await this.#adminDashboardStudyRepository.getAdminDashboardStudyInformation();
 
-        let all = this.#adminDashboardStudyView.querySelector("#adminContentAllButton");
-        let general = this.#adminDashboardStudyView.querySelector("#adminContentGeneralButton");
-        let study = this.#adminDashboardStudyView.querySelector("#adminContentStudyButton");
+        const content = this.#adminDashboardStudyView.querySelectorAll(".adminStudyContainer");
 
-        const generalData = this.#adminDashboardStudyView.querySelectorAll(".Algemeen");
-        const studyData = this.#adminDashboardStudyView.querySelectorAll(".Opleiding");
-        const content = this.#adminDashboardStudyView.querySelectorAll(".adminStudyContainer")
-        all.addEventListener("click", () => {
-            for (let i = 0; i < content.length; i++) {
+        for (let i = 0; i < content.length; i++) {
+            if (type === "all" || data[i].type === type) {
                 content[i].style.display = "flex";
+            } else {
+                content[i].style.display = "none";
             }
-        });
-        general.addEventListener("click", () => {
-            for (let i = 0; i < generalData.length; i++) {
-                const a = data[i].type;
-                generalData[i].style.display = "flex";
-                console.log(a);
-            }
-            for (let i = 0; i < studyData.length; i++) {
-                studyData[i].style.display = "none";
-            }
-        });
-        study.addEventListener("click", () => {
-            for (let i = 0; i < studyData.length; i++) {
-                const a = data[i].type;
-                studyData[i].style.display = "flex";
-                console.log(a);
-            }
-            for (let i = 0; i < generalData.length; i++) {
-                generalData[i].style.display = "none";
-            }
-        });
+        }
     }
 
     async #handleClickDeleteButton(nameStudy) {

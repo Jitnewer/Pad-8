@@ -17,4 +17,8 @@ export class StudyRepository {
         console.log(this.#route);
         return this.#networkManager.doRequest(this.#route, "GET");
     }
+    getType() {
+        console.log(this.#route);
+        return this.#networkManager.doRequest("/study/:type", "GET");
+    }
 }
