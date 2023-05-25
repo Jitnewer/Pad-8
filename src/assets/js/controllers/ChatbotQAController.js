@@ -145,8 +145,8 @@ export class ChatbotQAController {
         <td>referece ID: ${qa.id}</td>
         <td>Question: ${qa.question}</td>
         <td>Answer: ${qa.answer}</td>
-        <td><button data-id="${qa.id}" class="delete-button">Delete</button></td>
-        <td><button data-id="${qa.id}" class="update-button">Update</button></td>
+        <td><button data-id="${qa.id}" class="delete-button">Verwijderen</button></td>
+        <td><button data-id="${qa.id}" class="update-button">Aanpassen</button></td>
     `;
 
             item.querySelector(".delete-button").addEventListener("click", async () => {
@@ -156,8 +156,8 @@ export class ChatbotQAController {
 
             item.querySelector(".update-button").addEventListener("click", async () => {
 
-                const updatedQuestion = prompt("Enter the updated question:", qa.question);
-                const updatedAnswer = prompt("Enter the updated answer:", qa.answer);
+                const updatedQuestion = prompt("Voer de bijgewerkte vraag in:", qa.question);
+                const updatedAnswer = prompt("Voer het bijgewerkte antwoord in:", qa.answer);
                 if (updatedQuestion && updatedAnswer) {
                     await this.updateQuestionAnswer(qa.id, updatedQuestion, updatedAnswer);
                 }

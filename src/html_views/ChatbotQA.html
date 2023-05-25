@@ -1,37 +1,26 @@
 
 <div class="chatcontent">
   <div class="qa-container">
-    <h1>Chatbot Questions and Answers</h1>
+    <h3>Voeg een Vraag met Antwoord hier onder voor het Chatbot! , het is ook mogelijk om het te verwijderen/aanpassen</h3>
     <form id="create-question-answer-form">
-      <label for="question">Question:</label>
+      <label for="question">Vraag:</label>
       <input type="text" id="question" name="question" required>
 
-      <label for="answer">Answer:</label>
+      <label for="answer">Antwoordt:</label>
       <input type="text" id="answer" name="answer" required>
 
-      <button class="buttonchatqa" type="submit">Add Question and Answer</button>
+      <button class="buttonchatqa" type="submit">Voeg toe </button>
     </form>
     <div id="questions-answers-list"></div>
   </div>
 
-<!--  <div class="related-qa-container">-->
-<!--    <h1>Related Questions</h1>-->
-<!--    <form id="create-related-question-form">-->
-<!--      <label for="parentVraagid">Parent Question ID:</label>-->
-<!--      <input type="text" id="parentVraagid" name="parentVraagid" required>-->
 
-<!--      <label for="vraagid">Related Question ID:</label>-->
-<!--      <input type="text" id="vraagid" name="vraagid" required>-->
-
-<!--      <button class="buttonchatqa" type="submit">Add Related Question</button>-->
-<!--    </form>-->
-<!--    <div class="related-questions-list" id="related-questions-list"></div>-->
-<!--  </div>-->
-<!--</div>-->
   <form id="create-related-question-form">
+    <h6>met deze dropdown is het mogelijk een verbinding te maken met meerdere vragen en antwoorden</h6>
     <select id="parentVraagid"></select>
     <select id="vraagid"></select>
     <input type="submit" value="Submit">
   </form>
 
 
+</div>
