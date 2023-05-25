@@ -142,9 +142,9 @@ export class ChatbotQAController {
         for (const qa of questionsAnswers) {
             const item = document.createElement("tr");
             item.innerHTML = `
-        <td>referece ID: ${qa.id}</td>
-        <td>Question: ${qa.question}</td>
-        <td>Answer: ${qa.answer}</td>
+        <td>Nr: ${qa.id}</td>
+        <td>Vraag: ${qa.question}</td>
+        <td>Antwoord: ${qa.answer}</td>
         <td><button data-id="${qa.id}" class="delete-button">Verwijderen</button></td>
         <td><button data-id="${qa.id}" class="update-button">Aanpassen</button></td>
     `;

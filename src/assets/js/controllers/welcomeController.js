@@ -34,10 +34,16 @@ export class WelcomeController extends Controller{
             App.loadController(App.CONTROLLER_MAP);
         });
 
+        const afspraak_img = this.#welcomeView.querySelector(".afspraak_img");
+        afspraak_img.addEventListener("click", () => {
+            App.loadController(App.CONTROLLER_CREATE_APPOINTMENT);
+        });
+
         const proef_img = this.#welcomeView.querySelector(".proefles-container");
         proef_img.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_TRIALLESSON);
         });
+
 
         const studie_img = this.#welcomeView.querySelector(".studie_img");
         studie_img.addEventListener("click", () => {
