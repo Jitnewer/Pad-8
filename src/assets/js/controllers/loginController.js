@@ -48,6 +48,14 @@ export class LoginController extends Controller{
 
             //let the session manager know we are logged in by setting the username, never set the password in localstorage
             App.sessionManager.set("username", user.username);
+
+            // Refresh the NavbarController to reflect the logged in status
+            // Assumption: 'navbar' is the controller name for NavbarController in your App
+            App.loadController('navbar');
+
+            // Dispatch the custom event after successful login
+            document.dispatchEvent(new CustomEvent('userLoggedIn'));
+
             App.loadController(App.CONTROLLER_WELCOME);
         } catch(error) {
             //if unauthorized error code, show error message to the user
@@ -58,4 +66,6 @@ export class LoginController extends Controller{
             }
         }
     }
+
+
 }

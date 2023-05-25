@@ -6,48 +6,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-<!--                <li class="nav-item active">-->
-<!--                    <a class="nav-link" href="#" data-controller="welcome">Welcome</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="upload" href="#">Upload</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="appointments" href="#">Create appointments</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="login" href="#">Login</a>-->
-<!--                </li>-->
-                <li class="nav-item">
-                    <a class="nav-link" data-controller="logout" href="#">Admin</a>
+                <li id="admin-login-link" class="nav-item">
+                    <a class="nav-link" data-controller="admin-login" href="#">Admin login</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="admin-login" href="#">Admin</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="map" href="#">Map</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="adminDashboard" href="#">adminDashboard</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="adminDashboardStudy" href="#">adminDashboardStudy</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="adminMap" href="#">Admin Map</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="study" href="#">Study</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="trialLesson" href="#">TrialLesson</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="ChatbotQA" href="#">chatbotQA</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" data-controller="landingpage" href="#">landingpage</a>-->
-<!--                </li>-->
+
+                <!-- The extra navbar item. Initially hidden, will be shown if user is logged in -->
+                <li id="admin-dashboard-link" class="nav-item" style="display: none;">
+                    <a class="nav-link" data-controller="admin" href="#">Admin Dashboard</a>
+                </li>
+
+                <li id="admin-logout-link" class="nav-item" style="display: none;">
+                    <a class="nav-link" data-controller="logout" href="#">Admin logout</a>
+                </li>
+
+
             </ul>
         </div>
     </div>

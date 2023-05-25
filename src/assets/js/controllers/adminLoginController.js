@@ -1,6 +1,6 @@
 /**
  * Controller to get view and set button events
- * @Author: Jit Newer
+ * @Author: Jit Newer & Kevin
  */
 import {Controller} from "./controller.js";
 import {AdminLoginRepository} from "../repositories/adminLoginRepository.js";
@@ -59,6 +59,10 @@ export class AdminLoginController extends Controller {
         try {
             const user = await this.#adminLoginRepository.loginAdmin(email, password);
             App.sessionManager.set("username", user.username);
+
+            // Dispatch the 'userLoggedIn' event
+            document.dispatchEvent(new CustomEvent('userLoggedIn'));
+
             App.loadController(App.CONTROLLER_ADMIN);
         } catch (e) {
             errorMessageElement.innerHTML = e.reason;

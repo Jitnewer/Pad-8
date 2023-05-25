@@ -114,8 +114,6 @@ export class ChatbotController extends Controller {
 
                         // Insert the answer after the clicked question
                         // listItem.insertMy apologies for the abrupt cutoff of the previous message. Here is the continuation of the JavaScript code:
-
-                            // ```javascript
                         listItem.insertAdjacentElement('afterend', answerListItem);
 
                         // Add related questions underneath the answer

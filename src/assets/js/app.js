@@ -13,6 +13,7 @@ import {UploadController} from "./controllers/uploadController.js"
 import {WelcomeController} from "./controllers/welcomeController.js"
 import {createappointmentController} from "./controllers/createappointmentController.js";
 import {AdminLoginController} from "./controllers/adminLoginController.js";
+import {LogoutController} from "./controllers/LogoutController.js";
 import {TrialLessonController} from "./controllers/TrialLessonController.js";
 import {StudyController} from "./controllers/studyController.js";
 import {AdminDashboardTrialLessonController} from "./controllers/adminDashboardTrialLessonController.js";
@@ -34,6 +35,7 @@ export class App {
 //controller identifiers, add new controllers here
     static CONTROLLER_NAVBAR = "navbar";
     static CONTROLLER_LOGOUT = "logout";
+
     static CONTROLLER_WELCOME = "welcome";
     static CONTROLLER_UPLOAD = "upload";
     static CONTROLLER_CREATE_APPOINTMENT = "appointments";
@@ -138,7 +140,7 @@ export class App {
                 break;
             case App.CONTROLLER_ADMIN_LOGIN:
                 App.setCurrentController(name);
-                App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
+                App.isLoggedIn(() => new AdminLoginController(), () => new AdminLoginController());
                 break;
             case App.CONTROLLER_ADMIN:
                 App.setCurrentController(name);
