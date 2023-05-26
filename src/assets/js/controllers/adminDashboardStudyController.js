@@ -28,9 +28,6 @@ export class AdminDashboardStudyController extends Controller {
             this.#createFilterButton().then(
             () => this.#loadContent())
         );
-        // this.#createFilterButton().then(
-        //     () => this.#handleFilterButton()
-        // );
     }
 
     async #saveStudy(event) {
@@ -78,7 +75,6 @@ export class AdminDashboardStudyController extends Controller {
          * Get study data
          */
         let data = await this.#adminDashboardStudyRepository.getAdminDashboardStudyInformation();
-        console.log(data);
 
         /**
          * Study container
@@ -127,7 +123,6 @@ export class AdminDashboardStudyController extends Controller {
          * Get type data
          */
         const data = await this.#adminDashboardStudyRepository.getAdminDashboardStudyType();
-        console.log(data)
 
         /**
          * Button container
