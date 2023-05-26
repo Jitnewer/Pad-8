@@ -12,4 +12,8 @@ export class adminMapRepository {
     saveMap(floor, files, filename) {
         return this.#networkManager.doRequest(this.#route, "POST", {floor: floor, files: files, filename: filename})
     }
+
+    // getMap(floor, filename) {
+    //     return this.#networkManager.doRequest(this.#route, "GET", {floor: floor, files: files, filename: filename})
+    // }
 }

@@ -1,3 +1,11 @@
+body {
+    overflow: auto;
+}
+
+.content {
+    overflow-y: hidden;
+    /*max-height: 100vh;*/
+}
 .adminContentPage {
     display: flex;
     width: 100%;
@@ -5,10 +13,12 @@
     flex-direction: column;
     /*overflow: scroll;*/
 }
+
 .adminContentContainer {
     display: flex;
     flex-direction: row;
 }
+
 .adminDashboardStudyPosition {
     display: flex;
     flex-direction: column;
@@ -23,6 +33,7 @@
     padding-right: 3%;
     color: #000000;
 }
+
 .adminStudyPosition {
     display: flex;
     flex-wrap: wrap;
@@ -31,24 +42,29 @@
     max-height: 510px;
     margin: 2% 3% 3% auto;
 }
+
 .input-opleiding {
     /*align-self: center;*/
     margin-top: 2.5%;
 }
-.input-study-info{
+
+.input-study-info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
 }
+
 label {
     font-family: 'Inter';
     margin-left: 1%;
     height: fit-content;
 }
+
 .informationLabel {
     /*margin-left: 10%;*/
 }
+
 .input-info-textarea {
     margin-top: 5%;
     align-self: center;
@@ -61,6 +77,7 @@ label {
     color: red;
     font-size: 12px;
 }
+
 .adminStudyContainer {
     display: flex;
     background: white;
@@ -73,12 +90,13 @@ label {
     font-size: 1.2rem;
     color: #000000;
 }
+
 .adminDashboardStudyButton {
-    display:flex;
+    display: flex;
     flex-direction: row;
     /*margin: 10px 100px auto 100px;*/
-    margin: 5% 40% auto 39%;
-    border:none;
+    margin: 5% 40% auto 41%;
+    border: none;
     border-radius: 10px;
     color: #313030;
 }
@@ -90,7 +108,9 @@ label {
     width: 300px;
     height: 490px;
     margin-left: 10%;
+    /*overflow-y: auto;*/
 }
+
 .Toevoegen {
     margin-top: 5%;
     align-self: center;
@@ -100,16 +120,20 @@ label {
     font-size: 18px;
     font-family: 'Inter';
 }
+
 p {
     font-family: 'Inter';
 }
+
 .ContentType {
     margin-top: 2.5%;
 }
+
 .adminContentSelector {
     display: flex;
     margin: 2.5% auto auto 30%;
 }
+
 .adminContentButton {
     border-radius: 10px;
     display: flex;
@@ -129,45 +153,50 @@ p {
 
 @media (max-width: 680px) {
     body {
-        overflow-y: scroll;
+        overflow-y: auto;
     }
     .adminContentContainer {
         display: flex;
         flex-direction: column;
         margin-left: -5%;
         margin-right: 5%;
+        height: 100%;
+        overflow-y: scroll;
     }
-    .adminStudyPosistion {
+
+    .adminStudyPosition {
         display: flex;
-        /*flex-wrap: nowrap;*/
         justify-content: center;
-        /*margin: 0 auto 0 auto;*/
-        /*float: right;*/
         width: auto;
+        margin-left: 13%;
     }
-    /*.adminStudyContainer {*/
-    /*    width: 20%;*/
-    /*}*/
+
     .adminDashboardStudyButton {
-        margin: 0 35% 0 35%;
+        margin: 0 41% 0 41%;
     }
+
     .adminDashboardStudyPosition {
         display: flex;
         width: 55%;
         justify-content: center;
         margin: -3% 0 0 27.5%;
-        overflow-y: auto;
-        /*height: 0%;*/
     }
-    .adminContentPage {
-        overflow-y: scroll;
-    }
+
     .trashcan-icon {
         margin: 0% 0 0 2.5%;
     }
+
     .adminStudyContainer {
-        width: 20%;
-        height: 8rem;
+        width: 40%;
+        height: 10rem;
         margin-top: 2%;
+    }
+    .content {
+        overflow-y: auto;
+        max-height: 90vh;
+    }
+    .admin-Study-add-container {
+        /*flex-wrap: wrap;*/
+        /*overflow: auto;*/
     }
 }
