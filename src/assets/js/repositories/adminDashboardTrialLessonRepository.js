@@ -23,4 +23,13 @@ export class AdminDashboardTrialLessonRepository {
         const route = `${this.#route}/updateClicked/${id}`;
         return this.#networkManager.doRequest(route, "PUT");
     }
+
+    /**
+     * @author Jit Newer
+     * @param id triallesson id
+     * Delete request to delete participant
+     */
+    deleteParticipants(id) {
+        return this.#networkManager.doRequest(`${this.#route}/deleteParticipant/${id}`, "DELETE");
+    }
 }

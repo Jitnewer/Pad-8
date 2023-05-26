@@ -22,12 +22,12 @@ class trialSERoute {
             const prefix = req.body.prefix;
 
             try {
-                const data = await this.#databaseHelper.handleQuery({
+               await this.#databaseHelper.handleQuery({
                     query: "INSERT INTO participant (firstname, lastname, prefix, email, testlesson_id) value (?, ?, ?, ?, ?)",
                     values: [firstname, lastname, prefix, email, id]
                 })
 
-                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
+                res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({message: "Je bent ingescheven bij de proefles."});
             } catch (e) {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
             }

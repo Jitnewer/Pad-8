@@ -14,6 +14,7 @@ class adminDashboardTrialLessonRoute {
         this.#saveTestlesson();
         this.#deleteTestlesson();
         this.#updateClickedCount();
+        this.#delteParticipant();
     }
 // this enables the admin to save the fild in form in order to make a triallesson
     #saveTestlesson() {
@@ -38,12 +39,6 @@ class adminDashboardTrialLessonRoute {
                 // Delete trial lesson
                 const data = await this.#databaseHelper.handleQuery({
                     query: "DELETE FROM testlesson WHERE id = ?",
-                    values: [req.params.id]
-                });
-
-                // Delete all participants from database table where id equals trial lesson id
-                await this.#databaseHelper.handleQuery({
-                    query: "DELETE FROM participant WHERE id = ?",
                     values: [req.params.id]
                 });
 
@@ -75,6 +70,25 @@ class adminDashboardTrialLessonRoute {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
             }
         });
+    }
+
+    /**
+     * @author Jit Newer
+     * Deletes participants from DB when triallesson is deleted
+     */
+    #delteParticipant() {
+        this.#app.delete("/adminDashboard/deleteParticipant/:id", async (req, res) => {
+                try {
+                    // Delete all participants from database table where id equals trial lesson id
+                    await this.#databaseHelper.handleQuery({
+                        query: "DELETE FROM participant WHERE id = ?",
+                        values: [req.params.id]
+                    });
+                } catch (e) {
+                    res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+                }
+            }
+        )
     }
 }
 module.exports = adminDashboardTrialLessonRoute;

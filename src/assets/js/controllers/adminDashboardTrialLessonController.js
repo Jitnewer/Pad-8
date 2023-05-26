@@ -182,6 +182,8 @@ export class AdminDashboardTrialLessonController extends Controller {
         try {
             if(confirm("weet u zeker dat je het wilt verwijderen?") === true) {
                 await this.#adminDashboardTrialLessonRepository.deleteTestlesson(id);
+                await this.#adminDashboardTrialLessonRepository.deleteParticipants(id);
+
                 location.reload();
             }
         }
