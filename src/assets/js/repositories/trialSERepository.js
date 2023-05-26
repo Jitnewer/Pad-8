@@ -30,11 +30,4 @@ export class TrialSERepository {
 
         return this.#networkManager.doRequest(`${this.#trialSEEmail}`, "POST", emailData);
     }
-
-    /**
-     * @returns A list of trial lesson participants
-     */
-    getParticipants() {
-        return this.#networkManager.doRequest(`${this.#participantRoute}`, "GET");
-    }
 }

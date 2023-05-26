@@ -13,7 +13,7 @@ export class TrialLessonRepository {
     }
 
     /**
-     * Request to database to get all trial lessons
+     * Get request to get all trial lessons
      * @returns {Promise<*>}
      */
     getTrialLessons() {

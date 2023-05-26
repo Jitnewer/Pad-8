@@ -30,6 +30,7 @@ export class ChatbotQAController {
         this.updateRelatedQuestionsList(parentVraagid);
     }
 
+
     async loadView() {
         const view = await fetch("html_views/ChatbotQA.html");
         const html = await view.text();
@@ -149,10 +150,18 @@ export class ChatbotQAController {
         <td><button data-id="${qa.id}" class="update-button">Aanpassen</button></td>
     `;
 
-            item.querySelector(".delete-button").addEventListener("click", async () => {
-                await this.chatbotRepository.deleteQuestionAnswer(qa.id);
-                this.updateQuestionsAnswersList();
-            });
+
+                item.querySelector(".delete-button").addEventListener("click", async () => {
+                    // Delete related questions first
+                    const relatedQuestions = await this.chatbotRepository.getRelatedQuestions(qa.id);
+                    for (const rq of relatedQuestions) {
+                        await this.chatbotRepository.deleteRelatedQuestion(rq.id);
+                    }
+                    // Then delete the question answer
+                    await this.chatbotRepository.deleteQuestionAnswer(qa.id);
+                    this.updateQuestionsAnswersList();
+                });
+
 
             item.querySelector(".update-button").addEventListener("click", async () => {
 

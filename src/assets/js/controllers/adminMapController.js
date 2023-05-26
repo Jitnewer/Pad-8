@@ -199,15 +199,15 @@ export class adminMapController extends Controller {
     async #saveMap(event) {
         event.preventDefault();
 
-        let floor = this.#adminMapView.querySelector("#floor").value;
-        let files = this.#adminMapView.querySelector("#file").value;
-        let filename = this.#adminMapView.querySelector("#filename").value;
+        const floor = this.#adminMapView.querySelector("#floor").value;
+        const filename = this.#adminMapView.querySelector("#filename").value;
+        const files = this.#adminMapView.querySelector('#file').value;
 
 
         try {
-            if (floor == null || floor === "") {
-                alert("Opleiding mag niet leeg zijn");
-            } else if (floor.length > 30) {
+            if (floor == null || floor === "" || filename == null || filename == "") {
+                alert("Opleiding en verdieping mag niet leeg zijn");
+            } else if (filename.length > 30) {
                 alert("Naam van de opleiding mag niet langer dan 30 karakters zijn")
             } else {
                 if (confirm("weet u zeker dat u het wil toevoegen") === true) {
