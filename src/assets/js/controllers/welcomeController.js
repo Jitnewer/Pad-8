@@ -39,7 +39,7 @@ export class WelcomeController extends Controller{
             App.loadController(App.CONTROLLER_CREATE_APPOINTMENT);
         });
 
-        const proef_img = this.#welcomeView.querySelector(".proefles-container");
+        const proef_img = this.#welcomeView.querySelector(".welcome-proefles-container");
         proef_img.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_TRIALLESSON);
         });

@@ -7,6 +7,7 @@ class trialSERoute {
     #app;
     #databaseHelper = require("../framework/utils/databaseHelper.js");
     #httpErrorCodes = require("../framework/utils/httpErrorCodes.js");
+    sendTrialEmail = require("../trialSEEmail.js");
 
     constructor(app) {
         this.#app = app;
@@ -26,12 +27,17 @@ class trialSERoute {
                     query: "INSERT INTO participant (firstname, lastname, prefix, email, testlesson_id) value (?, ?, ?, ?, ?)",
                     values: [firstname, lastname, prefix, email, id]
                 })
-
+                await this.sendTrialEmail(email);
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
             }
-        })
+        });
+
+        this.#app.get("/trialSELesson/mail", async (req, res) => {
+
+            res.status(200);
+        });
     }
 }
 module.exports = trialSERoute;

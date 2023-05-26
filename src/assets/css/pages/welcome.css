@@ -51,13 +51,17 @@ body {
     text-align: center;
 }
 .proef_img{
-    margin-top: -8%;
+    margin: 1% 0% 0% 0%;
     text-align: center;
-    padding: 0 0 7% 0;
+    padding: 0% 0% 9% 0%;
+    width: 71%;
+    height: 86%;
 }
 
-study_img{
-    margin-top: 2%;
+.study_img{
+    margin: 0;
+    text-align: center;
+    width: 72%;
 }
 .img-container1{
     width: 70%;
@@ -76,7 +80,7 @@ study_img{
     cursor: pointer;
     border: 2px solid #7142d9;
 }
-.studys-container:hover {
+.study-container_img:hover {
      cursor: pointer;
      border: 2px solid #7142d9;
  }
@@ -86,8 +90,34 @@ study_img{
      text-align: center;
  }
 #study_img{
-    margin:0;
+    width: 66%;
+    text-align: center;
+    Margin-top: 8%;
 }
+.imge-container{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 86%;
+    margin-top: 10%;
+}
+
 .study-container_img{
     margin:0;
+}
+.studys-container{
+    width: 95%;
+    height: 85%;
+    text-align: center;
+    margin: 2% 2% -5% 0%;
+
+}
+.welcome-proefles-container{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 84%;
+    height: 95%;
+    margin-top: 2%;
+    padding: 0% 0% 0% 0%;
 }
