@@ -1,3 +1,11 @@
+body {
+    overflow: auto;
+}
+
+.content {
+    overflow-y: hidden;
+    /*max-height: 100vh;*/
+}
 .adminContentPage {
     display: flex;
     width: 100%;
@@ -144,6 +152,9 @@ p {
 /*}*/
 
 @media (max-width: 680px) {
+    body {
+        overflow-y: auto;
+    }
     .adminContentContainer {
         display: flex;
         flex-direction: column;
@@ -153,14 +164,15 @@ p {
         overflow-y: scroll;
     }
 
-    .adminStudyPosistion {
+    .adminStudyPosition {
         display: flex;
         justify-content: center;
         width: auto;
+        margin-left: 13%;
     }
 
     .adminDashboardStudyButton {
-        margin: 0 39% 0 37%;
+        margin: 0 41% 0 41%;
     }
 
     .adminDashboardStudyPosition {
@@ -179,7 +191,10 @@ p {
         height: 10rem;
         margin-top: 2%;
     }
-
+    .content {
+        overflow-y: auto;
+        max-height: 90vh;
+    }
     .admin-Study-add-container {
         /*flex-wrap: wrap;*/
         /*overflow: auto;*/
