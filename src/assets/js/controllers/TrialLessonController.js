@@ -233,7 +233,6 @@ export class TrialLessonController extends Controller {
         }
         // const subject = "Trial Lesson Application";
         // const question = "Thank you for applying to the trial lesson. We will get back to you soon.";
-        await this.#trialSERepository.sendTrialLessonEmail(mail.value);
     }
 
 }

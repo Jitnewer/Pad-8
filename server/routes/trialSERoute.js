@@ -27,7 +27,8 @@ class trialSERoute {
                     query: "INSERT INTO participant (firstname, lastname, prefix, email, testlesson_id) value (?, ?, ?, ?, ?)",
                     values: [firstname, lastname, prefix, email, id]
                 })
-                await this.sendTrialEmail(email);
+                // sends the email in which it thanks the applied user.
+                await this.sendTrialEmail(firstname,lastname,prefix,email);
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(data);
             } catch (e) {
                 res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});

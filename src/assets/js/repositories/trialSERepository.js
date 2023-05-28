@@ -23,11 +23,4 @@ export class TrialSERepository {
     /**
      * Send trial lesson email
      */
-   sendTrialLessonEmail(email) {
-        const emailData = {
-            email: email,
-        };
-
-        return this.#networkManager.doRequest(`${this.#trialSEEmail}`, "POST", emailData);
-    }
 }

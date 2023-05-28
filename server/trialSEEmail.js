@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-async function sendTrialLessonEmail(email) {
+async function sendTrialLessonEmail(firstname,lastname,prefix,email) {
     const emailData = {
         from: {
             name: "Group8",
@@ -8,12 +8,16 @@ async function sendTrialLessonEmail(email) {
         },
         to: [
             {
-                name: "infinity",
+                name: firstname,
                 address: email,
             },
         ],
         subject: "Proefles",
-        html:"Email",
+        html:"Beste " + firstname + " " + prefix + " " + lastname + "," +
+            "<br>Bedankt voor je aanmelding voor een proefles bij HVA!" +
+            "<br>We kijken uit naar je komst!" +
+            "<br><br>Groetjes," +
+            "<br>Hogeschool van Amsterdam",
     };
 
     try {
