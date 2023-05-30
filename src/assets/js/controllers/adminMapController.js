@@ -14,23 +14,23 @@ export class adminMapController extends Controller {
         this.#setupView();
     }
 
-    async #setupView() {
 
+    async #setupView() {
         this.#adminMapView = await super.loadHtmlIntoContent("html_views/admin_Map.html");
         let uploadButton = this.#adminMapView.querySelector(".upload");
         if (uploadButton) {
             uploadButton.addEventListener("click", (event) => this.#saveMap(event));
-
-            const floors = this.#adminMapRepository.getMap();
-        const listGroup = this.#adminMapView.querySelector(".list-group");
-        for (const map of floors) {
-            const a = document.createElement("a");
-            a.className = "list-group-item list-group-item-action";
-            a.dataset.floor = map.floor;
-            a.dataset.filename = map.filename;
-            listGroup.appendChild(a);
         }
 
+        const floors = await this.#networkManager.doRequest("/adminMap", "GET");
+        const listGroup = this.#adminMapView.querySelector(".list-group");
+        for (const floor of floors) {
+            const a = document.createElement("a");
+            a.className = "list-group-item list-group-item-action";
+            a.dataset.id = floor.id;
+            a.dataset.floor = floor.floor;
+            a.dataset.image = floor.image;
+            listGroup.appendChild(a);
         }
     }
 
