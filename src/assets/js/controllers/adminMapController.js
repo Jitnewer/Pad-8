@@ -1,3 +1,65 @@
+import {Controller} from "./controller.js";
+import {adminMapRepository} from "../repositories/adminMapRepository.js";
+import {NetworkManager} from "../framework/utils/networkManager.js";
+
+export class adminMapController extends Controller {
+    #adminMapView;
+    #adminMapRepository;
+    #networkManager
+
+    constructor() {
+        super();
+        this.#adminMapRepository = new adminMapRepository();
+        this.#networkManager = new NetworkManager();
+        this.#setupView();
+    }
+
+    async #setupView() {
+
+        this.#adminMapView = await super.loadHtmlIntoContent("html_views/admin_Map.html");
+        let uploadButton = this.#adminMapView.querySelector(".upload");
+        if (uploadButton) {
+            uploadButton.addEventListener("click", (event) => this.#saveMap(event));
+
+            const floors = this.#adminMapRepository.getMap();
+        const listGroup = this.#adminMapView.querySelector(".list-group");
+        for (const map of floors) {
+            const a = document.createElement("a");
+            a.className = "list-group-item list-group-item-action";
+            a.dataset.floor = map.floor;
+            a.dataset.filename = map.filename;
+            listGroup.appendChild(a);
+        }
+
+        }
+    }
+
+
+    async #saveMap(event) {
+        event.preventDefault();
+
+        const floor = this.#adminMapView.querySelector("#floor").value;
+        const filename = this.#adminMapView.querySelector("#filename").value;
+        const files = this.#adminMapView.querySelector('#file').value;
+
+
+        try {
+            if (floor == null || floor === "" || filename == null || filename == "") {
+                alert("Opleiding en verdieping mag niet leeg zijn");
+            } else if (filename.length > 35) {
+                alert("Naam van de opleiding mag niet langer dan 35 karakters zijn")
+            } else {
+                if (confirm("weet u zeker dat u het wil toevoegen") === true) {
+                    await this.#adminMapRepository.saveMap(floor, files, filename);
+                    location.reload();
+                }
+            }
+        } catch (e) {
+            alert("er ging iets mis!");
+        }
+    }
+}
+
 // import {RoomsExampleRepository} from "../repositories/roomsExampleRepository.js";
 // import {App} from "../app.js";
 // import {Controller} from "./controller.js";
@@ -173,50 +235,3 @@
 //         this.#adminMapView.querySelector("#preview-image").style.display = "revert";
 //     }
 // }
-
-import {Controller} from "./controller.js";
-import {adminMapRepository} from "../repositories/adminMapRepository.js";
-
-export class adminMapController extends Controller {
-    #adminMapView;
-    #adminMapRepository;
-
-    constructor() {
-        super();
-        this.#adminMapRepository = new adminMapRepository();
-        this.#setupView();
-    }
-
-    async #setupView() {
-        this.#adminMapView = await super.loadHtmlIntoContent("html_views/admin_Map.html");
-        let uploadButton = this.#adminMapView.querySelector(".upload");
-        if (uploadButton) {
-            uploadButton.addEventListener("click", (event) => this.#saveMap(event));
-        }
-    }
-
-
-    async #saveMap(event) {
-        event.preventDefault();
-
-        const floor = this.#adminMapView.querySelector("#floor").value;
-        const filename = this.#adminMapView.querySelector("#filename").value;
-        const files = this.#adminMapView.querySelector('#file').value;
-
-
-        try {
-            if (floor == null || floor === "" || filename == null || filename == "") {
-                alert("Opleiding en verdieping mag niet leeg zijn");
-            } else if (filename.length > 30) {
-                alert("Naam van de opleiding mag niet langer dan 30 karakters zijn")
-            } else {
-                if (confirm("weet u zeker dat u het wil toevoegen") === true) {
-                    await this.#adminMapRepository.saveMap(floor, files, filename);
-                    location.reload();
-                }
-            }
-        } catch (e) {
-            alert("er ging iets mis!");
-        }
-    }
-}
