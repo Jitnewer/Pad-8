@@ -1,3 +1,7 @@
+/**
+ * @author chant balci
+ * email structure
+ */
 const fetch = require("node-fetch");
 
 async function sendTrialLessonEmail(firstname,lastname,prefix,email) {

@@ -92,7 +92,7 @@ body {
 #study_img{
     width: 66%;
     text-align: center;
-    Margin-top: 8%;
+    Margin-top: 4%;
 }
 .imge-container{
     margin-left: auto;
@@ -120,4 +120,11 @@ body {
     height: 95%;
     margin-top: 2%;
     padding: 0% 0% 0% 0%;
+}
+@media(width: 442px){
+.imgnext{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 }
