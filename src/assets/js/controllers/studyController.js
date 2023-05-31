@@ -30,22 +30,7 @@ export class StudyController extends Controller {
                 }
             )
         );
-        // .then(
-        //     () => {
-        //         this.#handleFilterButton();
-        //     }
-        // );
-
-        // homeIcon.addEventListener("click", (e) => this.#handleClickHomeButton(e));
     }
-
-    // /**
-    //  * Return to homepage
-    //  */
-    // async #handleClickHomeButton(e) {
-    //     e.preventDefault();
-    //     window.location.href = "index.html"
-    // }
 
     async #createStudyButton() {
         /**
@@ -115,7 +100,6 @@ export class StudyController extends Controller {
          * Get data
          */
         const data = await this.#studyRepository.getStudyInformation();
-        console.log(data);
 
         /**
          * Show study information

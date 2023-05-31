@@ -129,12 +129,14 @@ export class AdminDashboardStudyController extends Controller {
          */
         const buttonContainer = this.#adminDashboardStudyView.querySelector(".adminContentSelector");
 
+        // Create Show all button
         const showAllButton = document.createElement("button");
         showAllButton.classList.add("adminContentButton");
         showAllButton.textContent = "Alles";
         buttonContainer.appendChild(showAllButton);
         showAllButton.addEventListener("click", () => this.#handleFilterButton("all"));
 
+        // Create filter type buttons
         for (let i = 0; i < data.length; i++) {
             const button = document.createElement("button");
             button.classList.add("adminContentButton");
@@ -168,6 +170,9 @@ export class AdminDashboardStudyController extends Controller {
 
         const content = this.#adminDashboardStudyView.querySelectorAll(".adminStudyContainer");
 
+        /**
+         * Filter function
+         */
         for (let i = 0; i < content.length; i++) {
             if (type === "all" || data[i].type === type) {
                 content[i].style.display = "flex";
