@@ -223,16 +223,15 @@ export class TrialLessonController extends Controller {
             );
 
             alert("You have successfully applied!");
-            window.location.reload();
+
             document.querySelector(".applyFormContainer").remove();
+            window.location.reload();
         } catch (e) {
-            console.log(e);
             errorMessage.innerHTML = "Email has already been registered";
             errorMessage.style.display = "block";
             mail.style.border = "1px solid red";
         }
-        // const subject = "Trial Lesson Application";
-        // const question = "Thank you for applying to the trial lesson. We will get back to you soon.";
+
     }
 
 }

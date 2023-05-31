@@ -17,7 +17,6 @@ import {LogoutController} from "./controllers/LogoutController.js";
 import {TrialLessonController} from "./controllers/TrialLessonController.js";
 import {StudyController} from "./controllers/studyController.js";
 import {AdminDashboardTrialLessonController} from "./controllers/adminDashboardTrialLessonController.js";
-import {TrialSEController} from "./controllers/trialSEController.js";
 import {ChatbotController} from "./controllers/chatbotController.js";
 import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyController.js";
 import {ChatbotQAController} from "./controllers/ChatbotQAController.js";
