@@ -15,18 +15,25 @@
 }
 
 /* Triallesson body */
-#trialBody {
-    display: flex;
-    justify-content: center;
+/*#trialBody {*/
+/*    height: 100%;*/
+/*}*/
+
+.trial-lessons-body {
+    height: 100vh;
 }
 
 /* Testlesson container */
 .Testlesson-position {
+    right: 0;
+    left: 0;
+    margin: 10px auto 0;
+    position:relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 900px;
-    max-height: 470px;
+    max-height: 70vh;
     overflow-y: auto;
 }
 
@@ -48,6 +55,7 @@
     background-color: #EBEBEB;
     border-radius: 15px;
     box-shadow: 0 4px 0 #000000A5;
+    max-height: 210px;
 }
 
 .apply-Testlesson-name{
@@ -109,7 +117,6 @@
 @media (max-width: 1100px) {
     .Testlesson-position {
         width: 700px;
-        max-height: 420px;
     }
 }
 /**/
@@ -121,7 +128,6 @@
     .Testlesson-position {
         justify-content: normal;
         width: 450px;
-        max-height: 440px;
     }
 }
 
@@ -136,14 +142,7 @@
 
     .Testlesson-position {
         width: 300px;
-        max-height: 450px;
         justify-content: center;
-    }
-}
-
-@media (max-width: 475px) {
-    .Testlesson-position {
-        max-height: 390px;
     }
 }
 
