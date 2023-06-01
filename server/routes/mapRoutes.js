@@ -35,9 +35,9 @@ class mapRoutes {
         this.#app.get("/adminMap", async (req, res) => {
             try {
                 const data = await this.#databaseHelper.handleQuery({
-                    query: "SELECT idMap, floor, filename FROM map",
+                    query: "SELECT * FROM map",
                 });
-                const response = data.map(({idMap, floor, filename}) => ({id: idMap, floor, filename}));
+                const response = data.map(({idMap, floor, files, filename}) => ({id: idMap, floor, files, filename}));
 
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(response);
             } catch (e) {
@@ -122,8 +122,9 @@ class mapRoutes {
 }
 
 function convertToUrl(filePath) {
-    const baseUrl = "https://example.com";
-    const fileUrl = `${baseUrl}/${encodeURIComponent(filePath)}`;
+    const baseUrl = "uploads";
+    const fileName = filePath.replace("C:\\fakepath\\", "")
+    const fileUrl = `${baseUrl}/${encodeURIComponent(fileName)}`;
     return fileUrl;
 }
 
