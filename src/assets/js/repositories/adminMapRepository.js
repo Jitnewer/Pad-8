@@ -1,4 +1,4 @@
-import {NetworkManager} from "../framework/utils/networkManager.js";
+import { NetworkManager } from "../framework/utils/networkManager.js";
 
 export class adminMapRepository {
     #networkManager;
@@ -10,6 +10,15 @@ export class adminMapRepository {
     }
 
     saveMap(floor, files, filename) {
-        return this.#networkManager.doRequest(this.#route, "POST", {floor: floor, files: files, filename: filename})
+        return this.#networkManager.doRequest(this.#route, "POST", { floor, files, filename });
+    }
+
+    getMap() {
+        return this.#networkManager.doRequest(this.#route, "GET");
+    }
+
+    deleteMap(idMap) {
+        const deleteRoute = `${this.#route}/${idMap}`;
+        return this.#networkManager.doRequest(deleteRoute, "DELETE");
     }
 }

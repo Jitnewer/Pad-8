@@ -19,3 +19,8 @@ input {
 .form-title {
     color: #FFFFFF;
 }
+
+.list-group-item {
+    background-color: white;
+    color: black;
+}

@@ -5,15 +5,11 @@ export class mapRepository {
     #route;
 
     constructor() {
-        this.#route = "/map"
         this.#networkManager = new NetworkManager();
+        this.#route = "/adminMap";
     }
 
-    async getFloors() {
+    async getMaps() {
         return await this.#networkManager.doRequest(this.#route, "GET");
-    }
-
-    async getFloor(floor) {
-        return await this.#networkManager.doRequest(`${this.#route}/${floor}`, "GET");
     }
 }
