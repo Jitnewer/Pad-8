@@ -21,4 +21,9 @@ export class adminMapRepository {
         const deleteRoute = `${this.#route}/${idMap}`;
         return this.#networkManager.doRequest(deleteRoute, "DELETE");
     }
+
+    updateMap(idMap, floor, filename) {
+        const updateRoute = `${this.#route}/${idMap}`;
+        return this.#networkManager.doRequest(updateRoute, "PUT", { floor, filename });
+    }
 }

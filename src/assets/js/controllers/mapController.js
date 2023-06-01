@@ -42,8 +42,8 @@ export class mapController extends Controller {
                     btn.classList.remove("active");
                 });
                 btn.classList.add("active");
-                const filename = btn.dataset.filename;
-                this.#mapView.querySelector(".floorplan-img").src = `/maps/${filename}/image`;
+                const files = btn.dataset.files;
+                this.#mapView.querySelector(".floorplan-img").src = `/maps/${files}/image`;
             });
         });
     }

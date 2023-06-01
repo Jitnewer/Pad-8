@@ -25,7 +25,8 @@ export class adminMapController extends Controller {
         const listGroup = this.#adminMapView.querySelector(".list-group");
         for (const { id, floor, filename } of maps) {
             const listItem = document.createElement("li");
-            listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+            listItem.className =
+                "list-group-item d-flex justify-content-between align-items-center";
 
             const fileNameElement = document.createElement("span");
             fileNameElement.innerText = filename;
@@ -34,6 +35,12 @@ export class adminMapController extends Controller {
             const floorElement = document.createElement("span");
             floorElement.innerText = floor;
             listItem.appendChild(floorElement);
+
+            const editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            editButton.className = "btn btn-primary";
+            editButton.addEventListener("click", () => this.#editMap(id));
+            listItem.appendChild(editButton);
 
             const deleteButton = document.createElement("button");
             deleteButton.innerText = "Delete";
@@ -56,12 +63,26 @@ export class adminMapController extends Controller {
         }
     }
 
+    async #editMap(id) {
+        const floor = prompt("Enter the new floor:");
+        const filename = prompt("Enter the new filename:");
+
+        if (floor !== null && filename !== null) {
+            try {
+                await this.#adminMapRepository.updateMap(id, floor, filename);
+                location.reload();
+            } catch (e) {
+                alert("An error occurred while updating the map.");
+            }
+        }
+    }
+
     async #saveMap(event) {
         event.preventDefault();
 
         const floor = this.#adminMapView.querySelector("#floor").value;
         const filename = this.#adminMapView.querySelector("#filename").value;
-        const files = this.#adminMapView.querySelector('#file').value;
+        const files = this.#adminMapView.querySelector("#file").value;
 
         try {
             if (!floor || !filename) {
