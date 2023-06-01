@@ -19,21 +19,21 @@ export class mapController extends Controller {
             return;
         }
 
-        // set the default image src to the first floor
-        this.#mapView.querySelector(".floorplan-img").src = `/maps/${floors[0].filename}/image`;
 
-        // add all the buttons for the different floors
+        const defaultFloor = floors[0];
+        await this.#loadFloorImage(defaultFloor.filename);
+
+
         for (const floor of floors) {
             const btn = document.createElement("button");
             btn.className = "btn floorplan-btn btn-outline-primary me-2 my-2";
-            btn.innerHTML = floor.floor === 0 ? "Begane grond" : `Verdieping ${floor.floor}`;
+            btn.innerHTML = floor.floor === 0 ? "Begane grond" : `Verdieping ${floor.floor} ${floor.filename}`;
             btn.dataset.id = floor.id;
             btn.dataset.floor = floor.floor;
             btn.dataset.filename = floor.filename;
             this.#mapView.querySelector(".floorplan-btn-container").appendChild(btn);
         }
 
-        // change the floorplan image when a button is clicked
         const floorBtns = this.#mapView.querySelectorAll(".floorplan-btn-container button");
         floorBtns[0].classList.add("active");
         floorBtns.forEach((btn) => {
@@ -42,9 +42,14 @@ export class mapController extends Controller {
                     btn.classList.remove("active");
                 });
                 btn.classList.add("active");
-                const files = btn.dataset.files;
-                this.#mapView.querySelector(".floorplan-img").src = `/maps/${files}/image`;
+                const filename = btn.dataset.filename;
+                await this.#loadFloorImage(filename);
             });
         });
+    }
+
+    async #loadFloorImage() {
+        const imageElement = this.#mapView.querySelector(".floorplan-img");
+        imageElement.src = `/assets/images/plattegrond-wibaut.jpg`;
     }
 }

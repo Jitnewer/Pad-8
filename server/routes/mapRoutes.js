@@ -9,6 +9,7 @@ class mapRoutes {
         this.#getMaps();
         this.#deleteMap();
         this.#updateMap();
+        this.#uploadFile();
         this.#getImage();
     }
 
@@ -23,10 +24,10 @@ class mapRoutes {
                     values: [req.body.floor, fileUrl, req.body.filename],
                 });
                 if (data.insertId) {
-                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({id: data.insertId});
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({ id: data.insertId });
                 }
             } catch (e) {
-                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
             }
         });
     }
@@ -37,11 +38,11 @@ class mapRoutes {
                 const data = await this.#databaseHelper.handleQuery({
                     query: "SELECT idMap, floor, filename FROM map",
                 });
-                const response = data.map(({idMap, floor, filename}) => ({id: idMap, floor, filename}));
+                const response = data.map(({ idMap, floor, filename }) => ({ id: idMap, floor, filename }));
 
                 res.status(this.#httpErrorCodes.HTTP_OK_CODE).json(response);
             } catch (e) {
-                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: "Map does not exist"});
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: "Map does not exist" });
             }
         });
     }
@@ -59,12 +60,12 @@ class mapRoutes {
                 });
 
                 if (result.affectedRows > 0) {
-                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({message: "Map deleted successfully"});
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({ message: "Map deleted successfully" });
                 } else {
-                    res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({message: "Map not found"});
+                    res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ message: "Map not found" });
                 }
             } catch (e) {
-                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
             }
         });
     }
@@ -73,7 +74,7 @@ class mapRoutes {
         this.#app.put("/adminMap/:idMap", async (req, res) => {
             try {
                 const idMap = req.params.idMap;
-                const {floor, filename} = req.body;
+                const { floor, filename } = req.body;
 
                 const result = await this.#databaseHelper.handleQuery({
                     query: "UPDATE map SET floor = ?, filename = ? WHERE idMap = ?",
@@ -81,40 +82,57 @@ class mapRoutes {
                 });
 
                 if (result.affectedRows > 0) {
-                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({message: "Map updated successfully"});
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({ message: "Map updated successfully" });
                 } else {
-                    res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({message: "Map not found"});
+                    res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ message: "Map not found" });
                 }
             } catch (e) {
-                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
+            }
+        });
+    }
+
+    #uploadFile() {
+        this.#app.post("/upload", async (req, res) => {
+            try {
+                // Handle the file upload logic here
+                // Save the file to the appropriate directory
+                // Generate a unique file path or filename for it
+                // Respond with the file path or any relevant information about the uploaded file in the server's response
+            } catch (e) {
+                res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({ reason: e });
             }
         });
     }
 
     #getImage() {
-        this.#app.get("/maps/:files", async (req, res) => {
+        this.#app.get("/maps/:filename/upload", async (req, res) => {
             try {
-                const files = req.params.files;
+                const filename = req.params.filename;
 
-                // TODO: Fetch the image from the database based on the file path
-                const image = await this.#fetchImageFromDatabase(files);
+                // TODO: Fetch the image from the database based on the filename
+                const image = await this.#fetchImageFromDatabase(filename);
 
                 if (image) {
-                    res.sendFile(image);
+                    res.setHeader("Content-Type", "image/jpg"); //
+                    res.send(image);
                 } else {
-                    res.status(this.#httpErrorCodes.NOT_FOUND_CODE).json({message: "Image not found"});
+                    res.status(this.#httpErrorCodes.NOT_FOUND_CODE).json({ message: "Image not found" });
                 }
             } catch (e) {
-                res.status(this.#httpErrorCodes.INTERNAL_SERVER_ERROR_CODE).json({reason: e});
+                res.status(this.#httpErrorCodes.INTERNAL_SERVER_ERROR_CODE).json({ reason: e });
             }
         });
     }
 
-    async #fetchImageFromDatabase(files) {
-        const image = await database.query("SELECT files FROM map WHERE files = ?", [files]);
+    async #fetchImageFromDatabase(filename) {
+        const data = await this.#databaseHelper.handleQuery({
+            query: "SELECT files FROM map WHERE filename = ?",
+            values: [filename],
+        });
 
-        if (image && image.length > 0) {
-            return image[0].image;
+        if (data && data.length > 0) {
+            return data[0].files;
         } else {
             return null;
         }
@@ -122,7 +140,7 @@ class mapRoutes {
 }
 
 function convertToUrl(filePath) {
-    const baseUrl = "https://example.com";
+    const baseUrl = "http://localhost:3000/";
     const fileUrl = `${baseUrl}/${encodeURIComponent(filePath)}`;
     return fileUrl;
 }

@@ -82,7 +82,7 @@ export class adminMapController extends Controller {
 
         const floor = this.#adminMapView.querySelector("#floor").value;
         const filename = this.#adminMapView.querySelector("#filename").value;
-        const files = this.#adminMapView.querySelector("#file").value;
+        const files = this.#adminMapView.querySelector("#file").files[0];
 
         try {
             if (!floor || !filename) {
@@ -98,5 +98,6 @@ export class adminMapController extends Controller {
         } catch (e) {
             alert("An error occurred while saving the map.");
         }
+
     }
 }
