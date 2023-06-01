@@ -81,9 +81,10 @@ class adminDashboardTrialLessonRoute {
                 try {
                     // Delete all participants from database table where id equals trial lesson id
                     await this.#databaseHelper.handleQuery({
-                        query: "DELETE FROM participant WHERE id = ?",
+                        query: "DELETE FROM participant WHERE testlesson_id = ?",
                         values: [req.params.id]
                     });
+                    res.status(this.#httpErrorCodes.HTTP_OK_CODE).json({reason: "Verwijderen gelukt"});
                 } catch (e) {
                     res.status(this.#httpErrorCodes.BAD_REQUEST_CODE).json({reason: e});
                 }

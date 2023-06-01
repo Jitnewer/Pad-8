@@ -187,13 +187,14 @@ export class AdminDashboardTrialLessonController extends Controller {
     async #deleteTestlesson(id){
         try {
             if(confirm("weet u zeker dat je het wilt verwijderen?") === true) {
-                await this.#adminDashboardTrialLessonRepository.deleteTestlesson(id);
-                await this.#adminDashboardTrialLessonRepository.deleteParticipants(id);
+                await this.#adminDashboardTrialLessonRepository.deleteTestlesson(id).then(async () =>{
+                    await this.#adminDashboardTrialLessonRepository.deleteParticipants(id);
+                });
             }
         }
         catch(e){
             console.log(e)
         }
-        window.location.reload();
+        // window.location.reload();
     }
 }
