@@ -10,13 +10,13 @@ import {ChatbotController} from "./chatbotController.js";
 
 export class NavbarController extends Controller{
     #navbarView
-    #chatbotController; // Add this line
+    #chatbotController;// Add this line
+
 
     constructor() {
         super();
         this.#chatbotController = new ChatbotController(); // Initialize ChatbotController instance
         this.#setupView();
-
         // Listen for the 'userLoggedIn' event
         document.addEventListener('userLoggedIn', () => this.#handleLoggedInState());
 
@@ -30,7 +30,6 @@ export class NavbarController extends Controller{
      * @private
      */
     async #setupView() {
-
         this.#navbarView = await super.loadHtmlIntoNavigation("html_views/navbar.html");
         const anchors = this.#navbarView.querySelectorAll("a.nav-link");
 
@@ -47,14 +46,36 @@ export class NavbarController extends Controller{
 
         anchors.forEach(anchor => anchor.addEventListener("click", (event) => this.#handleClickNavigationItem(event)))
 
-        const homeButton = document.querySelector(".homeButton");
-        const mapButton = document.querySelector(".homeButton");
+        // const mapButton = document.querySelector(".mapButton");
+        // Declare the activeController variable outside of any function scope
+        let activeController = '';
 
+// Function to update the activeController variable
+        function updateActiveController() {
+            const currentController = App.getCurrentController()?.name;
+            if (currentController) {
+                activeController = currentController;
+            }
+        }
 
+// Call the updateActiveController function before the click event starts
+        updateActiveController();
 
+// Click event listener for the home button
+        const homeButton = document.querySelector('.homeButton');
+        homeButton.addEventListener('click', () => {
+            // Update the activeController variable again before navigating
+            updateActiveController();
 
-
-
+            // Rest of the click event logic
+            if (activeController === 'adminDashboardStudy' || activeController === 'ChatbotQA'
+                || activeController === 'adminDashboard' || activeController === 'adminMap'
+                || activeController === 'admin') {
+                App.loadController(App.CONTROLLER_ADMIN);
+            } else {
+                App.loadController(App.CONTROLLER_WELCOME);
+            }
+        });
 
 
 
