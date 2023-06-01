@@ -126,52 +126,7 @@ h2 {
 }
 
 /* ==================== SIDEBAR RIGHT SIDE ==================== */
-.third-container {
-    z-index: 9;
-    position: fixed;
-    right: 0;
-    width: 5rem;
-    height: 100%;
-}
 
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 90%;
-}
-
-.sidebar-items {
-    display: none;
-    position: fixed;
-    right: 0;
-    top: 42.5vh;
-    width: 4.5rem;
-    height: 8rem;
-    background-color: var(--color-secondary);
-    border-radius: 1rem 0 0 1rem;
-}
-
-#back-div {
-    position: absolute;
-    margin-left: -2rem;
-    bottom: 1vh;
-}
-
-#back-button {
-    width: 6.5rem;
-    height: 3rem;
-    font-size: 1.4rem;
-    color: #000000;
-    background: var(--color-secondary);
-    border: var(--border-light);
-    border-radius: 0.8rem;
-    cursor: pointer;
-}
-#back-button:hover {
-    color: black;
-    border: var(--border-dark);
-}
 
 /*  ==================== LAST CONTAINER ==================== */
 .information-position {

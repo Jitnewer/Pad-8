@@ -30,6 +30,16 @@ export class NavbarController extends Controller{
         const anchors = this.#navbarView.querySelectorAll("a.nav-link");
         anchors.forEach(anchor => anchor.addEventListener("click", (event) => this.#handleClickNavigationItem(event)))
 
+        const homeButton = document.querySelector(".homeButton");
+        const mapButton = document.querySelector(".homeButton");
+        const chatbotButton = document.querySelector(".homeButton");
+
+
+
+
+
+
+
         // Add code to conditionally show the extra navbar item
         this.#handleLoggedInState();
     }
