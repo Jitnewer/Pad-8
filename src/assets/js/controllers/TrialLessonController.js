@@ -25,6 +25,7 @@ export class TrialLessonController extends Controller {
     }
 
     /**
+     * @author Jit Newer
      * Gives all the buttons a eventlisteren that opens application form
      * @param data: the list of triallessons
      */
@@ -142,6 +143,7 @@ export class TrialLessonController extends Controller {
     }
 
     /**
+     * @author Jit Newer
      * Create application form and gives it properties
      * @param name: the name of the triallesson
      * @param id: the id of the triallesson
@@ -167,6 +169,7 @@ export class TrialLessonController extends Controller {
     }
 
     /**
+     * @author Jit Newer
      *  Checks if input fields are falid
      */
     async #validate(event, id) {
@@ -212,13 +215,23 @@ export class TrialLessonController extends Controller {
             await this.#apply(firstname, lastname, prefix, mail, id, errorMessage);
         }
     }
+
+    /**
+     * @author Jit Newer
+     * Enrolls the user to the selected triallesson. Gives errormessage if already enrolled
+     * @param firstname
+     * @param lastname
+     * @param prefix
+     * @param mail
+     * @param id = id of the triallesson
+     * @param errorMessage
+     */
     async #apply(firstname, lastname, prefix, mail, id, errorMessage) {
         try {
             await this.#trialSERepository.applyTrialLesson(firstname.value, lastname.value, prefix.value, mail.value, id).then(
                 async () => {
                     // adds +1 to the clicked column in the database
                     await this.#adminDashboardTrialLessonRepository.updateClickedCount(id);
-
                 }
             );
 
@@ -231,9 +244,7 @@ export class TrialLessonController extends Controller {
             errorMessage.style.display = "block";
             mail.style.border = "1px solid red";
         }
-
     }
-
 }
 
 
