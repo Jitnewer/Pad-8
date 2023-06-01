@@ -46,10 +46,9 @@ export class NavbarController extends Controller{
 
         anchors.forEach(anchor => anchor.addEventListener("click", (event) => this.#handleClickNavigationItem(event)))
 
-        // const homeButton = document.querySelector(".homeButton");
         // const mapButton = document.querySelector(".mapButton");
-        const home_img = document.querySelector(".homeButton");
-        home_img.addEventListener("click", () => {
+        const homeButton = document.querySelector(".homeButton");
+        homeButton.addEventListener("click", () => {
             App.loadController(App.CONTROLLER_WELCOME);
             console.log("hellllooooo")
         })

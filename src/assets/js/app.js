@@ -92,21 +92,21 @@ export class App {
             currentControllerName !== App.CONTROLLER_ADMIN_DASHBOARD_Study;
     }
 
-    static unloadSidebar() {
-        const sidebarElement = document.querySelector(".third-container");
-        if (sidebarElement) {
-            sidebarElement.innerHTML = "";
-        }
-    }
-
-    static loadSidebar() {
-        new sidebarController();
-    }
-
-    static shouldLoadSidebar() {
-        const currentControllerName = App.getCurrentController()?.name;
-        return currentControllerName !== App.CONTROLLER_WELCOME;
-    }
+    // static unloadSidebar() {
+    //     const sidebarElement = document.querySelector(".third-container");
+    //     if (sidebarElement) {
+    //         sidebarElement.innerHTML = "";
+    //     }
+    // }
+    //
+    // static loadSidebar() {
+    //     new sidebarController();
+    // }
+    //
+    // // static shouldLoadSidebar() {
+    // //     const currentControllerName = App.getCurrentController()?.name;
+    // //     return currentControllerName !== App.CONTROLLER_WELCOME;
+    // // }
 
     static loadController(name, controllerData) {
         console.log("loadController: " + name);
@@ -299,7 +299,6 @@ export class App {
         App.sessionManager.remove("username");
 
         App.loadChatbot();
-        App.loadSidebar();
 //go to login screen
         App.loadController(App.CONTROLLER_ADMIN_LOGIN);
     }
