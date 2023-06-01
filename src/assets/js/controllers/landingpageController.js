@@ -26,6 +26,9 @@ export class LandingpageController extends Controller {
         console.log(this.#landingpageView);
 
         document.getElementById("content").appendChild(this.#landingpageView);
+
+        let sidebar = document.querySelector(".third-container");
+        sidebar.style.display = "none";
     }
 }// dit is voor de tag
 

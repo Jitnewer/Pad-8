@@ -17,7 +17,6 @@ import {LogoutController} from "./controllers/LogoutController.js";
 import {TrialLessonController} from "./controllers/TrialLessonController.js";
 import {StudyController} from "./controllers/studyController.js";
 import {AdminDashboardTrialLessonController} from "./controllers/adminDashboardTrialLessonController.js";
-import {TrialSEController} from "./controllers/trialSEController.js";
 import {ChatbotController} from "./controllers/chatbotController.js";
 import {AdminDashboardStudyController} from "./controllers/adminDashboardStudyController.js";
 import {ChatbotQAController} from "./controllers/ChatbotQAController.js";
@@ -25,6 +24,7 @@ import {LandingpageController} from "./controllers/landingpageController.js";
 import {AdminController} from "./controllers/adminController.js";
 import {mapController} from "./controllers/mapController.js";
 import {adminMapController} from "./controllers/adminMapController.js";
+import {sidebarController} from "./controllers/sidebarController.js";
 
 
 export class App {
@@ -50,16 +50,19 @@ export class App {
     static CONTROLLER_LANDINGPAGE = "landingpage";
     static CONTROLLER_MAP = "map";
     static CONTROLLER_ADMINMAP = "adminMap";
-
+    static CONTROLLER_SIDEBAR = "sidebar";
 
 
     constructor() {
 // Always load the navigation
-        App.loadController(App.CONTROLLER_NAVBAR);
+
 
         if (App.shouldLoadChatbot()) {
             App.loadController(App.CONTROLLER_CHATBOT);
         }
+
+            App.loadController(App.CONTROLLER_NAVBAR);
+
 
 // Attempt to load the controller from the URL, if it fails, fall back to the welcome controller.
         App.loadControllerFromUrl(App.CONTROLLER_WELCOME);
@@ -89,8 +92,25 @@ export class App {
             currentControllerName !== App.CONTROLLER_ADMIN_DASHBOARD_Study;
     }
 
+    static unloadSidebar() {
+        const sidebarElement = document.querySelector(".third-container");
+        if (sidebarElement) {
+            sidebarElement.innerHTML = "";
+        }
+    }
+
+    static loadSidebar() {
+        new sidebarController();
+    }
+
+    static shouldLoadSidebar() {
+        const currentControllerName = App.getCurrentController()?.name;
+        return currentControllerName !== App.CONTROLLER_WELCOME;
+    }
+
     static loadController(name, controllerData) {
         console.log("loadController: " + name);
+
 
 //log the data if data is being passed via controllers
         if (controllerData && Object.entries(controllerData).length !== 0) {
@@ -102,7 +122,11 @@ export class App {
 // Check for a special controller that shouldn't modify the URL
         switch (name) {
             case App.CONTROLLER_NAVBAR:
-                new NavbarController();
+                    new NavbarController();
+                return true;
+
+            case App.CONTROLLER_SIDEBAR:
+                new sidebarController();
                 return true;
 
             case App.CONTROLLER_CHATBOT:
@@ -125,14 +149,17 @@ export class App {
 
             case App.CONTROLLER_WELCOME:
                 new WelcomeController();
+                App.unloadSidebar();
                 break;
             case App.CONTROLLER_CREATE_APPOINTMENT:
                 App.setCurrentController(name);
                 new createappointmentController();
+                App.loadSidebar();
                 break;
                 case App.CONTROLLER_MAP:
                 App.setCurrentController(name);
                 new mapController();
+                    App.loadSidebar();
                 break;
             case App.CONTROLLER_CHATBOT_QA:
 // App.setCurrentController(name);
@@ -146,21 +173,25 @@ export class App {
                 App.setCurrentController(name);
                 App.isLoggedIn(() => new AdminController(), () => new AdminLoginController());
                 App.unloadChatbot();
+                App.unloadSidebar();
                 break;
             case App.CONTROLLER_ADMIN_DASHBOARD_TrialLesson:
                 App.setCurrentController(name);
                 App.isLoggedIn(() => new AdminDashboardTrialLessonController(), () => new AdminLoginController());
                 App.unloadChatbot();
+                App.unloadSidebar();
                 break;
 
             case App.CONTROLLER_ADMIN_DASHBOARD_Study:
                 App.setCurrentController(name);
                 App.isLoggedIn(() => new AdminDashboardStudyController(), () => new AdminLoginController());
                 App.unloadChatbot();
+                App.unloadSidebar();
                 break;
 
             case App.CONTROLLER_STUDY:
                 new StudyController();
+                App.loadSidebar();
                 break;
             case App.CONTROLLER_UPLOAD:
 // App.isLoggedIn(() => new UploadController(), () => new LoginController());
@@ -169,6 +200,7 @@ export class App {
             case App.CONTROLLER_TRIALLESSON:
                 App.setCurrentController(name);
                 new TrialLessonController();
+                App.loadSidebar();
                 break;
             case App.CONTROLLER_TRIALSE:
                 App.setCurrentController(name);
@@ -273,6 +305,7 @@ export class App {
         App.sessionManager.remove("username");
 
         App.loadChatbot();
+        App.loadSidebar();
 //go to login screen
         App.loadController(App.CONTROLLER_ADMIN_LOGIN);
     }

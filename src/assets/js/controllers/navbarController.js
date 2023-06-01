@@ -6,11 +6,15 @@
 
 import { App } from "../app.js";
 import {Controller} from "./controller.js";
+import {ChatbotController} from "./chatbotController.js";
 
 export class NavbarController extends Controller{
     #navbarView
+    #chatbotController; // Add this line
+
     constructor() {
         super();
+        this.#chatbotController = new ChatbotController(); // Initialize ChatbotController instance
         this.#setupView();
 
         // Listen for the 'userLoggedIn' event
@@ -26,9 +30,33 @@ export class NavbarController extends Controller{
      * @private
      */
     async #setupView() {
+
         this.#navbarView = await super.loadHtmlIntoNavigation("html_views/navbar.html");
         const anchors = this.#navbarView.querySelectorAll("a.nav-link");
+
+        const chatbotButton = document.querySelector(".chatbotButton"); // Select the chatbotButton
+
+        chatbotButton.addEventListener("click", () => {
+            const chatPopup = this.#chatbotController.chatboxView.querySelector("#chatPopup"); // Select the chatPopup
+            if (chatPopup.style.display === "none") {
+                chatPopup.style.display = "block"; // If chatPopup is not visible, show it
+            } else {
+                chatPopup.style.display = "none"; // If chatPopup is visible, hide it
+            }
+        });
+
         anchors.forEach(anchor => anchor.addEventListener("click", (event) => this.#handleClickNavigationItem(event)))
+
+        const homeButton = document.querySelector(".homeButton");
+        const mapButton = document.querySelector(".homeButton");
+
+
+
+
+
+
+
+
 
         // Add code to conditionally show the extra navbar item
         this.#handleLoggedInState();

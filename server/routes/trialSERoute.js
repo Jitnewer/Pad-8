@@ -14,6 +14,9 @@ class trialSERoute {
         this.#apply();
     }
 
+    /**
+     * Puts user info in to db
+     */
     #apply() {
         this.#app.post("/trialSELesson", async (req, res) => {
             const email = req.body.email;

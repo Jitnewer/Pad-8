@@ -23,6 +23,11 @@ export class AdminLoginController extends Controller {
             (event) => this.#handleLoginClick(event));
     }
 
+    /**
+     * Handles the login
+     * @param event
+     * @returns {Promise<void>}
+     */
     async #handleLoginClick(event) {
         event.preventDefault();
 
@@ -37,7 +42,7 @@ export class AdminLoginController extends Controller {
         passwordErrorElement.innerHTML = "";
         errorMessageElement.innerHTML = "";
 
-
+        // Check if the input fields are valid
         if (email.length === 0 && password.length === 0) {
             this.#errorMessage(emailErrorElement, passwordErrorElement);
             this.#adminLoginView.querySelector(".email").focus();
@@ -71,6 +76,11 @@ export class AdminLoginController extends Controller {
         }
     }
 
+    /**
+     * Creates errormessage
+     * @param element1
+     * @param element2
+     */
     #errorMessage(element1, element2) {
         const errorMessage = "Vul dit veld in!";
         element1.innerHTML = errorMessage;

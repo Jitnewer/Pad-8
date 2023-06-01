@@ -46,7 +46,7 @@
     margin-left: 24%;
 }
 #adminDashboard_Testlesson_time{
-    margin-left: 40.3%;
+    margin-left: 38.3%;
 }
 #adminDashboard_Testlesson_Location{
     margin-left: 16%;
@@ -79,6 +79,10 @@
     padding: 5px;
     font-size: 30px;
 }
+.trialLLi{
+    margin-bottom: 3.5%;
+    color: #000000;
+}
 
 .trash_Button_position{
     display:flex;
@@ -86,7 +90,7 @@
     margin: 0 36% auto;
     border:none;
     border-radius: 10px;
-
+    background-color: #F7F7F7;
 }
 .adminDashboard-position{
     display: flex;
@@ -182,7 +186,6 @@
 .dropdownTrial select{
     margin-left: 27.5%;;
 }
-
 @media (max-width: 1077px) {
     body {
         overflow-y: auto;

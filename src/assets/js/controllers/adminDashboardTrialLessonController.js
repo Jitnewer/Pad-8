@@ -92,7 +92,7 @@ export class AdminDashboardTrialLessonController extends Controller {
     }
 
     async #createTrialLesson () {
-        const CLASS_NAME_ITEM = "trialLi";
+        const CLASS_NAME_ITEM = "trialLLi";
         let textNode;
         let elementLi;
 
@@ -156,6 +156,12 @@ export class AdminDashboardTrialLessonController extends Controller {
 
             elementLi = document.createElement("li");
             elementLi.classList.add(CLASS_NAME_ITEM);
+            textNode = document.createTextNode(data[i].subject);
+            elementLi.appendChild(textNode);
+            ul.appendChild(elementLi);
+
+            elementLi = document.createElement("li");
+            elementLi.classList.add(CLASS_NAME_ITEM);
             textNode = document.createTextNode("Max " + data[i].capacity + " participanten");
             elementLi.appendChild(textNode);
             ul.appendChild(elementLi);
@@ -183,12 +189,11 @@ export class AdminDashboardTrialLessonController extends Controller {
             if(confirm("weet u zeker dat je het wilt verwijderen?") === true) {
                 await this.#adminDashboardTrialLessonRepository.deleteTestlesson(id);
                 await this.#adminDashboardTrialLessonRepository.deleteParticipants(id);
-
-                location.reload();
             }
         }
         catch(e){
             console.log(e)
         }
+        window.location.reload();
     }
 }

@@ -5,6 +5,15 @@ body {
     background-repeat: no-repeat;
     overflow: hidden;
 }
+#hva_img{
+    display: flex;
+    height: 10%;
+    margin: 0% 0% 0% 22%;
+}
+
+.hva_logo-container{
+    width: 11%;
+}
 
 .titlevanpagina, .infovanpagina {
     text-align: center;
@@ -13,11 +22,11 @@ body {
 
 .imgnext {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
     width: 100%;
-    margin-top:10%;
+    margin-top: 12%;
 }
 
 .layout1, .layouts {
@@ -35,7 +44,7 @@ body {
     width: 33%;
 }
 
-.afspraak_img, .map_img, .proef_img ,.study_img {
+.afspraak_img, .map_img, .proef_img, .study_img {
     background: none;
     border: none;
 }
@@ -46,55 +55,55 @@ body {
     cursor: pointer;
     margin: 0px auto;
 }
-.afspraak_img{
+
+.afspraak_img {
     margin-top: 3.5%;
     text-align: center;
 }
-.proef_img{
-    margin: 1% 0% 0% 0%;
+
+.proef_img {
+    margin: 2.5% 0% 0% 0%;
     text-align: center;
     padding: 0% 0% 9% 0%;
     width: 71%;
     height: 86%;
 }
 
-.study_img{
+.study_img {
     margin: 0;
     text-align: center;
     width: 72%;
 }
-.img-container1{
-    width: 70%;
+
+.img-container1 {
+    width: 71%;
     margin: 3% 15.6%;
     cursor: pointer;
 }
-.afspraak_img:hover {
+#plattegrond-text{
+    font-size: 1.05rem;
+    font-family: Inter, sans-serif;
+}
+
+.afspraak_img:hover, .map_img:hover, .proef_img:hover, .study-container_img:hover {
     cursor: pointer;
     border: 2px solid #7142d9;
 }
-.map_img:hover {
-    cursor: pointer;
-    border: 2px solid #7142d9;
+
+.map_img {
+    width: 34%;
+    margin: 3% 44% 0%;
+    text-align: center;
+    height: 82%;
 }
-.proef_img:hover {
-    cursor: pointer;
-    border: 2px solid #7142d9;
-}
-.study-container_img:hover {
-     cursor: pointer;
-     border: 2px solid #7142d9;
- }
- .map_img{
-     width: 34%;
-     margin: 0.5% 44%;
-     text-align: center;
- }
-#study_img{
+
+#study_img {
     width: 66%;
     text-align: center;
-    Margin-top: 4%;
+    margin-top: 6%;
 }
-.imge-container{
+
+.imge-container {
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -102,17 +111,18 @@ body {
     margin-top: 10%;
 }
 
-.study-container_img{
-    margin:0;
+.study-container_img {
+    margin: 0;
 }
-.studys-container{
+
+.studys-container {
     width: 95%;
     height: 85%;
     text-align: center;
     margin: 2% 2% -5% 0%;
-
 }
-.welcome-proefles-container{
+
+.welcome-proefles-container {
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -121,10 +131,50 @@ body {
     margin-top: 2%;
     padding: 0% 0% 0% 0%;
 }
-@media(width: 442px){
-.imgnext{
-    display: flex;
-    flex-wrap: wrap;
-}
 
+@media screen and (max-width: 600px) {
+    .imgnext {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        margin-left: -4%
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .layout1, .layouts {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    #content1, #contents, #conntents {
+        width: 100%;
+    }
+    .imge-container{
+        width:60%;
+        height:60%;
+    }
+    .img-container1{
+        width:144%;
+    }
+    .map_img{
+        margin-left: 20.5%;
+        margin-top: 8%;
+    }
+    #plattegrond-text{
+        margin-left: 59%;
+        font-size: 1.05rem;
+        font-family: Inter, sans-serif;
+    }
+    .hva_logo-container{
+        display: none;
+    }
+    .titlevanpagina{
+        margin: 0% 0% 0% -25%;
+    }
 }

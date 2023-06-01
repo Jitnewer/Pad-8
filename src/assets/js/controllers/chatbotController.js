@@ -1,16 +1,18 @@
 import { Controller } from "./controller.js";
-
+import { ChatbotQARepository } from "../repositories/ChatbotQARepository.js";
 export class ChatbotController extends Controller {
-    #chatboxView;
+    chatboxView;
+    #chatbotRepository;
 
     constructor() {
         super();
         console.log("ChatbotController constructor");
+        this.#chatbotRepository = new ChatbotQARepository();
         this.#setupView();
     }
 
     fetchAnswer = async (questionId) => {
-        const url = `/chatbot/answer/${questionId}`;
+        const url = `http://localhost:3000/chatbot/answer/${questionId}`;
         try {
             const response = await fetch(url);
             console.log("Server response:", response);
@@ -60,7 +62,7 @@ export class ChatbotController extends Controller {
     };
 
     async #setupView() {
-        const view = (this.#chatboxView = await this.loadHtmlIntoCustomElement(
+        const view = (this.chatboxView = await this.loadHtmlIntoCustomElement(
             "html_views/chatbot.html",
             document.querySelector(".chatbox")
         ));
@@ -80,48 +82,45 @@ export class ChatbotController extends Controller {
 
         const list = document.querySelector('.chatbot-list');
 
-        let url = '/chatbot/questions';
+        // Use the repository method instead of native fetch
+        const data = await this.#chatbotRepository.getQuestionLimt();
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Questions data:', data);
-                data.forEach(question => {
-                    const listItem = document.createElement('li');
-                    listItem.innerText = question.question;
-                    listItem.dataset.questionId = question.id;
-                    listItem.classList.add('question');
-                    listItem.style.cursor = "pointer";
+        // The rest of your code as it is...
+        console.log(data);
+        data.forEach(question => {
+            const listItem = document.createElement('li');
+            listItem.innerText = question.question;
+            listItem.dataset.questionId = question.id;
+            listItem.classList.add('question');
+            listItem.style.cursor = "pointer";
 
-                    listItem.addEventListener("click", async () => {
-                        // Show loading animation
-                        loading.style.display = "block";
+            listItem.addEventListener("click", async () => {
+                // Show loading animation
+                loading.style.display = "block";
 
-                        // Hide greeting message
-                        document.getElementById("greeting").style.display = "none";
+                // Hide greeting message
+                document.getElementById("greeting").style.display = "none";
 
-                        const answerData = await this.fetchAnswer(listItem.dataset.questionId);
+                const answerData = await this.fetchAnswer(listItem.dataset.questionId);
 
-                        // Add a 3-second delay before showing the answer
-                        await new Promise(resolve => setTimeout(resolve, 2500));
+                // Add a 3-second delay before showing the answer
+                await new Promise(resolve => setTimeout(resolve, 2500));
 
-                        // Hide loading animation
-                        loading.style.display = "none";
+                // Hide loading animation
+                loading.style.display = "none";
 
-                        const answerListItem = document.createElement("li");
-                        answerListItem.innerText = answerData.answer;
-                        answerListItem.classList.add('answer');
+                const answerListItem = document.createElement("li");
+                answerListItem.innerText = answerData.answer;
+                answerListItem.classList.add('answer');
 
-                        // Insert the answer after the clicked question
-                        // listItem.insertMy apologies for the abrupt cutoff of the previous message. Here is the continuation of the JavaScript code:
-                        listItem.insertAdjacentElement('afterend', answerListItem);
+                // Insert the answer after the clicked question
+                listItem.insertAdjacentElement('afterend', answerListItem);
 
-                        // Add related questions underneath the answer
-                        this.addRelatedQuestions(answerData.relatedQuestions, answerListItem);
-                    });
-
-                    list.appendChild(listItem);
-                });
+                // Add related questions underneath the answer
+                this.addRelatedQuestions(answerData.relatedQuestions, answerListItem);
             });
-        }
+
+            list.appendChild(listItem);
+        });
+    }
 }

@@ -28,6 +28,16 @@
     border-radius: 1rem 0 0 1rem;
 }
 
+.homeButton {
+    cursor: pointer;
+}
+.mapButton {
+    cursor: pointer;
+}
+.chatbotButton {
+    cursor: pointer;
+}
+
 .sidebar-items > * {
     margin: 0.2rem;
 }
@@ -35,7 +45,7 @@
 #back-div {
     position: absolute;
     margin-left: -2rem;
-    bottom: 1vh;
+    bottom: 5vh;
 }
 
 #back-button {
