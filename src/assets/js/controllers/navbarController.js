@@ -69,10 +69,10 @@ export class NavbarController extends Controller{
 
             // Rest of the click event logic
             if (activeController === 'adminDashboardStudy' || activeController === 'ChatbotQA'
-                || activeController === 'adminDashboard' || activeController === 'adminMap') {
+                || activeController === 'adminDashboard' || activeController === 'adminMap'
+                || activeController === 'admin') {
                 App.loadController(App.CONTROLLER_ADMIN);
             } else {
-                console.log('test123');
                 App.loadController(App.CONTROLLER_WELCOME);
             }
         });
