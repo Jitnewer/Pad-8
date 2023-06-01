@@ -92,22 +92,6 @@ export class App {
             currentControllerName !== App.CONTROLLER_ADMIN_DASHBOARD_Study;
     }
 
-    // static unloadSidebar() {
-    //     const sidebarElement = document.querySelector(".third-container");
-    //     if (sidebarElement) {
-    //         sidebarElement.innerHTML = "";
-    //     }
-    // }
-    //
-    // static loadSidebar() {
-    //     new sidebarController();
-    // }
-    //
-    // // static shouldLoadSidebar() {
-    // //     const currentControllerName = App.getCurrentController()?.name;
-    // //     return currentControllerName !== App.CONTROLLER_WELCOME;
-    // // }
-
     static loadController(name, controllerData) {
         console.log("loadController: " + name);
 

@@ -47,11 +47,35 @@ export class NavbarController extends Controller{
         anchors.forEach(anchor => anchor.addEventListener("click", (event) => this.#handleClickNavigationItem(event)))
 
         // const mapButton = document.querySelector(".mapButton");
-        const homeButton = document.querySelector(".homeButton");
-        homeButton.addEventListener("click", () => {
-            App.loadController(App.CONTROLLER_WELCOME);
-            console.log("hellllooooo")
-        })
+        // Declare the activeController variable outside of any function scope
+        let activeController = '';
+
+// Function to update the activeController variable
+        function updateActiveController() {
+            const currentController = App.getCurrentController()?.name;
+            if (currentController) {
+                activeController = currentController;
+            }
+        }
+
+// Call the updateActiveController function before the click event starts
+        updateActiveController();
+
+// Click event listener for the home button
+        const homeButton = document.querySelector('.homeButton');
+        homeButton.addEventListener('click', () => {
+            // Update the activeController variable again before navigating
+            updateActiveController();
+
+            // Rest of the click event logic
+            if (activeController === 'adminDashboardStudy' || activeController === 'ChatbotQA'
+                || activeController === 'adminDashboard' || activeController === 'adminMap') {
+                App.loadController(App.CONTROLLER_ADMIN);
+            } else {
+                console.log('test123');
+                App.loadController(App.CONTROLLER_WELCOME);
+            }
+        });
 
 
 
