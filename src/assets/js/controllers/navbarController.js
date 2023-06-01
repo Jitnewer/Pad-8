@@ -10,13 +10,13 @@ import {ChatbotController} from "./chatbotController.js";
 
 export class NavbarController extends Controller{
     #navbarView
-    #chatbotController; // Add this line
+    #chatbotController;// Add this line
+
 
     constructor() {
         super();
         this.#chatbotController = new ChatbotController(); // Initialize ChatbotController instance
         this.#setupView();
-
         // Listen for the 'userLoggedIn' event
         document.addEventListener('userLoggedIn', () => this.#handleLoggedInState());
 
@@ -30,7 +30,6 @@ export class NavbarController extends Controller{
      * @private
      */
     async #setupView() {
-
         this.#navbarView = await super.loadHtmlIntoNavigation("html_views/navbar.html");
         const anchors = this.#navbarView.querySelectorAll("a.nav-link");
 
@@ -47,14 +46,13 @@ export class NavbarController extends Controller{
 
         anchors.forEach(anchor => anchor.addEventListener("click", (event) => this.#handleClickNavigationItem(event)))
 
-        const homeButton = document.querySelector(".homeButton");
-        const mapButton = document.querySelector(".homeButton");
-
-
-
-
-
-
+        // const homeButton = document.querySelector(".homeButton");
+        // const mapButton = document.querySelector(".mapButton");
+        const home_img = document.querySelector(".homeButton");
+        home_img.addEventListener("click", () => {
+            App.loadController(App.CONTROLLER_WELCOME);
+            console.log("hellllooooo")
+        })
 
 
 
