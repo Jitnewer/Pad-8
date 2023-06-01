@@ -13,6 +13,10 @@ export class ChatbotQARepository {
         const response = await this.#networkManager.doRequest(this.#route, "GET");
         return response.data;
     }
+    async getQuestionLimt()
+    {
+       return await this.#networkManager.doRequest("/chatbot/questions", "GET");
+    }
 
     updateQuestionAnswer(id, question, answer) {
         return this.#networkManager.doRequest(`${this.#route}/${id}`, "PUT", { question, answer });
@@ -35,12 +39,10 @@ export class ChatbotQARepository {
         return this.#networkManager.doRequest(`/relatedquestions/${id}`, "DELETE");
     }
 
-    updateRelatedQuestion(id, parentVraagid, vraagid) {
-        return this.#networkManager.doRequest(`/relatedquestions/${id}`, "PUT", { parentVraagid, vraagid });
-    }
+
 
     async getQuestionAnswerById(id) {
-        const response = await this.#networkManager.doRequest(`${this.#route}/${id}`, "GET");
+        const response = await this.#networkManager.doRequest(`${this.#route}/answer/${id}`, "GET");
         return response.data;
     }
 

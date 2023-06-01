@@ -8,7 +8,7 @@ export class AdminLoginRepository {
     #route
 
     constructor() {
-        this.#route = "/admin_login"
+        this.#route = "/adminlogin";
         this.#networkManager = new NetworkManager();
     }
 
