@@ -19,10 +19,9 @@ footer {
     color: #cbbde2;
 }
 
-body{
+body {
     background-image: url("../../uploads/imageetesst.jpg");
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center center;
 }
-
