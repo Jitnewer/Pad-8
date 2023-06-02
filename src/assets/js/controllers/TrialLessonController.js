@@ -21,6 +21,7 @@ export class TrialLessonController extends Controller {
     async #setupView() {
         this.#trialLessonView = await super.loadHtmlIntoContent("html_views/triallesson.html");
 
+        document.querySelector(".third-container").style.zIndex = "1";
         this.#createTrialLesson();
     }
 
