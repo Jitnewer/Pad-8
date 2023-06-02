@@ -82,7 +82,7 @@ export class adminMapController extends Controller {
 
         const floor = this.#adminMapView.querySelector("#floor").value;
         const filename = this.#adminMapView.querySelector("#filename").value;
-        const files = this.#adminMapView.querySelector("#file").files[0];
+        const files = this.#adminMapView.querySelector("#file").value;
 
         try {
             if (!floor || !filename) {

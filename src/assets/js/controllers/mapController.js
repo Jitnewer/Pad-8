@@ -17,8 +17,8 @@ export class mapController extends Controller {
         const data = await this.#mapRepository.getMaps();
         console.log(data);
         for (let i = 0; i < data.length; i++) {
-            console.log(data[i].files);
-            this.#mapView.querySelector(".floorplan-img").src = data[i].files;
+            console.log(data[0].files);
+            this.#mapView.querySelector(".floorplan-img").src = data[0].files;
         }
         if (data.length === 0) {
             return;
@@ -37,18 +37,18 @@ export class mapController extends Controller {
             btn.dataset.filename = floor.files;
             this.#mapView.querySelector(".floorplan-btn-container").appendChild(btn);
         }
-
-        // change the floorplan image when a button is clicked
+// change the floorplan image when a button is clicked
         const floorBtns = this.#mapView.querySelectorAll(".floorplan-btn-container button");
         floorBtns[0].classList.add("active");
         floorBtns.forEach((btn) => {
-            btn.addEventListener("click", async () => {
+            btn.addEventListener("click", () => {
                 this.#mapView.querySelectorAll(".floorplan-btn").forEach((btn) => {
                     btn.classList.remove("active");
                 });
                 btn.classList.add("active");
-                const files = btn.dataset.files;
-                // this.#mapView.querySelector(".floorplan-img").src = `uploads/` + files;
+                const files = btn.dataset.filename;
+                const floorplanImg = this.#mapView.querySelector(".floorplan-img");
+                floorplanImg.src = `${files}`;
             });
         });
     }
