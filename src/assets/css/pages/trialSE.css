@@ -1,3 +1,7 @@
+.form {
+    z-index: 99;
+}
+
 .trial-container {
     position: absolute;
     top: 0;
