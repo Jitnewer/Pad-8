@@ -1,6 +1,7 @@
 Project naam: Hva Opendag
 developers: Jit Newer, Justin Chan, Chant Balci, Kevin Izasa, Philippe Bekkers, Mouadakh Akhamran
 
+Assignment:
 Het Open Dag team wil een dashboard gecreëerd door studenten voor aankomend
 studenten. Dit dashboard moet op een interactieve en speelse manier hulp en informatie
 bieden aan de deelnemers van de Open Dag. Voorbeelden van geschikte functionaliteiten:
